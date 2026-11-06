@@ -108,8 +108,8 @@ Camera::set_lookat(const float x, const float y, const float z) {
 // ----------------------------------------------------------------- set_up_vector
 
 inline void
-Camera::set_up_vector(const Vector3D& u) {
-	up = u;
+Camera::set_up_vector(const Vector3D& upVector) {
+	up = upVector;
 }
 
 

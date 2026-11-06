@@ -52,13 +52,13 @@ Directional::~Directional(void) {}
 // as this function is virtual, it shouldn't be inlined
 
 Vector3D
-Directional::get_direction(ShadeRec& sr) {
+Directional::get_direction(ShadeRec& sr [[maybe_unused]]) {
 	return (dir);
 }
 
 // ------------------------------------------------------------------------------  L
 
 RGBColor
-Directional::L(ShadeRec& s) {
+Directional::L(ShadeRec& s [[maybe_unused]]) {
 	return (ls * color);
 }

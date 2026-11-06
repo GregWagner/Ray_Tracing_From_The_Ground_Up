@@ -159,7 +159,7 @@ void wxraytracerFrame::OnRenderStart(wxCommandEvent& WXUNUSED(event)) {
 	menuFile->Enable(menuFile->FindItem(wxT("&Save As...")), TRUE);
 }
 
-void wxraytracerFrame::OnRenderCompleted(wxCommandEvent& event) {
+void wxraytracerFrame::OnRenderCompleted(wxCommandEvent& event [[maybe_unused]]) {
 	wxMenu* menu = GetMenuBar()->GetMenu(1);
 	menu->Enable(menu->FindItem(wxT("&Start")), TRUE);
 	menu->Enable(menu->FindItem(wxT("&Pause")), FALSE);
@@ -171,7 +171,7 @@ void wxraytracerFrame::OnRenderCompleted(wxCommandEvent& event) {
 	wxGetApp().SetStatusText(wxT("Rendering complete"));
 }
 
-void wxraytracerFrame::OnRenderPause(wxCommandEvent& event) {
+void wxraytracerFrame::OnRenderPause(wxCommandEvent& event [[maybe_unused]]) {
 	wxMenu* menu = GetMenuBar()->GetMenu(1);
 	menu->Enable(menu->FindItem(wxT("&Start")), FALSE);
 	menu->Enable(menu->FindItem(wxT("&Pause")), FALSE);
@@ -182,7 +182,7 @@ void wxraytracerFrame::OnRenderPause(wxCommandEvent& event) {
 	wxGetApp().SetStatusText(wxT("Rendering paused"));
 }
 
-void wxraytracerFrame::OnRenderResume(wxCommandEvent& event) {
+void wxraytracerFrame::OnRenderResume(wxCommandEvent& event [[maybe_unused]]) {
 	wxMenu* menu = GetMenuBar()->GetMenu(1);
 	menu->Enable(menu->FindItem(wxT("&Start")), FALSE);
 	menu->Enable(menu->FindItem(wxT("&Pause")), TRUE);
@@ -243,7 +243,7 @@ void RenderCanvas::OnDraw(wxDC& dc) {
 		wxBufferedDC bdc(&dc, *m_image);
 }
 
-void RenderCanvas::OnRenderCompleted(wxCommandEvent& event) {
+void RenderCanvas::OnRenderCompleted(wxCommandEvent& event [[maybe_unused]]) {
 	thread = NULL;
 
 	if (w != NULL) {
@@ -309,7 +309,7 @@ void RenderCanvas::renderResume(void) {
 		timer->Resume();
 }
 
-void RenderCanvas::OnTimerUpdate(wxTimerEvent& event) {
+void RenderCanvas::OnTimerUpdate(wxTimerEvent& event [[maybe_unused]]) {
 	if (timer == NULL)
 		return;
 
@@ -408,8 +408,8 @@ EVT_COMMAND(ID_RENDER_COMPLETED, wxEVT_RENDER,
 EVT_TIMER(ID_RENDER_UPDATE, RenderCanvas::OnTimerUpdate)
 END_EVENT_TABLE()
 
-void RenderThread::setPixel(int x, int y, int red, int green, int blue) {
-	pixels.push_back(new RenderPixel(x, y, red, green, blue));
+void RenderThread::setPixel(int x, int y, int redValue, int green, int blue) {
+	pixels.push_back(new RenderPixel(x, y, redValue, green, blue));
 
 	if (timer->Time() - lastUpdateTime > 40)
 		NotifyCanvas();

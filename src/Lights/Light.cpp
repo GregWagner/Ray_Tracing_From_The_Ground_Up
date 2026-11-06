@@ -8,7 +8,7 @@ Light::Light(void) {}
 
 // ---------------------------------------------------------------------- dopy constructor
 
-Light::Light(const Light& ls) {}
+Light::Light(const Light& ls [[maybe_unused]]) {}
 
 
 // ---------------------------------------------------------------------- assignment operator
@@ -31,6 +31,6 @@ Light::~Light(void) {}
 // returns the radiance
 
 RGBColor
-Light::L(ShadeRec& s) {
+Light::L(ShadeRec& s [[maybe_unused]]) {
 	return (black);
 }

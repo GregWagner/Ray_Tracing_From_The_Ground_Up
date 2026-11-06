@@ -56,9 +56,9 @@ Vector3D Pinhole::get_direction(const Point2D& p) const {
 // -----------------------------------------------------------------------------
 // render_scene
 
-void Pinhole::render_scene(const World& w) {
+void Pinhole::render_scene(const World& world) {
 	RGBColor L;
-	ViewPlane vp(w.vp);
+	ViewPlane vp(world.vp);
 	Ray ray;
 	int depth = 0;
 	Point2D pp; // sample point on a pixel
@@ -76,11 +76,11 @@ void Pinhole::render_scene(const World& w) {
 					pp.x = vp.s * (c - 0.5 * vp.hres + (q + 0.5) / n);
 					pp.y = vp.s * (r - 0.5 * vp.vres + (p + 0.5) / n);
 					ray.d = get_direction(pp);
-					L += w.tracer_ptr->trace_ray(ray, depth);
+					L += world.tracer_ptr->trace_ray(ray, depth);
 				}
 
 			L /= vp.num_samples;
 			L *= exposure_time;
-			w.display_pixel(r, c, L);
+			world.display_pixel(r, c, L);
 		}
 }

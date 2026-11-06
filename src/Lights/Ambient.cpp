@@ -49,7 +49,7 @@ Ambient::~Ambient(void) {}
 // ---------------------------------------------------------------------- get_direction
 
 Vector3D
-Ambient::get_direction(ShadeRec& s) {
+Ambient::get_direction(ShadeRec& s [[maybe_unused]]) {
 	return (Vector3D(0.0));
 }
 
@@ -57,6 +57,6 @@ Ambient::get_direction(ShadeRec& s) {
 // ---------------------------------------------------------------------- L
 
 RGBColor
-Ambient::L(ShadeRec& sr) {
+Ambient::L(ShadeRec& sr [[maybe_unused]]) {
 	return (ls * color);
 }

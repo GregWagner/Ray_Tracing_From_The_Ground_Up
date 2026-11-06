@@ -7,7 +7,7 @@ Material::Material(void) {}
 
 // ---------------------------------------------------------------- copy constructor
 
-Material::Material(const Material& m) {}
+Material::Material(const Material& m [[maybe_unused]]) {}
 
 
 // ---------------------------------------------------------------- assignment operator
@@ -29,6 +29,6 @@ Material::~Material(void) {}
 // ---------------------------------------------------------------- shade
 
 RGBColor
-Material::shade(ShadeRec& sr) {
+Material::shade(ShadeRec& sr [[maybe_unused]]) {
 	return (black);
 }

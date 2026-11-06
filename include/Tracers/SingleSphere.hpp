@@ -13,6 +13,8 @@ class SingleSphere : public Tracer {
 
 	virtual RGBColor
 	trace_ray(const Ray& ray) const;
+
+	using Tracer::trace_ray;
 };
 
 #endif
