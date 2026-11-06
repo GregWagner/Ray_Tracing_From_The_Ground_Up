@@ -13,10 +13,10 @@ class Point2D {
     Point2D& operator=(const Point2D& rhs);
 
     Point2D // multiplication on right by scalar
-    operator*(const float a);
+    operator*(const float a) const;
 };
 
 // scales the point by the float a
-inline Point2D Point2D::operator*(const float a) {
+inline Point2D Point2D::operator*(const float a) const {
     return (Point2D(a * x, a * y));
 }

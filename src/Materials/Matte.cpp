@@ -62,13 +62,13 @@ Matte::~Matte() {
 }
 
 RGBColor Matte::shade(ShadeRec& sr) {
-    Vector3D wo = -sr.ray.d;
+    Vector3D const wo = -sr.ray.d;
     RGBColor L = ambient_brdf->rho(sr, wo) * sr.w.ambient_ptr->L(sr);
-    int num_lights = sr.w.lights.size();
+    int const num_lights = sr.w.lights.size();
 
     for (int j = 0; j < num_lights; j++) {
-        Vector3D wi = sr.w.lights[j]->get_direction(sr);
-        float ndotwi = sr.normal * wi;
+        Vector3D const wi = sr.w.lights[j]->get_direction(sr);
+        float const ndotwi = sr.normal * wi;
 
         if (ndotwi > 0.0) {
             L += diffuse_brdf->f(sr, wo, wi) * sr.w.lights[j]->L(sr) * ndotwi;

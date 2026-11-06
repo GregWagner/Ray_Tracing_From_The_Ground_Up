@@ -93,10 +93,10 @@ void World::build() {
 void World::render_scene() const {
     RGBColor pixel_color;
     Ray ray;
-    int hres = vp.hres;
-    int vres = vp.vres;
-    float s = vp.s;
-    float zw = 100.0; // hardwired in
+    int const hres = vp.hres;
+    int const vres = vp.vres;
+    float const s = vp.s;
+    float const zw = 100.0; // hardwired in
 
     ray.d = Vector3D(0, 0, -1);
 
@@ -112,7 +112,7 @@ void World::render_scene() const {
 
 // clamp
 RGBColor World::max_to_one(const RGBColor& c) const {
-    float max_value = max(c.r, max(c.g, c.b));
+    float const max_value = max(c.r, max(c.g, c.b));
 
     if (max_value > 1.0) {
         return (c / max_value);
@@ -140,7 +140,7 @@ ShadeRec World::hit_objects(const Ray& ray) {
     Normal normal;
     Point3D local_hit_point;
     float tmin = kHugeValue;
-    int num_objects = objects.size();
+    int const num_objects = objects.size();
 
     for (int j = 0; j < num_objects; j++) {
         if (objects[j]->hit(ray, t, sr) && (t < tmin)) {
@@ -166,7 +166,7 @@ ShadeRec World::hit_objects(const Ray& ray) {
 // The objects array still exists, because it's an automatic variable, but it's
 // empty
 void World::delete_objects() {
-    int num_objects = objects.size();
+    int const num_objects = objects.size();
 
     for (int j = 0; j < num_objects; j++) {
         delete objects[j];
@@ -177,7 +177,7 @@ void World::delete_objects() {
 }
 
 void World::delete_lights() {
-    int num_lights = lights.size();
+    int const num_lights = lights.size();
 
     for (int j = 0; j < num_lights; j++) {
         delete lights[j];

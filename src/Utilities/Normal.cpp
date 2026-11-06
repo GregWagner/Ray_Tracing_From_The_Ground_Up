@@ -45,7 +45,7 @@ Normal& Normal::operator=(const Point3D& rhs) {
 }
 
 void Normal::normalize() {
-    double length = std::sqrt(x * x + y * y + z * z);
+    double const length = std::sqrt(x * x + y * y + z * z);
     if (length == 0.0) {
         return;
     }

@@ -32,12 +32,12 @@ Plane& Plane::operator=(const Plane& rhs) {
 Plane::~Plane() {}
 
 bool Plane::hit(const Ray& ray, double& tmin, ShadeRec& sr) const {
-    double denom = ray.d * n;
+    double const denom = ray.d * n;
     if (denom == 0.0) {
         return (false);
     }
 
-    double t = ((a - ray.o) * n) / denom;
+    double const t = ((a - ray.o) * n) / denom;
 
     if (t > kEpsilon) {
         tmin = t;

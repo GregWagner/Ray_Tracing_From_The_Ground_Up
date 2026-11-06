@@ -36,20 +36,20 @@ bool Sphere::hit(const Ray& ray, double& tmin, ShadeRec& sr) const {
         return (false);
     }
 
-    Vector3D temp = ray.o - center;
-    double a = ray.d * ray.d;
+    Vector3D const temp = ray.o - center;
+    double const a = ray.d * ray.d;
     if (a <= 0.0) {
         return (false);
     }
-    double b = 2.0 * temp * ray.d;
-    double c = temp * temp - radius * radius;
-    double disc = b * b - 4.0 * a * c;
+    double const b = 2.0 * temp * ray.d;
+    double const c = temp * temp - radius * radius;
+    double const disc = b * b - 4.0 * a * c;
 
     if (disc < 0.0) {
         return (false);
     } else {
-        double e = std::sqrt(disc);
-        double denom = 2.0 * a;
+        double const e = std::sqrt(disc);
+        double const denom = 2.0 * a;
         t = (-b - e) / denom; // smaller root
 
         if (t > kEpsilon) {

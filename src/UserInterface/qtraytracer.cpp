@@ -28,10 +28,10 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent) {
     setCentralWidget(canvas);
 
     auto* fileMenu = menuBar()->addMenu("&File");
-    auto* openAction = fileMenu->addAction("&Open...");
+    auto const* openAction = fileMenu->addAction("&Open...");
     auto* saveAction = fileMenu->addAction("&Save As...");
     fileMenu->addSeparator();
-    auto* quitAction = fileMenu->addAction("E&xit");
+    auto const* quitAction = fileMenu->addAction("E&xit");
 
     auto* renderMenu = menuBar()->addMenu("&Render");
     auto* startAction = renderMenu->addAction("&Start");
@@ -91,7 +91,7 @@ void MainWindow::onOpenFile() {
         return;
     }
 
-    QImage image(path);
+    QImage const image(path);
     if (image.isNull()) {
         QMessageBox::information(this, "Error", "Sorry, could not load file.");
         return;
@@ -209,7 +209,7 @@ void RenderCanvas::renderResume() {
 }
 
 void RenderCanvas::onPixelBatch(const QVector<RenderPixel*>& batch) {
-    for (RenderPixel* pixel : batch) {
+    for (RenderPixel const* pixel : batch) {
         if (pixel != nullptr && !image.isNull() && pixel->x >= 0 && pixel->y >= 0 &&
             pixel->x < image.width() && pixel->y < image.height()) {
             image.setPixelColor(pixel->x, pixel->y,
@@ -244,7 +244,7 @@ RenderThread::~RenderThread() = default;
 
 void RenderThread::setPixel(int x, int y, int redValue, int green, int blue) {
     {
-        QMutexLocker locker(&mutex);
+        QMutexLocker const locker(&mutex);
         while (paused && !isInterruptionRequested()) {
             condition.wait(&mutex);
         }
@@ -266,12 +266,12 @@ void RenderThread::setPixel(int x, int y, int redValue, int green, int blue) {
 }
 
 void RenderThread::pause() {
-    QMutexLocker locker(&mutex);
+    QMutexLocker const locker(&mutex);
     paused = true;
 }
 
 void RenderThread::resume() {
-    QMutexLocker locker(&mutex);
+    QMutexLocker const locker(&mutex);
     paused = false;
     condition.wakeAll();
 }
@@ -289,7 +289,7 @@ void RenderThread::run() {
 void RenderThread::notifyCanvas() {
     lastUpdateTime = timer.elapsed();
 
-    auto* batch = new QVector<RenderPixel*>(pixels);
+    auto const* batch = new QVector<RenderPixel*>(pixels);
     pixels.clear();
 
     emit pixelBatchReady(*batch);
@@ -297,7 +297,7 @@ void RenderThread::notifyCanvas() {
 }
 
 int main(int argc, char* argv[]) {
-    QApplication app(argc, argv);
+    QApplication const app(argc, argv);
 
     MainWindow window;
     window.show();
@@ -319,8 +319,8 @@ void World::display_pixel(const int row, const int column,
         mapped_color = mapped_color.powc(vp.inv_gamma);
     }
 
-    int x = column;
-    int y = vp.vres - row - 1;
+    int const x = column;
+    int const y = vp.vres - row - 1;
 
     if (paintArea != nullptr) {
         paintArea->setPixel(x, y, static_cast<int>(mapped_color.r * 255),
