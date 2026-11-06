@@ -79,6 +79,10 @@ add_executable(qtraytracer
 
 target_link_libraries(qtraytracer PRIVATE rtf_core Qt6::Widgets)
 
+if(ENABLE_COVERAGE AND CMAKE_CXX_COMPILER_ID MATCHES "GNU")
+    target_link_options(qtraytracer PRIVATE --coverage)
+endif()
+
 target_include_directories(rtf_core PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/src
     ${CMAKE_CURRENT_SOURCE_DIR}/include
