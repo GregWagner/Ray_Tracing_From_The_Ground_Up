@@ -6,53 +6,36 @@
 #include "Point2D.hpp"
 #include "World.hpp" // we can #include "World.hpp" here
 
-//--------------------------------------------------------------------- class Pinhole
+// class Pinhole
 
 class Pinhole : public Camera {
-	public:
-	Pinhole();
+public:
+  Pinhole();
 
-	Pinhole(const Pinhole& ph);
+  Pinhole(const Pinhole &ph);
 
-	[[nodiscard]] virtual Camera*
-	clone() const override;
+  [[nodiscard]] virtual Camera *clone() const override;
 
-	Pinhole&
-	operator=(const Pinhole& rhs);
+  Pinhole &operator=(const Pinhole &rhs);
 
-	virtual ~Pinhole() override;
+  virtual ~Pinhole() override;
 
-	void
-	set_view_distance(const float vpd);
+  void set_view_distance(const float vpd);
 
-	void
-	set_zoom(const float zoom_factor);
+  void set_zoom(const float zoom_factor);
 
-	[[nodiscard]] Vector3D
-	get_direction(const Point2D& p) const;
+  [[nodiscard]] Vector3D get_direction(const Point2D &p) const;
 
-	virtual void
-	render_scene(const World& w) override;
+  virtual void render_scene(const World &w) override;
 
-	private:
-	float d;	// view plane distance
-	float zoom; // zoom factor
+private:
+  float d;    // view plane distance
+  float zoom; // zoom factor
 };
 
+// set_vpd
+inline void Pinhole::set_view_distance(float _d) { d = _d; }
 
-//-------------------------------------------------------------------------- set_vpd
-
-inline void
-Pinhole::set_view_distance(float _d) {
-	d = _d;
-}
-
-
-//-------------------------------------------------------------------------- set_zoom
-
-inline void
-Pinhole::set_zoom(float zoom_factor) {
-	zoom = zoom_factor;
-}
+inline void Pinhole::set_zoom(float zoom_factor) { zoom = zoom_factor; }
 
 #endif

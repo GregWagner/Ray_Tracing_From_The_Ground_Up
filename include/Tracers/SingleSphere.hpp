@@ -4,17 +4,16 @@
 #include "Tracer.hpp"
 
 class SingleSphere : public Tracer {
-	public:
-	SingleSphere();
+public:
+  SingleSphere();
 
-	explicit SingleSphere(World* _worldPtr);
+  explicit SingleSphere(World *_worldPtr);
 
-	virtual ~SingleSphere() override;
+  virtual ~SingleSphere() override;
 
-	[[nodiscard]] virtual RGBColor
-	trace_ray(const Ray& ray) const override;
+  [[nodiscard]] virtual RGBColor trace_ray(const Ray &ray) const override;
 
-	using Tracer::trace_ray;
+  using Tracer::trace_ray;
 };
 
 #endif

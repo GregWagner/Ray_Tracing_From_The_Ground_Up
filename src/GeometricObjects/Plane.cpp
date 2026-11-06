@@ -2,78 +2,47 @@
 
 const double Plane::kEpsilon = 0.001;
 
-// ----------------------------------------------------------------------  default constructor
+Plane::Plane() : GeometricObject(), a(0.0), n(0, 1, 0) {}
 
-Plane::Plane()
-	: GeometricObject(),
-	  a(0.0),
-	  n(0, 1, 0) {}
-
-
-// ----------------------------------------------------------------------  constructor
-
-Plane::Plane(const Point3D& point, const Normal& normal)
-	: GeometricObject(),
-	  a(point),
-	  n(normal) {
-	n.normalize();
+Plane::Plane(const Point3D &point, const Normal &normal)
+    : GeometricObject(), a(point), n(normal) {
+  n.normalize();
 }
 
+Plane::Plane(const Plane &plane)
+    : GeometricObject(plane), a(plane.a), n(plane.n) {}
 
-// ---------------------------------------------------------------- copy constructor
+Plane *Plane::clone() const { return (new Plane(*this)); }
 
-Plane::Plane(const Plane& plane)
-	: GeometricObject(plane),
-	  a(plane.a),
-	  n(plane.n) {}
+Plane &Plane::operator=(const Plane &rhs) {
+  if (this == &rhs)
+    return (*this);
 
+  GeometricObject::operator=(rhs);
 
-// ---------------------------------------------------------------- clone
+  a = rhs.a;
+  n = rhs.n;
 
-Plane*
-Plane::clone() const {
-	return (new Plane(*this));
+  return (*this);
 }
-
-
-// ---------------------------------------------------------------- assignment operator
-
-Plane&
-Plane::operator=(const Plane& rhs) {
-	if (this == &rhs)
-		return (*this);
-
-	GeometricObject::operator=(rhs);
-
-	a = rhs.a;
-	n = rhs.n;
-
-	return (*this);
-}
-
-
-// ---------------------------------------------------------------- destructor
 
 Plane::~Plane() {}
 
+bool Plane::hit(const Ray &ray, double &tmin, ShadeRec &sr) const {
+  double denom = ray.d * n;
+  if (denom == 0.0) {
+    return (false);
+  }
 
-// ----------------------------------------------------------------- hit
+  double t = ((a - ray.o) * n) / denom;
 
-bool Plane::hit(const Ray& ray, double& tmin, ShadeRec& sr) const {
-	double denom = ray.d * n;
-	if (denom == 0.0) {
-		return (false);
-	}
+  if (t > kEpsilon) {
+    tmin = t;
+    sr.normal = n;
+    sr.local_hit_point = ray.o + t * ray.d;
 
-	double t = ((a - ray.o) * n) / denom;
+    return (true);
+  }
 
-	if (t > kEpsilon) {
-		tmin = t;
-		sr.normal = n;
-		sr.local_hit_point = ray.o + t * ray.d;
-
-		return (true);
-	}
-
-	return (false);
+  return (false);
 }

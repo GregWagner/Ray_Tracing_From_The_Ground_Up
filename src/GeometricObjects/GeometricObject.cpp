@@ -1,58 +1,36 @@
-// this file contains the definition of the class GeometricObject
-
+#include "GeometricObject.hpp"
 #include "Constants.hpp"
 #include "Material.hpp"
-#include "GeometricObject.hpp"
 
+GeometricObject::GeometricObject() : material_ptr(nullptr) {}
 
-// ---------------------------------------------------------------------- default constructor
-
-
-GeometricObject::GeometricObject()
-	: material_ptr(nullptr) {}
-
-
-// ---------------------------------------------------------------------- copy constructor
-
-GeometricObject::GeometricObject(const GeometricObject& object) {
-	if (object.material_ptr)
-		material_ptr = object.material_ptr->clone();
-	else
-		material_ptr = nullptr;
+GeometricObject::GeometricObject(const GeometricObject &object) {
+  if (object.material_ptr)
+    material_ptr = object.material_ptr->clone();
+  else
+    material_ptr = nullptr;
 }
 
+GeometricObject &GeometricObject::operator=(const GeometricObject &rhs) {
+  if (this == &rhs)
+    return (*this);
 
-// ---------------------------------------------------------------------- assignment operator
+  if (material_ptr) {
+    delete material_ptr;
+    material_ptr = nullptr;
+  }
 
-GeometricObject&
-GeometricObject::operator=(const GeometricObject& rhs) {
-	if (this == &rhs)
-		return (*this);
+  if (rhs.material_ptr)
+    material_ptr = rhs.material_ptr->clone();
 
-	if (material_ptr) {
-		delete material_ptr;
-		material_ptr = nullptr;
-	}
-
-	if (rhs.material_ptr)
-		material_ptr = rhs.material_ptr->clone();
-
-	return (*this);
+  return (*this);
 }
-
-
-// ---------------------------------------------------------------------- destructor
 
 GeometricObject::~GeometricObject() {
-	if (material_ptr) {
-		delete material_ptr;
-		material_ptr = nullptr;
-	}
+  if (material_ptr) {
+    delete material_ptr;
+    material_ptr = nullptr;
+  }
 }
 
-
-// ---------------------------------------------------------------- set_material
-
-void GeometricObject::set_material(Material* mPtr) {
-	material_ptr = mPtr;
-}
+void GeometricObject::set_material(Material *mPtr) { material_ptr = mPtr; }

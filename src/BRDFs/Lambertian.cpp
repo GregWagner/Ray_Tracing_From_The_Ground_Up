@@ -1,62 +1,34 @@
 #include "Lambertian.hpp"
 #include "Constants.hpp"
 
-// ---------------------------------------------------------------------- default constructor
+Lambertian::Lambertian() : BRDF(), kd(0.0), cd(0.0) {}
 
-Lambertian::Lambertian()
-	: BRDF(),
-	  kd(0.0),
-	  cd(0.0) {}
+Lambertian::Lambertian(const Lambertian &lamb)
+    : BRDF(lamb), kd(lamb.kd), cd(lamb.cd) {}
 
-
-// ---------------------------------------------------------------------- copy constructor
-
-Lambertian::Lambertian(const Lambertian& lamb)
-	: BRDF(lamb),
-	  kd(lamb.kd),
-	  cd(lamb.cd) {}
-
-
-// ---------------------------------------------------------------------- clone
-
-Lambertian*
-Lambertian::clone() const {
-	return (new Lambertian(*this));
-}
-
-
-// ---------------------------------------------------------------------- destructor
+Lambertian *Lambertian::clone() const { return (new Lambertian(*this)); }
 
 Lambertian::~Lambertian() {}
 
+Lambertian &Lambertian::operator=(const Lambertian &rhs) {
+  if (this == &rhs)
+    return (*this);
 
-// ---------------------------------------------------------------------- assignment operator
+  BRDF::operator=(rhs);
 
-Lambertian&
-Lambertian::operator=(const Lambertian& rhs) {
-	if (this == &rhs)
-		return (*this);
+  kd = rhs.kd;
+  cd = rhs.cd;
 
-	BRDF::operator=(rhs);
-
-	kd = rhs.kd;
-	cd = rhs.cd;
-
-	return (*this);
+  return (*this);
 }
 
-
-// ---------------------------------------------------------------------- f
-
-RGBColor
-Lambertian::f(const ShadeRec& sr [[maybe_unused]], const Vector3D& wo [[maybe_unused]], const Vector3D& wi [[maybe_unused]]) const {
-	return (kd * cd * invPI);
+RGBColor Lambertian::f(const ShadeRec &sr [[maybe_unused]],
+                       const Vector3D &wo [[maybe_unused]],
+                       const Vector3D &wi [[maybe_unused]]) const {
+  return (kd * cd * invPI);
 }
 
-
-// ---------------------------------------------------------------------- rho
-
-RGBColor
-Lambertian::rho(const ShadeRec& sr [[maybe_unused]], const Vector3D& wo [[maybe_unused]]) const {
-	return (kd * cd);
+RGBColor Lambertian::rho(const ShadeRec &sr [[maybe_unused]],
+                         const Vector3D &wo [[maybe_unused]]) const {
+  return (kd * cd);
 }

@@ -2,20 +2,11 @@
 #ifndef _WXRAYTRACER_H_
 #define _WXRAYTRACER_H_
 
-/**
- * Ray Tracer skeleton
- *
- * Author : Sverre Kvaale <sverre@kvaale.com>
- * Version: 0.8
- *
- */
-
-#include <wx/wx.h>
 #include "World.hpp"
 #include <vector>
+#include <wx/wx.h>
 
 using namespace std;
-
 
 class wxraytracerFrame;
 class RenderCanvas;
@@ -23,85 +14,83 @@ class RenderThread;
 class RenderPixel;
 
 class wxraytracerapp : public wxApp {
-	public:
-	virtual bool OnInit() override;
-	virtual int OnExit() override;
-	virtual void SetStatusText(const wxString& text, int number = 0);
+public:
+  virtual bool OnInit() override;
+  virtual int OnExit() override;
+  virtual void SetStatusText(const wxString &text, int number = 0);
 
-	private:
-	wxraytracerFrame* frame;
-	DECLARE_EVENT_TABLE()
+private:
+  wxraytracerFrame *frame;
+  DECLARE_EVENT_TABLE()
 };
 
 class wxraytracerFrame : public wxFrame {
-	public:
-	wxraytracerFrame(const wxPoint& pos, const wxSize& size);
+public:
+  wxraytracerFrame(const wxPoint &pos, const wxSize &size);
 
-	// event handlers
-	void OnQuit(wxCommandEvent& event);
-	void OnOpenFile(wxCommandEvent& event);
-	void OnSaveFile(wxCommandEvent& event);
-	void OnRenderStart(wxCommandEvent& event);
-	void OnRenderCompleted(wxCommandEvent& event);
-	void OnRenderPause(wxCommandEvent& event);
-	void OnRenderResume(wxCommandEvent& event);
+  // event handlers
+  void OnQuit(wxCommandEvent &event);
+  void OnOpenFile(wxCommandEvent &event);
+  void OnSaveFile(wxCommandEvent &event);
+  void OnRenderStart(wxCommandEvent &event);
+  void OnRenderCompleted(wxCommandEvent &event);
+  void OnRenderPause(wxCommandEvent &event);
+  void OnRenderResume(wxCommandEvent &event);
 
-	private:
-	RenderCanvas* canvas; // where the rendering takes place
-	wxString currentPath; // for file dialogues
-	DECLARE_EVENT_TABLE()
+private:
+  RenderCanvas *canvas; // where the rendering takes place
+  wxString currentPath; // for file dialogues
+  DECLARE_EVENT_TABLE()
 };
 
 // IDs for menu items
 enum {
-	Menu_File_Quit = 100,
-	Menu_File_Open,
-	Menu_File_Save,
-	Menu_Render_Start,
-	Menu_Render_Pause,
-	Menu_Render_Resume
+  Menu_File_Quit = 100,
+  Menu_File_Open,
+  Menu_File_Save,
+  Menu_Render_Start,
+  Menu_Render_Pause,
+  Menu_Render_Resume
 };
 
 class RenderCanvas : public wxScrolledWindow {
-	public:
-	explicit RenderCanvas(wxWindow* parent);
-	virtual ~RenderCanvas();
+public:
+  explicit RenderCanvas(wxWindow *parent);
+  virtual ~RenderCanvas();
 
-	void SetImage(wxImage& image);
-	wxImage GetImage();
+  void SetImage(wxImage &image);
+  wxImage GetImage();
 
-	virtual void OnDraw(wxDC& dc) override;
-	void renderStart();
-	void renderPause();
-	void renderResume();
-	void OnRenderCompleted(wxCommandEvent& event);
-	void OnTimerUpdate(wxTimerEvent& event);
-	void OnNewPixel(wxCommandEvent& event);
+  virtual void OnDraw(wxDC &dc) override;
+  void renderStart();
+  void renderPause();
+  void renderResume();
+  void OnRenderCompleted(wxCommandEvent &event);
+  void OnTimerUpdate(wxTimerEvent &event);
+  void OnNewPixel(wxCommandEvent &event);
 
-	protected:
-	wxBitmap* m_image;
-	World* w;
+protected:
+  wxBitmap *m_image;
+  World *w;
 
-	private:
-	RenderThread* thread;
-	wxStopWatch* timer;
-	long pixelsRendered;
-	long pixelsToRender;
-	wxTimer updateTimer;
+private:
+  RenderThread *thread;
+  wxStopWatch *timer;
+  long pixelsRendered;
+  long pixelsToRender;
+  wxTimer updateTimer;
 
-	DECLARE_EVENT_TABLE()
+  DECLARE_EVENT_TABLE()
 };
-
 
 class RenderPixel {
-	public:
-	RenderPixel(int x, int y, int red, int green, int blue);
+public:
+  RenderPixel(int x, int y, int red, int green, int blue);
 
-	public:
-	int x, y;
-	int red, green, blue;
+public:
+  int x, y;
+  int red, green, blue;
 };
-
 
 DECLARE_EVENT_TYPE(wxEVT_RENDER, -1)
 #define ID_RENDER_COMPLETED 100
@@ -109,22 +98,21 @@ DECLARE_EVENT_TYPE(wxEVT_RENDER, -1)
 #define ID_RENDER_UPDATE 102
 
 class RenderThread : public wxThread {
-	public:
-	RenderThread(RenderCanvas* c, World* w) : wxThread(), world(w), canvas(c) {}
-	virtual void* Entry() override;
-	virtual void OnExit() override;
-	virtual void setPixel(int x, int y, int red, int green, int blue);
+public:
+  RenderThread(RenderCanvas *c, World *w) : wxThread(), world(w), canvas(c) {}
+  virtual void *Entry() override;
+  virtual void OnExit() override;
+  virtual void setPixel(int x, int y, int red, int green, int blue);
 
-	private:
-	void NotifyCanvas();
+private:
+  void NotifyCanvas();
 
-	World* world;
-	RenderCanvas* canvas;
+  World *world;
+  RenderCanvas *canvas;
 
-	vector<RenderPixel*> pixels;
-	wxStopWatch* timer;
-	long lastUpdateTime;
+  vector<RenderPixel *> pixels;
+  wxStopWatch *timer;
+  long lastUpdateTime;
 };
-
 
 #endif

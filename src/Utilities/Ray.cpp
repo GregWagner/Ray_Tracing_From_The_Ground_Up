@@ -1,35 +1,19 @@
 #include "Ray.hpp"
 
-// ---------------------------------------------------------------- default constructor
+Ray::Ray() : o(0.0), d(0.0, 0.0, 1.0) {}
 
-Ray::Ray()
-	: o(0.0),
-	  d(0.0, 0.0, 1.0) {}
+Ray::Ray(const Point3D &origin, const Vector3D &dir) : o(origin), d(dir) {}
 
-// ---------------------------------------------------------------- constructor
+Ray::Ray(const Ray &ray) : o(ray.o), d(ray.d) {}
 
-Ray::Ray(const Point3D& origin, const Vector3D& dir)
-	: o(origin),
-	  d(dir) {}
+Ray &Ray::operator=(const Ray &rhs) {
+  if (this == &rhs)
+    return (*this);
 
-// ---------------------------------------------------------------- copy constructor
+  o = rhs.o;
+  d = rhs.d;
 
-Ray::Ray(const Ray& ray)
-	: o(ray.o),
-	  d(ray.d) {}
-
-// ---------------------------------------------------------------- assignment operator
-
-Ray& Ray::operator=(const Ray& rhs) {
-	if (this == &rhs)
-		return (*this);
-
-	o = rhs.o;
-	d = rhs.d;
-
-	return (*this);
+  return (*this);
 }
-
-// ---------------------------------------------------------------- destructor
 
 Ray::~Ray() {}
