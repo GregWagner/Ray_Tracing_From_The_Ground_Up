@@ -19,15 +19,15 @@ class Light {
 	Light&
 	operator=(const Light& rhs);
 
-	virtual Light*
+	[[nodiscard]] virtual Light*
 	clone() const = 0;
 
 	virtual ~Light();
 
-	virtual Vector3D
+	[[nodiscard]] virtual Vector3D
 	get_direction(ShadeRec& sr) = 0;
 
-	virtual RGBColor
+	[[nodiscard]] virtual RGBColor
 	L(ShadeRec& sr);
 };
 

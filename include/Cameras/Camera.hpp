@@ -17,7 +17,7 @@ class Camera {
 
 	Camera(const Camera& camera); // copy constructor
 
-	virtual Camera* // virtual copy constructor
+	[[nodiscard]] virtual Camera* // virtual copy constructor
 	clone() const = 0;
 
 	virtual ~Camera();

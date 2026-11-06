@@ -14,7 +14,7 @@ class Pinhole : public Camera {
 
 	Pinhole(const Pinhole& ph);
 
-	virtual Camera*
+	[[nodiscard]] virtual Camera*
 	clone() const override;
 
 	Pinhole&
@@ -28,7 +28,7 @@ class Pinhole : public Camera {
 	void
 	set_zoom(const float zoom_factor);
 
-	Vector3D
+	[[nodiscard]] Vector3D
 	get_direction(const Point2D& p) const;
 
 	virtual void

@@ -11,10 +11,10 @@ class RayCast : public Tracer {
 
 	virtual ~RayCast() override;
 
-	virtual RGBColor
+	[[nodiscard]] virtual RGBColor
 	trace_ray(const Ray& ray) const override;
 
-	virtual RGBColor
+	[[nodiscard]] virtual RGBColor
 	trace_ray(const Ray ray, const int depth) const override;
 };
 

@@ -34,10 +34,10 @@ class Point3D {
 	Point3D // multiplication by a double on the right
 	operator*(const double a) const;
 
-	double // square of distance bertween two points
+	[[nodiscard]] double // square of distance bertween two points
 	d_squared(const Point3D& p) const;
 
-	double // distance bewteen two points
+	[[nodiscard]] double // distance bewteen two points
 	distance(const Point3D& p) const;
 };
 

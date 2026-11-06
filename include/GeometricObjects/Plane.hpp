@@ -13,7 +13,7 @@ class Plane : public GeometricObject {
 
 	Plane(const Plane& plane); // copy constructor
 
-	virtual Plane* // virtual copy constructor
+	[[nodiscard]] virtual Plane* // virtual copy constructor
 	clone() const override;
 
 	Plane& // assignment operator
@@ -22,7 +22,7 @@ class Plane : public GeometricObject {
 	virtual // destructor
 		~Plane() override;
 
-	virtual bool
+	[[nodiscard]] virtual bool
 	hit(const Ray& ray, double& tmin, ShadeRec& sr) const override;
 
 	private:

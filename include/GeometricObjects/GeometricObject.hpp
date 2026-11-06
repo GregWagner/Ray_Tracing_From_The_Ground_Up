@@ -16,16 +16,16 @@ class GeometricObject {
 
 	GeometricObject(const GeometricObject& object); // copy constructor
 
-	virtual GeometricObject* // virtual copy constructor
+	[[nodiscard]] virtual GeometricObject* // virtual copy constructor
 	clone() const = 0;
 
 	virtual // destructor
 		~GeometricObject();
 
-	virtual bool
+	[[nodiscard]] virtual bool
 	hit(const Ray& ray, double& t, ShadeRec& s) const = 0;
 
-	Material*
+	[[nodiscard]] Material*
 	get_material() const;
 
 	virtual void // needs to virtual so that it can be overriden in Compound

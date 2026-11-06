@@ -20,10 +20,10 @@ class Tracer {
 
 	virtual ~Tracer();
 
-	virtual RGBColor
+	[[nodiscard]] virtual RGBColor
 	trace_ray(const Ray& ray) const;
 
-	virtual RGBColor
+	[[nodiscard]] virtual RGBColor
 	trace_ray(const Ray ray, const int depth) const;
 
 	protected:

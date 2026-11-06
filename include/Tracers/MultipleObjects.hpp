@@ -11,7 +11,7 @@ class MultipleObjects : public Tracer {
 
 	virtual ~MultipleObjects() override;
 
-	virtual RGBColor
+	[[nodiscard]] virtual RGBColor
 	trace_ray(const Ray& ray) const override;
 
 	using Tracer::trace_ray;

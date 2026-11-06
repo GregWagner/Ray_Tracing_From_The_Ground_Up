@@ -12,7 +12,7 @@ class Matte : public Material {
 
 	Matte(const Matte& m);
 
-	virtual Material*
+	[[nodiscard]] virtual Material*
 	clone() const override;
 
 	Matte&
@@ -35,7 +35,7 @@ class Matte : public Material {
 	void
 	set_cd(const float c);
 
-	virtual RGBColor
+	[[nodiscard]] virtual RGBColor
 	shade(ShadeRec& sr) override;
 
 	private:

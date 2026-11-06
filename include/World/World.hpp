@@ -69,16 +69,16 @@ class World {
 	void
 	render_scene() const;
 
-	RGBColor
+	[[nodiscard]] RGBColor
 	max_to_one(const RGBColor& c) const;
 
-	RGBColor
+	[[nodiscard]] RGBColor
 	clamp_to_color(const RGBColor& c) const;
 
 	void
 	display_pixel(const int row, const int column, const RGBColor& pixel_color) const;
 
-	ShadeRec
+	[[nodiscard]] ShadeRec
 	hit_objects(const Ray& ray);
 
 

@@ -9,7 +9,7 @@ class Lambertian : public BRDF {
 
 	Lambertian(const Lambertian& lamb);
 
-	virtual Lambertian*
+	[[nodiscard]] virtual Lambertian*
 	clone() const override;
 
 	~Lambertian() override;
@@ -17,10 +17,10 @@ class Lambertian : public BRDF {
 	Lambertian&
 	operator=(const Lambertian& rhs);
 
-	virtual RGBColor
+	[[nodiscard]] virtual RGBColor
 	f(const ShadeRec& sr, const Vector3D& wo, const Vector3D& wi) const override;
 
-	virtual RGBColor
+	[[nodiscard]] virtual RGBColor
 	rho(const ShadeRec& sr, const Vector3D& wo) const override;
 
 	void

@@ -11,12 +11,12 @@ class Material {
 
 	Material(const Material& material);
 
-	virtual Material*
+	[[nodiscard]] virtual Material*
 	clone() const = 0;
 
 	virtual ~Material();
 
-	virtual RGBColor
+	[[nodiscard]] virtual RGBColor
 	shade(ShadeRec& sr);
 
 	protected:

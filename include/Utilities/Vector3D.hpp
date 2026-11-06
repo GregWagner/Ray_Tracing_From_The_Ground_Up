@@ -36,10 +36,10 @@ class Vector3D {
 	Vector3D // unary minus
 	operator-() const;
 
-	double // length
+	[[nodiscard]] double // length
 	length() const;
 
-	double // square of the length
+	[[nodiscard]] double // square of the length
 	len_squared() const;
 
 	Vector3D // multiplication by a double on the right

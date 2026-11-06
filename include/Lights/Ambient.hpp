@@ -9,7 +9,7 @@ class Ambient : public Light {
 
 	Ambient(const Ambient& a);
 
-	virtual Light*
+	[[nodiscard]] virtual Light*
 	clone() const override;
 
 	Ambient&
@@ -29,10 +29,10 @@ class Ambient : public Light {
 	void
 	set_color(const float r, const float g, const float b);
 
-	virtual Vector3D
+	[[nodiscard]] virtual Vector3D
 	get_direction(ShadeRec& s) override;
 
-	virtual RGBColor
+	[[nodiscard]] virtual RGBColor
 	L(ShadeRec& s) override;
 
 	private:

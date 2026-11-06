@@ -15,7 +15,7 @@ class Sphere : public GeometricObject {
 
 	Sphere(const Sphere& sphere); // Copy constructor
 
-	virtual Sphere* // Virtual copy constructor
+	[[nodiscard]] virtual Sphere* // Virtual copy constructor
 	clone() const override;
 
 	virtual // Destructor
@@ -33,7 +33,7 @@ class Sphere : public GeometricObject {
 	void
 	set_radius(const double r);
 
-	virtual bool
+	[[nodiscard]] virtual bool
 	hit(const Ray& ray, double& t, ShadeRec& s) const override;
 
 	private:
