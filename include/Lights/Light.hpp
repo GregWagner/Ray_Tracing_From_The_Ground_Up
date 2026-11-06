@@ -12,7 +12,7 @@ class ShadeRec;
 
 class Light {
 	public:
-	Light(void);
+	Light();
 
 	Light(const Light& ls);
 
@@ -20,9 +20,9 @@ class Light {
 	operator=(const Light& rhs);
 
 	virtual Light*
-	clone(void) const = 0;
+	clone() const = 0;
 
-	virtual ~Light(void);
+	virtual ~Light();
 
 	virtual Vector3D
 	get_direction(ShadeRec& sr) = 0;

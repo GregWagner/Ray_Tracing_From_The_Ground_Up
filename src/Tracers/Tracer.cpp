@@ -2,8 +2,8 @@
 
 // -------------------------------------------------------------------- default constructor
 
-Tracer::Tracer(void)
-	: world_ptr(NULL) {}
+Tracer::Tracer()
+	: world_ptr(nullptr) {}
 
 
 // -------------------------------------------------------------------- constructor
@@ -14,9 +14,9 @@ Tracer::Tracer(World* _worldPtr)
 
 // -------------------------------------------------------------------- destructor
 
-Tracer::~Tracer(void) {
+Tracer::~Tracer() {
 	if (world_ptr)
-		world_ptr = NULL;
+		world_ptr = nullptr;
 }
 
 

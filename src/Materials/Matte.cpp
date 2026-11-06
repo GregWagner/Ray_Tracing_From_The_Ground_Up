@@ -2,7 +2,7 @@
 
 // ---------------------------------------------------------------- default constructor
 
-Matte::Matte(void)
+Matte::Matte()
 	: Material(),
 	  ambient_brdf(new Lambertian),
 	  diffuse_brdf(new Lambertian) {}
@@ -15,19 +15,19 @@ Matte::Matte(const Matte& m)
 	if (m.ambient_brdf)
 		ambient_brdf = m.ambient_brdf->clone();
 	else
-		ambient_brdf = NULL;
+		ambient_brdf = nullptr;
 
 	if (m.diffuse_brdf)
 		diffuse_brdf = m.diffuse_brdf->clone();
 	else
-		diffuse_brdf = NULL;
+		diffuse_brdf = nullptr;
 }
 
 
 // ---------------------------------------------------------------- clone
 
 Material*
-Matte::clone(void) const {
+Matte::clone() const {
 	return (new Matte(*this));
 }
 
@@ -43,7 +43,7 @@ Matte::operator=(const Matte& rhs) {
 
 	if (ambient_brdf) {
 		delete ambient_brdf;
-		ambient_brdf = NULL;
+		ambient_brdf = nullptr;
 	}
 
 	if (rhs.ambient_brdf)
@@ -51,7 +51,7 @@ Matte::operator=(const Matte& rhs) {
 
 	if (diffuse_brdf) {
 		delete diffuse_brdf;
-		diffuse_brdf = NULL;
+		diffuse_brdf = nullptr;
 	}
 
 	if (rhs.diffuse_brdf)
@@ -63,15 +63,15 @@ Matte::operator=(const Matte& rhs) {
 
 // ---------------------------------------------------------------- destructor
 
-Matte::~Matte(void) {
+Matte::~Matte() {
 	if (ambient_brdf) {
 		delete ambient_brdf;
-		ambient_brdf = NULL;
+		ambient_brdf = nullptr;
 	}
 
 	if (diffuse_brdf) {
 		delete diffuse_brdf;
-		diffuse_brdf = NULL;
+		diffuse_brdf = nullptr;
 	}
 }
 

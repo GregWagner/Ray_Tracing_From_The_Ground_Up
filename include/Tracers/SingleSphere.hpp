@@ -5,11 +5,11 @@
 
 class SingleSphere : public Tracer {
 	public:
-	SingleSphere(void);
+	SingleSphere();
 
 	SingleSphere(World* _worldPtr);
 
-	virtual ~SingleSphere(void);
+	virtual ~SingleSphere();
 
 	virtual RGBColor
 	trace_ray(const Ray& ray) const;

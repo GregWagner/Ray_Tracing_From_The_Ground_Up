@@ -9,7 +9,7 @@
 // -----------------------------------------------------------------------------
 // default constructor
 
-Pinhole::Pinhole(void) : Camera(), d(500), zoom(1.0) {}
+Pinhole::Pinhole() : Camera(), d(500), zoom(1.0) {}
 
 // -----------------------------------------------------------------------------
 // copy constructor
@@ -19,7 +19,7 @@ Pinhole::Pinhole(const Pinhole& c) : Camera(c), d(c.d), zoom(c.zoom) {}
 // -----------------------------------------------------------------------------
 // clone
 
-Camera* Pinhole::clone(void) const {
+Camera* Pinhole::clone() const {
 	return (new Pinhole(*this));
 }
 
@@ -41,7 +41,7 @@ Pinhole& Pinhole::operator=(const Pinhole& rhs) {
 // -----------------------------------------------------------------------------
 // destructor
 
-Pinhole::~Pinhole(void) {}
+Pinhole::~Pinhole() {}
 
 // -----------------------------------------------------------------------------
 // get_direction
@@ -62,7 +62,7 @@ void Pinhole::render_scene(const World& world) {
 	Ray ray;
 	int depth = 0;
 	Point2D pp; // sample point on a pixel
-	int n = (int)sqrt((float)vp.num_samples);
+	int n = static_cast<int>(sqrt(static_cast<float>(vp.num_samples)));
 
 	vp.s /= zoom;
 	ray.o = eye;

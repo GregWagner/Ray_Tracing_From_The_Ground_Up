@@ -3,7 +3,7 @@
 
 // ---------------------------------------------------------------------- default constructor
 
-Lambertian::Lambertian(void)
+Lambertian::Lambertian()
 	: BRDF(),
 	  kd(0.0),
 	  cd(0.0) {}
@@ -20,14 +20,14 @@ Lambertian::Lambertian(const Lambertian& lamb)
 // ---------------------------------------------------------------------- clone
 
 Lambertian*
-Lambertian::clone(void) const {
+Lambertian::clone() const {
 	return (new Lambertian(*this));
 }
 
 
 // ---------------------------------------------------------------------- destructor
 
-Lambertian::~Lambertian(void) {}
+Lambertian::~Lambertian() {}
 
 
 // ---------------------------------------------------------------------- assignment operator

@@ -7,7 +7,7 @@
 // ---------------------------------------------------------- default
 // constructor
 
-Normal::Normal(void) : x(0.0), y(0.0), z(0.0) {}
+Normal::Normal() : x(0.0), y(0.0), z(0.0) {}
 
 // ---------------------------------------------------------- constructor
 
@@ -28,7 +28,7 @@ Normal::Normal(const Vector3D& v) : x(v.x), y(v.y), z(v.z) {}
 
 // ---------------------------------------------------------- destructor
 
-Normal::~Normal(void) {}
+Normal::~Normal() {}
 
 // ----------------------------------------------------------- operator=
 // assignment operator
@@ -66,7 +66,7 @@ Normal& Normal::operator=(const Point3D& rhs) {
 
 // ------------------------------------------------------------ normalize
 
-void Normal::normalize(void) {
+void Normal::normalize() {
 	double length = sqrt(x * x + y * y + z * z);
 	x /= length;
 	y /= length;

@@ -2,7 +2,7 @@
 
 // ---------------------------------------------------------------- default constructor
 
-Material::Material(void) {}
+Material::Material() {}
 
 
 // ---------------------------------------------------------------- copy constructor
@@ -23,7 +23,7 @@ Material::operator=(const Material& rhs) {
 
 // ---------------------------------------------------------------- destructor
 
-Material::~Material(void) {}
+Material::~Material() {}
 
 
 // ---------------------------------------------------------------- shade

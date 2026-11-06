@@ -65,15 +65,15 @@ enum {
 class RenderCanvas : public wxScrolledWindow {
 	public:
 	RenderCanvas(wxWindow* parent);
-	virtual ~RenderCanvas(void);
+	virtual ~RenderCanvas();
 
 	void SetImage(wxImage& image);
-	wxImage GetImage(void);
+	wxImage GetImage();
 
 	virtual void OnDraw(wxDC& dc);
-	void renderStart(void);
-	void renderPause(void);
-	void renderResume(void);
+	void renderStart();
+	void renderPause();
+	void renderResume();
 	void OnRenderCompleted(wxCommandEvent& event);
 	void OnTimerUpdate(wxTimerEvent& event);
 	void OnNewPixel(wxCommandEvent& event);

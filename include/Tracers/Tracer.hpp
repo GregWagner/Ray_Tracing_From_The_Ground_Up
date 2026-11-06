@@ -14,11 +14,11 @@ class World;
 
 class Tracer {
 	public:
-	Tracer(void);
+	Tracer();
 
 	Tracer(World* _world_ptr);
 
-	virtual ~Tracer(void);
+	virtual ~Tracer();
 
 	virtual RGBColor
 	trace_ray(const Ray& ray) const;

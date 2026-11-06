@@ -9,7 +9,7 @@ class Ray {
 	Point3D o;	// origin
 	Vector3D d; // direction
 
-	Ray(void);
+	Ray();
 
 	Ray(const Point3D& origin, const Vector3D& dir);
 
@@ -18,7 +18,7 @@ class Ray {
 	Ray&
 	operator=(const Ray& rhs);
 
-	~Ray(void);
+	~Ray();
 };
 
 #endif

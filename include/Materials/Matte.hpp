@@ -8,17 +8,17 @@
 
 class Matte : public Material {
 	public:
-	Matte(void);
+	Matte();
 
 	Matte(const Matte& m);
 
 	virtual Material*
-	clone(void) const;
+	clone() const;
 
 	Matte&
 	operator=(const Matte& rhs);
 
-	~Matte(void);
+	~Matte();
 
 	void
 	set_ka(const float k);

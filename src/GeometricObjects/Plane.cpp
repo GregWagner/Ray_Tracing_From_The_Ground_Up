@@ -4,7 +4,7 @@ const double Plane::kEpsilon = 0.001;
 
 // ----------------------------------------------------------------------  default constructor
 
-Plane::Plane(void)
+Plane::Plane()
 	: GeometricObject(),
 	  a(0.0),
 	  n(0, 1, 0) {}
@@ -31,7 +31,7 @@ Plane::Plane(const Plane& plane)
 // ---------------------------------------------------------------- clone
 
 Plane*
-Plane::clone(void) const {
+Plane::clone() const {
 	return (new Plane(*this));
 }
 
@@ -54,7 +54,7 @@ Plane::operator=(const Plane& rhs) {
 
 // ---------------------------------------------------------------- destructor
 
-Plane::~Plane(void) {}
+Plane::~Plane() {}
 
 
 // ----------------------------------------------------------------- hit

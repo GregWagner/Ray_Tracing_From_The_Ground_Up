@@ -15,7 +15,7 @@ class Pinhole : public Camera {
 	Pinhole(const Pinhole& ph);
 
 	virtual Camera*
-	clone(void) const;
+	clone() const;
 
 	Pinhole&
 	operator=(const Pinhole& rhs);

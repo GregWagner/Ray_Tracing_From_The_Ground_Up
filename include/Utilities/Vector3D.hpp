@@ -15,14 +15,14 @@ class Vector3D {
 	double x, y, z;
 
 	public:
-	Vector3D(void);							   // default constructor
+	Vector3D();								   // default constructor
 	Vector3D(double a);						   // constructor
 	Vector3D(double _x, double _y, double _z); // constructor
 	Vector3D(const Vector3D& v);			   // copy constructor
 	Vector3D(const Normal& n);				   // constructs a vector from a Normal
 	Vector3D(const Point3D& p);				   // constructs a vector from a point
 
-	~Vector3D(void); // destructor
+	~Vector3D(); // destructor
 
 	Vector3D& // assignment operator
 	operator=(const Vector3D& rhs);
@@ -34,13 +34,13 @@ class Vector3D {
 	operator=(const Point3D& rhs);
 
 	Vector3D // unary minus
-	operator-(void) const;
+	operator-() const;
 
 	double // length
-	length(void);
+	length();
 
 	double // square of the length
-	len_squared(void);
+	len_squared();
 
 	Vector3D // multiplication by a double on the right
 	operator*(const double a) const;
@@ -64,10 +64,10 @@ class Vector3D {
 	operator^(const Vector3D& v) const;
 
 	void // convert vector to a unit vector
-	normalize(void);
+	normalize();
 
 	Vector3D& // return a unit vector, and normalize the vector
-	hat(void);
+	hat();
 };
 
 
@@ -79,7 +79,7 @@ class Vector3D {
 // functions that reverse the direction of a ray that's stored in the ShadeRec object
 
 inline Vector3D
-Vector3D::operator-(void) const {
+Vector3D::operator-() const {
 	return (Vector3D(-x, -y, -z));
 }
 
@@ -88,7 +88,7 @@ Vector3D::operator-(void) const {
 // the square of the length
 
 inline double
-Vector3D::len_squared(void) {
+Vector3D::len_squared() {
 	return (x * x + y * y + z * z);
 }
 

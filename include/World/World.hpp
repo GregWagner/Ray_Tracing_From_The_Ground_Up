@@ -47,7 +47,7 @@ class World {
 
 
 	public:
-	World(void);
+	World();
 
 	~World();
 
@@ -64,10 +64,10 @@ class World {
 	set_camera(Camera* c_ptr);
 
 	void
-	build(void);
+	build();
 
 	void
-	render_scene(void) const;
+	render_scene() const;
 
 	RGBColor
 	max_to_one(const RGBColor& c) const;
@@ -84,10 +84,10 @@ class World {
 
 	private:
 	void
-	delete_objects(void);
+	delete_objects();
 
 	void
-	delete_lights(void);
+	delete_lights();
 };
 
 

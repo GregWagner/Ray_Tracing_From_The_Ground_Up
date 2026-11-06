@@ -49,31 +49,31 @@
 // camera_ptr is set to NULL because the build functions will always have to construct a camera
 // and set its parameters
 
-World::World(void)
+World::World()
 	: background_color(black),
-	  tracer_ptr(NULL),
+	  tracer_ptr(nullptr),
 	  ambient_ptr(new Ambient),
-	  camera_ptr(NULL) {}
+	  camera_ptr(nullptr) {}
 
 
 //------------------------------------------------------------------ destructor
 
-World::~World(void) {
+World::~World() {
 	if (tracer_ptr) {
 		delete tracer_ptr;
-		tracer_ptr = NULL;
+		tracer_ptr = nullptr;
 	}
 
 
 	if (ambient_ptr) {
 		delete ambient_ptr;
-		ambient_ptr = NULL;
+		ambient_ptr = nullptr;
 	}
 
 
 	if (camera_ptr) {
 		delete camera_ptr;
-		camera_ptr = NULL;
+		camera_ptr = nullptr;
 	}
 
 	delete_objects();
@@ -85,7 +85,7 @@ World::~World(void) {
 
 // This uses orthographic viewing along the zw axis
 
-void World::render_scene(void) const {
+void World::render_scene() const {
 	RGBColor pixel_color;
 	Ray ray;
 	int hres = vp.hres;
@@ -160,9 +160,9 @@ void World::display_pixel(const int row, const int column, const RGBColor& raw_c
 	int x = column;
 	int y = vp.vres - row - 1;
 
-	paintArea->setPixel(x, y, (int)(mapped_color.r * 255),
-						(int)(mapped_color.g * 255),
-						(int)(mapped_color.b * 255));
+	paintArea->setPixel(x, y, static_cast<int>(mapped_color.r * 255),
+						static_cast<int>(mapped_color.g * 255),
+						static_cast<int>(mapped_color.b * 255));
 }
 
 // ----------------------------------------------------------------------------- hit_objects
@@ -201,12 +201,12 @@ World::hit_objects(const Ray& ray) {
 // Deletes the objects in the objects array, and erases the array.
 // The objects array still exists, because it's an automatic variable, but it's empty
 
-void World::delete_objects(void) {
+void World::delete_objects() {
 	int num_objects = objects.size();
 
 	for (int j = 0; j < num_objects; j++) {
 		delete objects[j];
-		objects[j] = NULL;
+		objects[j] = nullptr;
 	}
 
 	objects.erase(objects.begin(), objects.end());
@@ -215,12 +215,12 @@ void World::delete_objects(void) {
 
 //------------------------------------------------------------------ delete_lights
 
-void World::delete_lights(void) {
+void World::delete_lights() {
 	int num_lights = lights.size();
 
 	for (int j = 0; j < num_lights; j++) {
 		delete lights[j];
-		lights[j] = NULL;
+		lights[j] = nullptr;
 	}
 
 	lights.erase(lights.begin(), lights.end());

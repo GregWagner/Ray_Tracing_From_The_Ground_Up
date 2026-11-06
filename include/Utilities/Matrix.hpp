@@ -12,11 +12,11 @@ class Matrix {
 	double m[4][4]; // elements
 
 
-	Matrix(void); // default constructor
+	Matrix(); // default constructor
 
 	Matrix(const Matrix& mat); // copy constructor
 
-	~Matrix(void); // destructor
+	~Matrix(); // destructor
 
 	Matrix& // assignment operator
 	operator=(const Matrix& rhs);
@@ -28,7 +28,7 @@ class Matrix {
 	operator/(const double d);
 
 	void // set to the identity matrix
-	set_identity(void);
+	set_identity();
 };
 
 

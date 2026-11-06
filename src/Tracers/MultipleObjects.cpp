@@ -3,7 +3,7 @@
 
 // -------------------------------------------------------------------- default constructor
 
-MultipleObjects::MultipleObjects(void)
+MultipleObjects::MultipleObjects()
 	: Tracer() {}
 
 
@@ -15,7 +15,7 @@ MultipleObjects::MultipleObjects(World* _worldPtr)
 
 // -------------------------------------------------------------------- destructor
 
-MultipleObjects::~MultipleObjects(void) {}
+MultipleObjects::~MultipleObjects() {}
 
 
 // -------------------------------------------------------------------- trace_ray

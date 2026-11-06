@@ -13,13 +13,13 @@ class Normal {
 	double x, y, z;
 
 	public:
-	Normal(void);							 // default constructor
+	Normal();								 // default constructor
 	Normal(double a);						 // constructor
 	Normal(double _x, double _y, double _z); // constructor
 	Normal(const Normal& n);				 // copy constructor
 	Normal(const Vector3D& v);				 // constructs a normal from vector
 
-	~Normal(void); // destructor
+	~Normal(); // destructor
 
 	Normal& // assignment operator
 	operator=(const Normal& rhs);
@@ -31,7 +31,7 @@ class Normal {
 	operator=(const Point3D& rhs);
 
 	Normal // unary minus
-	operator-(void) const;
+	operator-() const;
 
 	Normal // addition
 	operator+(const Normal& n) const;
@@ -46,7 +46,7 @@ class Normal {
 	operator*(const double a) const;
 
 	void // convert normal to a unit normal
-	normalize(void);
+	normalize();
 };
 
 
@@ -56,7 +56,7 @@ class Normal {
 // unary minus
 
 inline Normal
-Normal::operator-(void) const {
+Normal::operator-() const {
 	return (Normal(-x, -y, -z));
 }
 

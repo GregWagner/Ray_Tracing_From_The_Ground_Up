@@ -6,7 +6,7 @@
 
 // -------------------------------------------------------- default constructor
 
-RGBColor::RGBColor(void) : r(0.0), g(0.0), b(0.0) {}
+RGBColor::RGBColor() : r(0.0), g(0.0), b(0.0) {}
 
 // -------------------------------------------------------- constructor
 
@@ -22,7 +22,7 @@ RGBColor::RGBColor(const RGBColor& c) : r(c.r), g(c.g), b(c.b) {}
 
 // -------------------------------------------------------- destructor
 
-RGBColor::~RGBColor(void) {}
+RGBColor::~RGBColor() {}
 
 // --------------------------------------------------------assignment operator
 

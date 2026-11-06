@@ -6,11 +6,11 @@ class Point2D {
 	float x, y;
 
 	public:
-	Point2D(void);							 // default constructor
+	Point2D();								 // default constructor
 	Point2D(const float arg);				 // constructor
 	Point2D(const float x1, const float y1); // constructor
 	Point2D(const Point2D& p);				 // copy constructor
-	~Point2D(void) {}						 // destructor
+	~Point2D() {}							 // destructor
 
 	Point2D& // assignment operator
 	operator=(const Point2D& rhs);

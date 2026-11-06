@@ -8,8 +8,8 @@
 // ---------------------------------------------------------------------- default constructor
 
 
-GeometricObject::GeometricObject(void)
-	: material_ptr(NULL) {}
+GeometricObject::GeometricObject()
+	: material_ptr(nullptr) {}
 
 
 // ---------------------------------------------------------------------- copy constructor
@@ -18,7 +18,7 @@ GeometricObject::GeometricObject(const GeometricObject& object) {
 	if (object.material_ptr)
 		material_ptr = object.material_ptr->clone();
 	else
-		material_ptr = NULL;
+		material_ptr = nullptr;
 }
 
 
@@ -31,7 +31,7 @@ GeometricObject::operator=(const GeometricObject& rhs) {
 
 	if (material_ptr) {
 		delete material_ptr;
-		material_ptr = NULL;
+		material_ptr = nullptr;
 	}
 
 	if (rhs.material_ptr)
@@ -43,10 +43,10 @@ GeometricObject::operator=(const GeometricObject& rhs) {
 
 // ---------------------------------------------------------------------- destructor
 
-GeometricObject::~GeometricObject(void) {
+GeometricObject::~GeometricObject() {
 	if (material_ptr) {
 		delete material_ptr;
-		material_ptr = NULL;
+		material_ptr = nullptr;
 	}
 }
 

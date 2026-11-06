@@ -5,17 +5,17 @@
 
 class Ambient : public Light {
 	public:
-	Ambient(void);
+	Ambient();
 
 	Ambient(const Ambient& a);
 
 	virtual Light*
-	clone(void) const;
+	clone() const;
 
 	Ambient&
 	operator=(const Ambient& rhs);
 
-	virtual ~Ambient(void);
+	virtual ~Ambient();
 
 	void
 	scale_radiance(const float b);

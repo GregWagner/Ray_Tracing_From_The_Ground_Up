@@ -5,14 +5,14 @@
 
 class Lambertian : public BRDF {
 	public:
-	Lambertian(void);
+	Lambertian();
 
 	Lambertian(const Lambertian& lamb);
 
 	virtual Lambertian*
-	clone(void) const;
+	clone() const;
 
-	~Lambertian(void);
+	~Lambertian();
 
 	Lambertian&
 	operator=(const Lambertian& rhs);

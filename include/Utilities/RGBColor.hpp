@@ -10,12 +10,12 @@ class RGBColor {
 	float r, g, b;
 
 	public:
-	RGBColor(void);							// default constructor
+	RGBColor();								// default constructor
 	RGBColor(float c);						// constructor
 	RGBColor(float _r, float _g, float _b); // constructor
 	RGBColor(const RGBColor& c);			// copy constructor
 
-	~RGBColor(void); // destructor
+	~RGBColor(); // destructor
 
 	RGBColor& // assignment operator
 	operator=(const RGBColor& rhs);
@@ -48,7 +48,7 @@ class RGBColor {
 	powc(float p) const;
 
 	float // the average of the components
-	average(void) const;
+	average() const;
 };
 
 
@@ -139,7 +139,7 @@ RGBColor::operator==(const RGBColor& c) const {
 // the average of the three components
 
 inline float
-RGBColor::average(void) const {
+RGBColor::average() const {
 	return (0.333333333333 * (r + g + b));
 }
 

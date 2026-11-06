@@ -2,7 +2,7 @@
 
 // ---------------------------------------------------------------------- default constructor
 
-Directional::Directional(void)
+Directional::Directional()
 	: Light(),
 	  ls(1.0),
 	  color(1.0),
@@ -21,7 +21,7 @@ Directional::Directional(const Directional& dl)
 // ---------------------------------------------------------------------- clone
 
 Light*
-Directional::clone(void) const {
+Directional::clone() const {
 	return (new Directional(*this));
 }
 
@@ -45,7 +45,7 @@ Directional::operator=(const Directional& rhs) {
 
 // ---------------------------------------------------------------------- destructor
 
-Directional::~Directional(void) {}
+Directional::~Directional() {}
 
 
 // ---------------------------------------------------------------------- get_direction

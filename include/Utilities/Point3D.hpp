@@ -20,7 +20,7 @@ class Point3D {
 	operator=(const Point3D& p);
 
 	Point3D // unary minus
-	operator-(void) const;
+	operator-() const;
 
 	Vector3D // vector joining two points
 	operator-(const Point3D& p) const;
@@ -48,7 +48,7 @@ class Point3D {
 // unary minus
 
 inline Point3D
-Point3D::operator-(void) const {
+Point3D::operator-() const {
 	return (Point3D(-x, -y, -z));
 }
 

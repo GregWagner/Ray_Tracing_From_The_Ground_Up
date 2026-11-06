@@ -5,11 +5,11 @@
 
 class RayCast : public Tracer {
 	public:
-	RayCast(void);
+	RayCast();
 
 	RayCast(World* _worldPtr);
 
-	virtual ~RayCast(void);
+	virtual ~RayCast();
 
 	virtual RGBColor
 	trace_ray(const Ray& ray) const;

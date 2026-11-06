@@ -5,7 +5,7 @@
 
 // -------------------------------------------------------------------- default constructor
 
-RayCast::RayCast(void)
+RayCast::RayCast()
 	: Tracer() {}
 
 
@@ -17,7 +17,7 @@ RayCast::RayCast(World* _worldPtr)
 
 // -------------------------------------------------------------------- destructor
 
-RayCast::~RayCast(void) {}
+RayCast::~RayCast() {}
 
 
 // -------------------------------------------------------------------- trace_ray

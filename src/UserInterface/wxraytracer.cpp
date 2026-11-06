@@ -49,8 +49,8 @@ EVT_COMMAND(ID_RENDER_COMPLETED, wxEVT_RENDER,
 END_EVENT_TABLE()
 
 wxraytracerFrame::wxraytracerFrame(const wxPoint& pos, const wxSize& size)
-	: wxFrame((wxFrame*)NULL, -1, wxT("Ray Tracer"), pos, size) {
-	wxMenu* menuFile = new wxMenu;
+	: wxFrame((wxFrame*)nullptr, -1, wxT("Ray Tracer"), pos, size) {
+	auto* menuFile = new wxMenu;
 
 	menuFile->Append(Menu_File_Open, wxT("&Open..."));
 	menuFile->Append(Menu_File_Save, wxT("&Save As..."));
@@ -59,7 +59,7 @@ wxraytracerFrame::wxraytracerFrame(const wxPoint& pos, const wxSize& size)
 
 	menuFile->Enable(menuFile->FindItem(wxT("&Save As...")), FALSE);
 
-	wxMenu* menuRender = new wxMenu;
+	auto* menuRender = new wxMenu;
 
 	menuRender->Append(Menu_Render_Start, wxT("&Start"));
 	menuRender->Append(Menu_Render_Pause, wxT("&Pause"));
@@ -69,7 +69,7 @@ wxraytracerFrame::wxraytracerFrame(const wxPoint& pos, const wxSize& size)
 	menuRender->Enable(menuRender->FindItem(wxT("&Pause")), FALSE);
 	menuRender->Enable(menuRender->FindItem(wxT("&Resume")), FALSE);
 
-	wxMenuBar* menuBar = new wxMenuBar;
+	auto* menuBar = new wxMenuBar;
 	menuBar->Append(menuFile, wxT("&File"));
 	menuBar->Append(menuRender, wxT("&Render"));
 
@@ -132,7 +132,7 @@ void wxraytracerFrame::OnOpenFile(wxCommandEvent& WXUNUSED(event)) {
 
 	if (dialog.ShowModal() == wxID_OK) {
 		currentPath = dialog.GetPath();
-		wxImage* theImage = new wxImage();
+		auto* theImage = new wxImage();
 		theImage->LoadFile(currentPath);
 
 		if (!theImage->IsOk()) {
@@ -200,58 +200,58 @@ void wxraytracerFrame::OnRenderResume(wxCommandEvent& event [[maybe_unused]]) {
 
 
 RenderCanvas::RenderCanvas(wxWindow* parent)
-	: wxScrolledWindow(parent), m_image(NULL), w(NULL), thread(NULL),
-	  timer(NULL), updateTimer(this, ID_RENDER_UPDATE) {
+	: wxScrolledWindow(parent), m_image(nullptr), w(nullptr), thread(nullptr),
+	  timer(nullptr), updateTimer(this, ID_RENDER_UPDATE) {
 	SetOwnBackgroundColour(wxColour(143, 144, 150));
 }
 
-RenderCanvas::~RenderCanvas(void) {
-	if (m_image != NULL)
+RenderCanvas::~RenderCanvas() {
+	if (m_image != nullptr)
 		delete m_image;
 
-	if (thread != NULL)
+	if (thread != nullptr)
 		thread->Delete();
 
-	if (w != NULL)
+	if (w != nullptr)
 		delete w;
 
-	if (timer != NULL)
+	if (timer != nullptr)
 		delete timer;
 }
 
 void RenderCanvas::SetImage(wxImage& image) {
-	if (m_image != NULL)
+	if (m_image != nullptr)
 		delete m_image;
 
 	m_image = new wxBitmap(image);
 
-	SetScrollbars(10, 10, (int)(m_image->GetWidth() / 10.0f),
-				  (int)(m_image->GetHeight() / 10.0f), 0, 0, true);
+	SetScrollbars(10, 10, static_cast<int>(m_image->GetWidth() / 10.0f),
+				  static_cast<int>(m_image->GetHeight() / 10.0f), 0, 0, true);
 
 	Refresh();
 }
 
-wxImage RenderCanvas::GetImage(void) {
-	if (m_image != NULL)
+wxImage RenderCanvas::GetImage() {
+	if (m_image != nullptr)
 		return m_image->ConvertToImage();
 
 	return wxImage();
 }
 
 void RenderCanvas::OnDraw(wxDC& dc) {
-	if (m_image != NULL && m_image->IsOk())
+	if (m_image != nullptr && m_image->IsOk())
 		wxBufferedDC bdc(&dc, *m_image);
 }
 
 void RenderCanvas::OnRenderCompleted(wxCommandEvent& event [[maybe_unused]]) {
-	thread = NULL;
+	thread = nullptr;
 
-	if (w != NULL) {
+	if (w != nullptr) {
 		delete w;
-		w = NULL;
+		w = nullptr;
 	}
 
-	if (timer != NULL) {
+	if (timer != nullptr) {
 		long interval = timer->Time();
 
 		wxTimeSpan timeElapsed(0, 0, 0, interval);
@@ -259,7 +259,7 @@ void RenderCanvas::OnRenderCompleted(wxCommandEvent& event [[maybe_unused]]) {
 		wxGetApp().SetStatusText(timeString, 1);
 
 		delete timer;
-		timer = NULL;
+		timer = nullptr;
 	}
 }
 
@@ -270,10 +270,10 @@ void RenderCanvas::OnNewPixel(wxCommandEvent& event) {
 	wxBufferedDC bufferedDC(&cdc, *m_image);
 
 	// iterate over all pixels in the event
-	vector<RenderPixel*>* pixelsUpdate =
-		(vector<RenderPixel*>*)event.GetClientData();
+	auto* pixelsUpdate =
+		static_cast<vector<RenderPixel*>*>(event.GetClientData());
 
-	for (vector<RenderPixel*>::iterator itr = pixelsUpdate->begin();
+	for (auto itr = pixelsUpdate->begin();
 		 itr != pixelsUpdate->end(); itr++) {
 		RenderPixel* pixel = *itr;
 
@@ -289,35 +289,35 @@ void RenderCanvas::OnNewPixel(wxCommandEvent& event) {
 	delete pixelsUpdate;
 }
 
-void RenderCanvas::renderPause(void) {
-	if (thread != NULL)
+void RenderCanvas::renderPause() {
+	if (thread != nullptr)
 		thread->Pause();
 
 	updateTimer.Stop();
 
-	if (timer != NULL)
+	if (timer != nullptr)
 		timer->Pause();
 }
 
-void RenderCanvas::renderResume(void) {
-	if (thread != NULL)
+void RenderCanvas::renderResume() {
+	if (thread != nullptr)
 		thread->Resume();
 
 	updateTimer.Start();
 
-	if (timer != NULL)
+	if (timer != nullptr)
 		timer->Resume();
 }
 
 void RenderCanvas::OnTimerUpdate(wxTimerEvent& event [[maybe_unused]]) {
-	if (timer == NULL)
+	if (timer == nullptr)
 		return;
 
 	// percent
-	float completed = (float)pixelsRendered / (float)pixelsToRender;
+	float completed = static_cast<float>(pixelsRendered) / static_cast<float>(pixelsToRender);
 
 	wxString progressString = wxString::Format(wxT("Rendering...%d%%"),
-											   (int)(completed * 100));
+											   static_cast<int>(completed * 100));
 	wxGetApp().SetStatusText(progressString, 0);
 
 	// time elapsed
@@ -327,7 +327,7 @@ void RenderCanvas::OnTimerUpdate(wxTimerEvent& event [[maybe_unused]]) {
 
 	// time remaining
 	float remaining = 1.0f - completed;
-	long msecRemain = (long)(((double)interval / (completed * 100)) * 100 * remaining);
+	long msecRemain = static_cast<long>((static_cast<double>(interval) / (completed * 100)) * 100 * remaining);
 
 	wxTimeSpan timeRemaining(0, 0, 0, msecRemain);
 
@@ -341,7 +341,7 @@ void RenderCanvas::OnTimerUpdate(wxTimerEvent& event [[maybe_unused]]) {
 		wxGetApp().SetStatusText(timeString, 1);
 }
 
-void RenderCanvas::renderStart(void) {
+void RenderCanvas::renderStart() {
 	w = new World();
 
 	wxGetApp().SetStatusText(wxT("Building world..."));
@@ -421,7 +421,7 @@ void RenderThread::NotifyCanvas() {
 	lastUpdateTime = timer->Time();
 
 	// copy rendered pixels into a new vector and reset
-	vector<RenderPixel*>* pixelsUpdate = new vector<RenderPixel*>(pixels);
+	auto* pixelsUpdate = new vector<RenderPixel*>(pixels);
 	pixels.clear();
 
 	wxCommandEvent event(wxEVT_RENDER, ID_RENDER_NEWPIXEL);
@@ -446,5 +446,5 @@ void* RenderThread::Entry() {
 	// world->render_scene(); //for bare bones ray tracer only
 	world->camera_ptr->render_scene(*world);
 
-	return NULL;
+	return nullptr;
 }

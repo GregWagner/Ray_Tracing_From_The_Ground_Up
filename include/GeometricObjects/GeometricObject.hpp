@@ -12,21 +12,21 @@ class Material;
 
 class GeometricObject {
 	public:
-	GeometricObject(void); // default constructor
+	GeometricObject(); // default constructor
 
 	GeometricObject(const GeometricObject& object); // copy constructor
 
 	virtual GeometricObject* // virtual copy constructor
-	clone(void) const = 0;
+	clone() const = 0;
 
 	virtual // destructor
-		~GeometricObject(void);
+		~GeometricObject();
 
 	virtual bool
 	hit(const Ray& ray, double& t, ShadeRec& s) const = 0;
 
 	Material*
-	get_material(void) const;
+	get_material() const;
 
 	virtual void // needs to virtual so that it can be overriden in Compound
 	set_material(Material* mPtr);
@@ -43,7 +43,7 @@ class GeometricObject {
 // ------------------------------------------------------------------------- get_material
 
 inline Material*
-GeometricObject::get_material(void) const {
+GeometricObject::get_material() const {
 	return (material_ptr);
 }
 

@@ -11,17 +11,17 @@
 
 class Directional : public Light {
 	public:
-	Directional(void);
+	Directional();
 
 	Directional(const Directional& dl);
 
 	virtual Light*
-	clone(void) const;
+	clone() const;
 
 	Directional&
 	operator=(const Directional& rhs);
 
-	virtual ~Directional(void);
+	virtual ~Directional();
 
 	void
 	scale_radiance(const float b);

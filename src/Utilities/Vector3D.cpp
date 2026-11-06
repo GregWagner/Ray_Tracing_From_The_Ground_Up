@@ -9,7 +9,7 @@
 // ---------------------------------------------------------- default
 // constructor
 
-Vector3D::Vector3D(void) : x(0.0), y(0.0), z(0.0) {}
+Vector3D::Vector3D() : x(0.0), y(0.0), z(0.0) {}
 
 // ---------------------------------------------------------- constructor
 
@@ -37,7 +37,7 @@ Vector3D::Vector3D(const Point3D& p) : x(p.x), y(p.y), z(p.z) {}
 
 // ---------------------------------------------------------- destructor
 
-Vector3D::~Vector3D(void) {}
+Vector3D::~Vector3D() {}
 
 // ---------------------------------------------------------- assignment
 // operator
@@ -76,14 +76,14 @@ Vector3D& Vector3D::operator=(const Point3D& rhs) {
 // ----------------------------------------------------------  length
 // length of the vector
 
-double Vector3D::length(void) {
+double Vector3D::length() {
 	return (sqrt(x * x + y * y + z * z));
 }
 
 // ----------------------------------------------------------  normalize
 // converts the vector to a unit vector
 
-void Vector3D::normalize(void) {
+void Vector3D::normalize() {
 	double length = sqrt(x * x + y * y + z * z);
 	x /= length;
 	y /= length;
@@ -93,7 +93,7 @@ void Vector3D::normalize(void) {
 // ----------------------------------------------------------  hat
 // converts the vector to a unit vector and returns the vector
 
-Vector3D& Vector3D::hat(void) {
+Vector3D& Vector3D::hat() {
 	double length = sqrt(x * x + y * y + z * z);
 	x /= length;
 	y /= length;

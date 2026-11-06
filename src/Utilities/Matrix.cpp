@@ -5,7 +5,7 @@
 // ----------------------------------------------------------------------- default constructor
 // a default matrix is an identity matrix
 
-Matrix::Matrix(void) {
+Matrix::Matrix() {
 	for (int x = 0; x < 4; x++)
 		for (int y = 0; y < 4; y++) {
 			if (x == y)
@@ -27,7 +27,7 @@ Matrix::Matrix(const Matrix& mat) {
 
 // ----------------------------------------------------------------------- destructor
 
-Matrix::~Matrix(void) {}
+Matrix::~Matrix() {}
 
 
 // ----------------------------------------------------------------------- assignment operator
@@ -82,7 +82,7 @@ Matrix::operator/(const double d) {
 // ----------------------------------------------------------------------- set_identity
 // set matrix to the identity matrix
 
-void Matrix::set_identity(void) {
+void Matrix::set_identity() {
 	for (int x = 0; x < 4; x++)
 		for (int y = 0; y < 4; y++) {
 			if (x == y)

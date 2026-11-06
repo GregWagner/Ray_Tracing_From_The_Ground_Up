@@ -18,7 +18,7 @@ class Camera {
 	Camera(const Camera& camera); // copy constructor
 
 	virtual Camera* // virtual copy constructor
-	clone(void) const = 0;
+	clone() const = 0;
 
 	virtual ~Camera();
 
@@ -50,7 +50,7 @@ class Camera {
 	set_exposure_time(const float exposure);
 
 	void
-	compute_uvw(void);
+	compute_uvw();
 
 
 	protected:

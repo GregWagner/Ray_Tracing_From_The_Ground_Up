@@ -3,7 +3,7 @@
 
 // ---------------------------------------------------------------------- default constructor
 
-Ambient::Ambient(void)
+Ambient::Ambient()
 	: Light(),
 	  ls(1.0),
 	  color(1.0) {}
@@ -20,7 +20,7 @@ Ambient::Ambient(const Ambient& a)
 // ---------------------------------------------------------------------- clone
 
 Light*
-Ambient::clone(void) const {
+Ambient::clone() const {
 	return (new Ambient(*this));
 }
 
@@ -43,7 +43,7 @@ Ambient::operator=(const Ambient& rhs) {
 
 // ---------------------------------------------------------------------- destructor
 
-Ambient::~Ambient(void) {}
+Ambient::~Ambient() {}
 
 
 // ---------------------------------------------------------------------- get_direction
