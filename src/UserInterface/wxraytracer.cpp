@@ -50,7 +50,7 @@ EVT_COMMAND(ID_RENDER_COMPLETED, wxEVT_RENDER,
 END_EVENT_TABLE()
 
 wxraytracerFrame::wxraytracerFrame(const wxPoint& pos, const wxSize& size)
-	: wxFrame((wxFrame*)nullptr, -1, wxT("Ray Tracer"), pos, size) {
+	: wxFrame(static_cast<wxFrame*>(nullptr), -1, wxT("Ray Tracer"), pos, size) {
 	auto* menuFile = new wxMenu;
 
 	menuFile->Append(Menu_File_Open, wxT("&Open..."));
