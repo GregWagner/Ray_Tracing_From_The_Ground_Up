@@ -24,7 +24,7 @@ Matrix::Matrix(const Matrix& mat) {
     }
 }
 
-Matrix::~Matrix() {}
+Matrix::~Matrix() = default;
 
 Matrix& Matrix::operator=(const Matrix& rhs) {
     if (this == &rhs) {

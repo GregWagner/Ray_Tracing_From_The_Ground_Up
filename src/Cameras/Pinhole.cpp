@@ -6,7 +6,7 @@
 
 Pinhole::Pinhole() : Camera(), d(500), zoom(1.0) {}
 
-Pinhole::Pinhole(const Pinhole& c) : Camera(c), d(c.d), zoom(c.zoom) {}
+Pinhole::Pinhole(const Pinhole& c) = default;
 
 Camera* Pinhole::clone() const {
     return (new Pinhole(*this));
@@ -25,7 +25,7 @@ Pinhole& Pinhole::operator=(const Pinhole& rhs) {
     return (*this);
 }
 
-Pinhole::~Pinhole() {}
+Pinhole::~Pinhole() = default;
 
 Vector3D Pinhole::get_direction(const Point2D& p) const {
     Vector3D dir = p.x * u + p.y * v - d * w;

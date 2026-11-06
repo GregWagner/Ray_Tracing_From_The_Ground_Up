@@ -5,7 +5,7 @@ MultipleObjects::MultipleObjects() : Tracer() {}
 
 MultipleObjects::MultipleObjects(World* _worldPtr) : Tracer(_worldPtr) {}
 
-MultipleObjects::~MultipleObjects() {}
+MultipleObjects::~MultipleObjects() = default;
 
 RGBColor MultipleObjects::trace_ray(const Ray& ray) const {
     ShadeRec const sr(world_ptr->hit_objects(ray)); // sr is copy constructed

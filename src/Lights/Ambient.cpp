@@ -3,8 +3,7 @@
 
 Ambient::Ambient() : Light(), ls(1.0), color(1.0) {}
 
-Ambient::Ambient(const Ambient& ambient_light)
-    : Light(ambient_light), ls(ambient_light.ls), color(ambient_light.color) {}
+Ambient::Ambient(const Ambient& ambient_light) = default;
 
 Light* Ambient::clone() const {
     return (new Ambient(*this));
@@ -23,7 +22,7 @@ Ambient& Ambient::operator=(const Ambient& rhs) {
     return (*this);
 }
 
-Ambient::~Ambient() {}
+Ambient::~Ambient() = default;
 
 Vector3D Ambient::get_direction(ShadeRec& srec [[maybe_unused]]) {
     return (Vector3D(0.0));

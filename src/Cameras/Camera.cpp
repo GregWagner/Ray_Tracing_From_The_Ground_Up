@@ -4,9 +4,7 @@ Camera::Camera()
     : eye(0, 0, 500), lookat(0), ra(0), u(1, 0, 0), v(0, 1, 0), w(0, 0, 1),
       up(0, 1, 0), exposure_time(1.0) {}
 
-Camera::Camera(const Camera& c)
-    : eye(c.eye), lookat(c.lookat), ra(c.ra), u(c.u), v(c.v), w(c.w), up(c.up),
-      exposure_time(c.exposure_time) {}
+Camera::Camera(const Camera& c) = default;
 
 Camera& Camera::operator=(const Camera& rhs) {
     if (this == &rhs) {
@@ -25,7 +23,7 @@ Camera& Camera::operator=(const Camera& rhs) {
     return (*this);
 }
 
-Camera::~Camera() {}
+Camera::~Camera() = default;
 
 // This computes an orthornormal basis given the view point, lookat point, and
 // up vector

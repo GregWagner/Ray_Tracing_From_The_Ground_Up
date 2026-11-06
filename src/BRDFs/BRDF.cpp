@@ -9,7 +9,7 @@ BRDF& BRDF::operator=(const BRDF& rhs) {
     return (*this);
 }
 
-BRDF::~BRDF() {}
+BRDF::~BRDF() = default;
 
 RGBColor BRDF::f(const ShadeRec& srec [[maybe_unused]],
                  const Vector3D& wo [[maybe_unused]],

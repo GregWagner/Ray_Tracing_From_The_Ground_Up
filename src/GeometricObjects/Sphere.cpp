@@ -12,8 +12,7 @@ Sphere* Sphere::clone() const {
 }
 
 // copy
-Sphere::Sphere(const Sphere& sphere)
-    : GeometricObject(sphere), center(sphere.center), radius(sphere.radius) {}
+Sphere::Sphere(const Sphere& sphere) = default;
 
 Sphere& Sphere::operator=(const Sphere& rhs) {
     if (this == &rhs) {
@@ -28,7 +27,7 @@ Sphere& Sphere::operator=(const Sphere& rhs) {
     return (*this);
 }
 
-Sphere::~Sphere() {}
+Sphere::~Sphere() = default;
 
 bool Sphere::hit(const Ray& ray, double& tmin, ShadeRec& sr) const {
     double t;

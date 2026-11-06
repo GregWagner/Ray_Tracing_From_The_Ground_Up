@@ -2,8 +2,7 @@
 
 Directional::Directional() : Light(), ls(1.0), color(1.0), dir(0, 1, 0) {}
 
-Directional::Directional(const Directional& dl)
-    : Light(dl), ls(dl.ls), color(dl.color), dir(dl.dir) {}
+Directional::Directional(const Directional& dl) = default;
 
 Light* Directional::clone() const {
     return (new Directional(*this));
@@ -23,7 +22,7 @@ Directional& Directional::operator=(const Directional& rhs) {
     return (*this);
 }
 
-Directional::~Directional() {}
+Directional::~Directional() = default;
 
 // as this function is virtual, it shouldn't be inlined
 Vector3D Directional::get_direction(ShadeRec& sr [[maybe_unused]]) {

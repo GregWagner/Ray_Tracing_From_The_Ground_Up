@@ -11,8 +11,7 @@ Vector3D::Vector3D(double a) : x(a), y(a), z(a) {}
 
 Vector3D::Vector3D(double _x, double _y, double _z) : x(_x), y(_y), z(_z) {}
 
-Vector3D::Vector3D(const Vector3D& vector)
-    : x(vector.x), y(vector.y), z(vector.z) {}
+Vector3D::Vector3D(const Vector3D& vector) = default;
 
 // constructs a vector from a normal
 Vector3D::Vector3D(const Normal& n) : x(n.x), y(n.y), z(n.z) {}
@@ -21,7 +20,7 @@ Vector3D::Vector3D(const Normal& n) : x(n.x), y(n.y), z(n.z) {}
 // this is used in the ConcaveHemisphere hit functions
 Vector3D::Vector3D(const Point3D& p) : x(p.x), y(p.y), z(p.z) {}
 
-Vector3D::~Vector3D() {}
+Vector3D::~Vector3D() = default;
 
 Vector3D& Vector3D::operator=(const Vector3D& rhs) {
     if (this == &rhs) {

@@ -6,7 +6,7 @@ SingleSphere::SingleSphere() : Tracer() {}
 
 SingleSphere::SingleSphere(World* _worldPtr) : Tracer(_worldPtr) {}
 
-SingleSphere::~SingleSphere() {}
+SingleSphere::~SingleSphere() = default;
 
 RGBColor SingleSphere::trace_ray(const Ray& ray) const {
     ShadeRec sr(*world_ptr); // not used

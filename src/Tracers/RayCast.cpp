@@ -7,7 +7,7 @@ RayCast::RayCast() : Tracer() {}
 
 RayCast::RayCast(World* _worldPtr) : Tracer(_worldPtr) {}
 
-RayCast::~RayCast() {}
+RayCast::~RayCast() = default;
 
 RGBColor RayCast::trace_ray(const Ray& ray) const {
     ShadeRec sr(world_ptr->hit_objects(ray));

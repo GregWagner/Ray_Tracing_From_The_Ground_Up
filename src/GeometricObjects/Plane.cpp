@@ -9,8 +9,7 @@ Plane::Plane(const Point3D& point, const Normal& normal)
     n.normalize();
 }
 
-Plane::Plane(const Plane& plane)
-    : GeometricObject(plane), a(plane.a), n(plane.n) {}
+Plane::Plane(const Plane& plane) = default;
 
 Plane* Plane::clone() const {
     return (new Plane(*this));
@@ -29,7 +28,7 @@ Plane& Plane::operator=(const Plane& rhs) {
     return (*this);
 }
 
-Plane::~Plane() {}
+Plane::~Plane() = default;
 
 bool Plane::hit(const Ray& ray, double& tmin, ShadeRec& sr) const {
     double const denom = ray.d * n;

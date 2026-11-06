@@ -3,14 +3,13 @@
 
 Lambertian::Lambertian() : BRDF(), kd(0.0), cd(0.0) {}
 
-Lambertian::Lambertian(const Lambertian& lamb)
-    : BRDF(lamb), kd(lamb.kd), cd(lamb.cd) {}
+Lambertian::Lambertian(const Lambertian& lamb) = default;
 
 Lambertian* Lambertian::clone() const {
     return (new Lambertian(*this));
 }
 
-Lambertian::~Lambertian() {}
+Lambertian::~Lambertian() = default;
 
 Lambertian& Lambertian::operator=(const Lambertian& rhs) {
     if (this == &rhs) {

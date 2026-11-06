@@ -1,6 +1,6 @@
 #include "Material.hpp"
 
-Material::Material() {}
+Material::Material() = default;
 
 Material::Material(const Material& m [[maybe_unused]]) {}
 
@@ -12,7 +12,7 @@ Material& Material::operator=(const Material& rhs) {
     return (*this);
 }
 
-Material::~Material() {}
+Material::~Material() = default;
 
 RGBColor Material::shade(ShadeRec& sr [[maybe_unused]]) {
     return (black);
