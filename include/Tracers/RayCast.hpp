@@ -3,21 +3,19 @@
 
 #include "Tracer.hpp"
 
-class RayCast: public Tracer {
+class RayCast : public Tracer {
 	public:
-		
-		RayCast(void);
-		
-		RayCast(World* _worldPtr);
-				
-		virtual											
-		~RayCast(void);		
+	RayCast(void);
 
-		virtual RGBColor	
-		trace_ray(const Ray& ray) const;
+	RayCast(World* _worldPtr);
 
-		virtual RGBColor	
-		trace_ray(const Ray ray, const int depth) const;
+	virtual ~RayCast(void);
+
+	virtual RGBColor
+	trace_ray(const Ray& ray) const;
+
+	virtual RGBColor
+	trace_ray(const Ray ray, const int depth) const;
 };
 
 #endif

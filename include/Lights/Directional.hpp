@@ -5,55 +5,52 @@
 #include "Vector3D.hpp"
 #include "RGBColor.hpp"
 
-#include "World.hpp"			// you will need this later on for shadows
+#include "World.hpp" // you will need this later on for shadows
 #include "ShadeRec.hpp"
 
 
-class Directional: public Light {
+class Directional : public Light {
 	public:
-	
-		Directional(void);   							
+	Directional(void);
 
-		Directional(const Directional& dl); 
-		
-		virtual Light* 									
-		clone(void) const;			
+	Directional(const Directional& dl);
 
-		Directional& 									
-		operator= (const Directional& rhs); 
-			
-		virtual											
-		~Directional(void); 
-				
-		void
-		scale_radiance(const float b);
-		
-		void
-		set_color(const float c);
-		
-		void
-		set_color(const RGBColor& c);
-		
-		void
-		set_color(const float r, const float g, const float b); 		
-			
-		void
-		set_direction(Vector3D d);						
-		
-		void
-		set_direction(float dx, float dy, float dz);
-		
-		virtual Vector3D								
-		get_direction(ShadeRec& sr);
-				
-		virtual RGBColor		
-		L(ShadeRec& sr);	
-		
+	virtual Light*
+	clone(void) const;
+
+	Directional&
+	operator=(const Directional& rhs);
+
+	virtual ~Directional(void);
+
+	void
+	scale_radiance(const float b);
+
+	void
+	set_color(const float c);
+
+	void
+	set_color(const RGBColor& c);
+
+	void
+	set_color(const float r, const float g, const float b);
+
+	void
+	set_direction(Vector3D d);
+
+	void
+	set_direction(float dx, float dy, float dz);
+
+	virtual Vector3D
+	get_direction(ShadeRec& sr);
+
+	virtual RGBColor
+	L(ShadeRec& sr);
+
 	private:
-
-		float		ls;			
-		RGBColor	color;
-		Vector3D	dir;		// direction the light comes from
+	float ls;
+	RGBColor color;
+	Vector3D dir; // direction the light comes from
 };
 
 
@@ -63,7 +60,7 @@ class Directional: public Light {
 // ------------------------------------------------------------------------------- scale_radiance
 
 inline void
-Directional::scale_radiance(const float b) { 
+Directional::scale_radiance(const float b) {
 	ls = b;
 }
 
@@ -71,7 +68,9 @@ Directional::scale_radiance(const float b) {
 
 inline void
 Directional::set_color(const float c) {
-	color.r = c; color.g = c; color.b = c;
+	color.r = c;
+	color.g = c;
+	color.b = c;
 }
 
 
@@ -87,7 +86,9 @@ Directional::set_color(const RGBColor& c) {
 
 inline void
 Directional::set_color(const float r, const float g, const float b) {
-	color.r = r; color.g = g; color.b = b;
+	color.r = r;
+	color.g = g;
+	color.b = b;
 }
 
 
@@ -100,11 +101,13 @@ Directional::set_direction(Vector3D d) {
 }
 
 
-// ---------------------------------------------------------------------- set_direction 
+// ---------------------------------------------------------------------- set_direction
 
 inline void
 Directional::set_direction(float dx, float dy, float dz) {
-	dir.x = dx; dir.y = dy; dir.z = dz;
+	dir.x = dx;
+	dir.y = dy;
+	dir.z = dz;
 	dir.normalize();
 }
 

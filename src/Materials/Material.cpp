@@ -10,11 +10,10 @@ Material::Material(void) {}
 Material::Material(const Material& m) {}
 
 
-
 // ---------------------------------------------------------------- assignment operator
 
-Material& 
-Material::operator= (const Material& rhs) {
+Material&
+Material::operator=(const Material& rhs) {
 	if (this == &rhs)
 		return (*this);
 
@@ -24,8 +23,7 @@ Material::operator= (const Material& rhs) {
 
 // ---------------------------------------------------------------- destructor
 
-Material::~Material(void)
-{}
+Material::~Material(void) {}
 
 
 // ---------------------------------------------------------------- shade
@@ -34,6 +32,3 @@ RGBColor
 Material::shade(ShadeRec& sr) {
 	return (black);
 }
-
-
-

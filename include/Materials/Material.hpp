@@ -1,30 +1,27 @@
 #ifndef __MATERIAL__
 #define __MATERIAL__
 
-#include "World.hpp"			// required for the shade function in all derived classes
+#include "World.hpp" // required for the shade function in all derived classes
 #include "RGBColor.hpp"
 #include "ShadeRec.hpp"
 
-class Material {	
+class Material {
 	public:
-	
-		Material(void);						
-		
-		Material(const Material& material); 
-		
-		virtual Material*								
-		clone(void) const = 0;	
-				
-		virtual 								
-		~Material(void);
-				
-		virtual RGBColor
-		shade(ShadeRec& sr);	
-		
+	Material(void);
+
+	Material(const Material& material);
+
+	virtual Material*
+	clone(void) const = 0;
+
+	virtual ~Material(void);
+
+	virtual RGBColor
+	shade(ShadeRec& sr);
+
 	protected:
-	
-		Material& 								
-		operator= (const Material& rhs);						
+	Material&
+	operator=(const Material& rhs);
 };
 
 #endif

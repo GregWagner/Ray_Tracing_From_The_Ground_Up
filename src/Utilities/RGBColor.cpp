@@ -18,7 +18,7 @@ RGBColor::RGBColor(float _r, float _g, float _b) : r(_r), g(_g), b(_b) {}
 
 // -------------------------------------------------------- copy constructor
 
-RGBColor::RGBColor(const RGBColor &c) : r(c.r), g(c.g), b(c.b) {}
+RGBColor::RGBColor(const RGBColor& c) : r(c.r), g(c.g), b(c.b) {}
 
 // -------------------------------------------------------- destructor
 
@@ -26,15 +26,15 @@ RGBColor::~RGBColor(void) {}
 
 // --------------------------------------------------------assignment operator
 
-RGBColor &RGBColor::operator=(const RGBColor &rhs) {
-  if (this == &rhs)
-    return (*this);
+RGBColor& RGBColor::operator=(const RGBColor& rhs) {
+	if (this == &rhs)
+		return (*this);
 
-  r = rhs.r;
-  g = rhs.g;
-  b = rhs.b;
+	r = rhs.r;
+	g = rhs.g;
+	b = rhs.b;
 
-  return (*this);
+	return (*this);
 }
 
 // -------------------------------------------------------- powc
@@ -42,5 +42,5 @@ RGBColor &RGBColor::operator=(const RGBColor &rhs) {
 // used for color filtering in Chapter 28
 
 RGBColor RGBColor::powc(float p) const {
-  return (RGBColor(pow(r, p), pow(g, p), pow(b, p)));
+	return (RGBColor(pow(r, p), pow(g, p), pow(b, p)));
 }

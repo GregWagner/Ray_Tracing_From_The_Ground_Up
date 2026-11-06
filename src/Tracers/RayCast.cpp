@@ -6,15 +6,13 @@
 // -------------------------------------------------------------------- default constructor
 
 RayCast::RayCast(void)
-	: Tracer()
-{}
+	: Tracer() {}
 
 
 // -------------------------------------------------------------------- constructor
-		
+
 RayCast::RayCast(World* _worldPtr)
-	: Tracer(_worldPtr)
-{}
+	: Tracer(_worldPtr) {}
 
 
 // -------------------------------------------------------------------- destructor
@@ -24,15 +22,14 @@ RayCast::~RayCast(void) {}
 
 // -------------------------------------------------------------------- trace_ray
 
-RGBColor	
+RGBColor
 RayCast::trace_ray(const Ray& ray) const {
 	ShadeRec sr(world_ptr->hit_objects(ray));
-		
+
 	if (sr.hit_an_object) {
-		sr.ray = ray;			// used for specular shading
+		sr.ray = ray; // used for specular shading
 		return (sr.material_ptr->shade(sr));
-	}   
-	else
+	} else
 		return (world_ptr->background_color);
 }
 
@@ -40,15 +37,13 @@ RayCast::trace_ray(const Ray& ray) const {
 // -------------------------------------------------------------------- trace_ray
 // this ignores the depth argument
 
-RGBColor	
+RGBColor
 RayCast::trace_ray(const Ray ray, const int depth) const {
 	ShadeRec sr(world_ptr->hit_objects(ray));
-		
+
 	if (sr.hit_an_object) {
-		sr.ray = ray;			// used for specular shading
+		sr.ray = ray; // used for specular shading
 		return (sr.material_ptr->shade(sr));
-	}   
-	else
+	} else
 		return (world_ptr->background_color);
 }
-

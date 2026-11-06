@@ -9,14 +9,12 @@
 BRDF::BRDF(void) {}
 
 
-BRDF::BRDF(const BRDF& brdf) {}	
-
+BRDF::BRDF(const BRDF& brdf) {}
 
 
 // --------------------------------------------------------------- assignment operator
 
-BRDF&														
-BRDF::operator= (const BRDF& rhs) {
+BRDF& BRDF::operator=(const BRDF& rhs) {
 	if (this == &rhs)
 		return (*this);
 
@@ -26,7 +24,7 @@ BRDF::operator= (const BRDF& rhs) {
 
 // ---------------------------------------------------------- destructor
 
-BRDF::~BRDF(void) {}  
+BRDF::~BRDF(void) {}
 
 
 // ------------------------------------------------------------------------ f
@@ -53,10 +51,9 @@ BRDF::sample_f(const ShadeRec& sr, const Vector3D& wo, Vector3D& wi, float& pdf)
 }
 
 
-// ------------------------------------------------------------------------ rho	
-	
+// ------------------------------------------------------------------------ rho
+
 RGBColor
 BRDF::rho(const ShadeRec& sr, const Vector3D& wo) const {
 	return (black);
 }
-
