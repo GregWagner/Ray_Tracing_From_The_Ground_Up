@@ -53,3 +53,8 @@ CMakeFiles/
 CMakeCache.txt
 cmake_install.cmake
 CTestTestfile.cmake
+
+# Root-level CMake generated files
+compile_commands.json
+CTestTestfile.cmake
+.qt/
