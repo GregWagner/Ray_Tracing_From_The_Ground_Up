@@ -22,7 +22,7 @@
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
   setWindowTitle("Ray Tracer");
-  resize(700, 500);
+  resize(500, 550);
 
   canvas = new RenderCanvas(this);
   setCentralWidget(canvas);
@@ -56,6 +56,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
 void MainWindow::onRenderStart() {
   if (canvas != nullptr) {
     canvas->renderStart();
+    resize(canvas->getImage().width() + 100,
+           canvas->getImage().height() + 150);
   }
 
   if (auto *sbar = statusBar()) {
@@ -150,7 +152,14 @@ void RenderCanvas::paintEvent(QPaintEvent *) {
   QPainter painter(this);
   if (!image.isNull()) {
     painter.drawImage(0, 0, image);
+  }
 }
+
+QSize RenderCanvas::sizeHint() const {
+  if (!image.isNull()) {
+    return image.size();
+  }
+  return QSize(400, 400);
 }
 
 void RenderCanvas::renderStart() {

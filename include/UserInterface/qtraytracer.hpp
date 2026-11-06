@@ -68,6 +68,7 @@ private slots:
 
 protected:
     void paintEvent(QPaintEvent *event) override;
+    QSize sizeHint() const override;
 
 private:
     QImage image;
