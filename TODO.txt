@@ -7,10 +7,10 @@ All compiler warnings are fixed (clean build: 0 warnings).
 
 clang-tidy: 0 errors. Remaining warnings (not auto-fixed safely):
   40 modernize-use-equals-default
-  17 bugprone-narrowing-conversions
+  13 bugprone-narrowing-conversions
    5 modernize-return-braced-init-list
-   3 performance-type-promotion-in-math-fn
    2 performance-unnecessary-value-param
+   2 performance-unnecessary-copy-initialization
    2 modernize-loop-convert
    1 modernize-min-max-use-initializer-list
    1 modernize-avoid-c-style-cast
