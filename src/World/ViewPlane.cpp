@@ -22,5 +22,3 @@ ViewPlane& ViewPlane::operator=(const ViewPlane& rhs) {
 
     return (*this);
 }
-
-ViewPlane::~ViewPlane() = default;

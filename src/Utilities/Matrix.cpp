@@ -24,8 +24,6 @@ Matrix::Matrix(const Matrix& mat) {
     }
 }
 
-Matrix::~Matrix() = default;
-
 Matrix& Matrix::operator=(const Matrix& rhs) {
     if (this == &rhs) {
         return (*this);
@@ -73,7 +71,6 @@ Matrix Matrix::operator/(const double d) const {
             result.m[x][y] = m[x][y] / d;
         }
     }
-
     return (result);
 }
 

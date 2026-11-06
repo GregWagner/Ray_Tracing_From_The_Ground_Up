@@ -11,7 +11,7 @@ class Matrix {
 
     Matrix(const Matrix& mat);
 
-    ~Matrix();
+    ~Matrix() = default;
 
     Matrix& operator=(const Matrix& rhs);
 

@@ -105,14 +105,6 @@ Priority 2: memory and resource safety
       where possible, especially in delete_objects/delete_lights.
 
 Priority 3: API design and modern C++
-  [ ] Avoid `using namespace std;` in headers (World.hpp, qtraytracer.hpp).
-  [ ] Replace reserved double-underscore include guards with pragma once or valid
-      guard names; use `<cstdlib>` instead of `<stdlib.h>`.
-  [ ] Improve const-correctness: mark getters/operators const where appropriate
-      (RGBColor, Point2D, Vector3D, Matrix, ViewPlane setters maybe non-const).
-  [ ] Modernize operators and casts: Tracer::trace_ray(Ray, int) should take
-      Ray const&, conversion helpers should avoid repeated sqrt(), many loops can
-      become range-based.
   [ ] Rename ambiguous/misspelled APIs and comments consistently; `max_to_one`,
       `kHugeValue`, and chapter-specific members make the API harder to reuse.
   [ ] Prefer standard library over custom math (`std::max`) and consider

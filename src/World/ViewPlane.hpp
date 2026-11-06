@@ -17,7 +17,7 @@ class ViewPlane {
 
     ViewPlane& operator=(const ViewPlane& rhs);
 
-    ~ViewPlane();
+    ~ViewPlane() = default;
 
     void set_hres(const int h_res);
 

@@ -1,7 +1,0 @@
-set(__QT_DEPLOY_TARGETS "rtf_tests;rtf_core;qtraytracer")
-set(__QT_DEPLOY_TARGET_rtf_tests_FILE /home/greg/Ray_Tracing_From_The_Ground_Up/tests/rtf_tests)
-set(__QT_DEPLOY_TARGET_rtf_tests_TYPE EXECUTABLE)
-set(__QT_DEPLOY_TARGET_rtf_core_FILE /home/greg/Ray_Tracing_From_The_Ground_Up/librtf_core.a)
-set(__QT_DEPLOY_TARGET_rtf_core_TYPE STATIC_LIBRARY)
-set(__QT_DEPLOY_TARGET_qtraytracer_FILE /home/greg/Ray_Tracing_From_The_Ground_Up/qtraytracer)
-set(__QT_DEPLOY_TARGET_qtraytracer_TYPE EXECUTABLE)

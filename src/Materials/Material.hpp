@@ -2,7 +2,7 @@
 
 #include "RGBColor.hpp"
 #include "ShadeRec.hpp"
-#include "World.hpp" // required for the shade function in all derived classes
+#include "World.hpp"
 
 class Material {
     public:
@@ -14,7 +14,7 @@ class Material {
 
     virtual ~Material();
 
-    [[nodiscard]] virtual RGBColor shade(ShadeRec& sr);
+    [[nodiscard]] virtual RGBColor shade(ShadeRec& srec);
 
     protected:
     Material& operator=(const Material& rhs);
