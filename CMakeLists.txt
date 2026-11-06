@@ -54,15 +54,16 @@ add_executable(wxraytracer
 
 target_include_directories(wxraytracer PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/src
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/BRDFs
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/Cameras
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/GeometricObjects
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/Lights
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/Materials
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/Tracers
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/UserInterface
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/Utilities
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/World
+    ${CMAKE_CURRENT_SOURCE_DIR}/include
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/BRDFs
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/Cameras
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/GeometricObjects
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/Lights
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/Materials
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/Tracers
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/UserInterface
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/Utilities
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/World
 )
 
 target_link_libraries(wxraytracer PRIVATE ${wxWidgets_LIBRARIES})
@@ -84,7 +85,7 @@ find_program(CLANG_FORMAT_EXE NAMES clang-format)
 if(CLANG_FORMAT_EXE)
     file(GLOB_RECURSE FORMAT_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/src/*.h
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/*.hpp
     )
     list(FILTER FORMAT_SOURCES EXCLUDE REGEX "\\.xpm$")
     add_custom_target(format
