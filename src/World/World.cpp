@@ -26,10 +26,6 @@
 #include "ShadeRec.hpp"
 #include "Vector3D.hpp"
 
-// build functions
-// TODO(fix): builder
-// #include "BuildShadedObjects.cpp"
-
 // tracer_ptr is set to NULL because the build functions will always construct
 // the appropriate tracer ambient_ptr is set to a default ambient light because
 // this will do for most scenes camera_ptr is set to NULL because the build
@@ -57,6 +53,40 @@ World::~World() {
 
   delete_objects();
   delete_lights();
+}
+
+// This uses orthographic viewing along the zw axis
+void World::build() {
+  vp.set_hres(400);
+  vp.set_vres(400);
+  vp.set_pixel_size(1.0f);
+  vp.set_samples(1);
+  vp.set_gamma(1.0f);
+
+  tracer_ptr = new RayCast(this);
+
+  auto *pinhole = new Pinhole();
+  pinhole->set_eye(0, 0, 500);
+  pinhole->set_lookat(0, 0, 0);
+  pinhole->set_up_vector(0, 1, 0);
+  pinhole->compute_uvw();
+  pinhole->set_view_distance(500);
+  pinhole->set_zoom(1.0);
+  camera_ptr = pinhole;
+
+  auto *sphere = new Sphere(Point3D(0, 0, 0), 80);
+  auto *matte = new Matte();
+  matte->set_ka(0.25f);
+  matte->set_kd(0.6f);
+  matte->set_cd(1.0f);
+  sphere->set_material(matte);
+  add_object(sphere);
+
+  auto *directional = new Directional();
+  directional->scale_radiance(3.0f);
+  directional->set_color(1.0f);
+  directional->set_direction(1, 1, 1);
+  add_light(directional);
 }
 
 // This uses orthographic viewing along the zw axis

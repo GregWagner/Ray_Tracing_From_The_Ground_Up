@@ -1,18 +1,18 @@
 # Ray Tracing from the Ground Up
 
 C++17 ray tracer based on "Ray Tracing from the Ground Up" (Kevin Suffern).
-wxWidgets 3.2 (GTK3) GUI.
+Qt6 Widgets GUI.
 
 ## Build
 
-Requires CMake 3.16+, a C++17 compiler (GCC 9+ or Clang 9+), and wxWidgets 3.2+.
+Requires CMake 3.16+, a C++17 compiler (GCC 9+ or Clang 9+), and Qt6 6.2+.
 
 ```sh
 cmake -S . -B build
 cmake --build build
 ```
 
-The executable lands at `build/wxraytracer`.
+The executable lands at `build/qtraytracer`.
 
 CMake presets are provided for common workflows:
 
@@ -26,7 +26,7 @@ cmake --preset sanitize && cmake --build --preset sanitize  # ASan/UBSan
 ## Run
 
 ```sh
-./build/wxraytracer
+./build/qtraytracer
 ```
 
 Then start rendering from the Render menu.
