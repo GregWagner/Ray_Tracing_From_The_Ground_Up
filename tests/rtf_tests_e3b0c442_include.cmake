@@ -1,5 +1,0 @@
-if(EXISTS "/home/greg/Ray_Tracing_From_The_Ground_Up/tests/rtf_tests_e3b0c442_tests.cmake")
-  include("/home/greg/Ray_Tracing_From_The_Ground_Up/tests/rtf_tests_e3b0c442_tests.cmake")
-else()
-  add_test(rtf_tests_NOT_BUILT rtf_tests_NOT_BUILT)
-endif()

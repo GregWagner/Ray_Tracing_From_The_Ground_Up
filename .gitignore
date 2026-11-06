@@ -42,3 +42,7 @@ CMakeCache.txt
 
 # clangd / tooling caches
 .cache/
+
+# CMake generated files in test source dir (if accidentally configured in-tree)
+tests/Makefile
+tests/*.cmake
