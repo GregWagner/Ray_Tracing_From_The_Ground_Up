@@ -1,0 +1,42 @@
+name: CI
+
+on:
+  push:
+    branches: [ master, qt6-port ]
+  pull_request:
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            cmake \
+            ninja-build \
+            g++ \
+            clang \
+            clang-tidy \
+            clang-format \
+            qt6-base-dev \
+            qt6-tools-dev \
+            libgl1-mesa-dev \
+            libgtest-dev \
+            lcov
+
+      - name: Configure
+        run: cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release -DENABLE_CLANG_TIDY=ON
+
+      - name: Build
+        run: cmake --build build
+
+      - name: Test
+        run: ctest --test-dir build --output-on-failure
+
+      - name: Check formatting
+        run: cmake --build build --target check-format
