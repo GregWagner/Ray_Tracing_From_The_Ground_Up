@@ -36,5 +36,9 @@ GeometricObject::~GeometricObject() {
 }
 
 void GeometricObject::set_material(Material* mPtr) {
+    if (mPtr != material_ptr) {
+        delete material_ptr;
+    }
+
     material_ptr = mPtr;
 }

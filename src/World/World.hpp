@@ -81,9 +81,17 @@ inline void World::add_light(Light* light_ptr) {
 }
 
 inline void World::set_ambient_light(Light* light_ptr) {
+    if (light_ptr != ambient_ptr) {
+        delete ambient_ptr;
+    }
+
     ambient_ptr = light_ptr;
 }
 
 inline void World::set_camera(Camera* c_ptr) {
+    if (c_ptr != camera_ptr) {
+        delete camera_ptr;
+    }
+
     camera_ptr = c_ptr;
 }

@@ -57,6 +57,19 @@ World::~World() {
 
 // This uses orthographic viewing along the zw axis
 void World::build() {
+    // Allow rebuilds without leaking the previously owned scene.
+    delete tracer_ptr;
+    tracer_ptr = nullptr;
+
+    delete camera_ptr;
+    camera_ptr = nullptr;
+
+    delete ambient_ptr;
+    ambient_ptr = new Ambient;
+
+    delete_objects();
+    delete_lights();
+
     vp.set_hres(800);
     vp.set_vres(800);
     vp.set_pixel_size(1.0f);

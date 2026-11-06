@@ -240,7 +240,13 @@ RenderThread::RenderThread(RenderCanvas* canvasIn, World* worldIn,
                            QObject* parent)
     : QThread(parent), canvas(canvasIn), world(worldIn) {}
 
-RenderThread::~RenderThread() = default;
+RenderThread::~RenderThread() {
+    QMutexLocker const locker(&mutex);
+    for (RenderPixel* pixel : pixels) {
+        delete pixel;
+    }
+    pixels.clear();
+}
 
 void RenderThread::setPixel(int x, int y, int redValue, int green, int blue) {
     {
@@ -294,6 +300,14 @@ void RenderThread::notifyCanvas() {
 
     emit pixelBatchReady(*batch);
     delete batch;
+}
+
+// NOLINTNEXTLINE(bugprone-reserved-identifier)
+extern "C" const char* __lsan_default_suppressions() {
+    // Qt's Wayland platform plugin intentionally keeps a few proxy objects
+    // alive until process exit; these are not leaks in this application.
+    return "leak:wl_proxy_marshal_array_flags\n"
+           "leak:libwayland-client.so\n";
 }
 
 int main(int argc, char* argv[]) {
