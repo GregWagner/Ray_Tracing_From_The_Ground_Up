@@ -4,16 +4,16 @@
 #include "Tracer.hpp"
 
 class MultipleObjects : public Tracer {
-public:
-  MultipleObjects();
+	public:
+	MultipleObjects();
 
-  explicit MultipleObjects(World *_world_ptr);
+	explicit MultipleObjects(World* _world_ptr);
 
-  virtual ~MultipleObjects() override;
+	virtual ~MultipleObjects() override;
 
-  [[nodiscard]] virtual RGBColor trace_ray(const Ray &ray) const override;
+	[[nodiscard]] virtual RGBColor trace_ray(const Ray& ray) const override;
 
-  using Tracer::trace_ray;
+	using Tracer::trace_ray;
 };
 
 #endif

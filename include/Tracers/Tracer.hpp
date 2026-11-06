@@ -12,20 +12,20 @@
 class World;
 
 class Tracer {
-public:
-  Tracer();
+	public:
+	Tracer();
 
-  explicit Tracer(World *_world_ptr);
+	explicit Tracer(World* _world_ptr);
 
-  virtual ~Tracer();
+	virtual ~Tracer();
 
-  [[nodiscard]] virtual RGBColor trace_ray(const Ray &ray) const;
+	[[nodiscard]] virtual RGBColor trace_ray(const Ray& ray) const;
 
-  [[nodiscard]] virtual RGBColor trace_ray(const Ray ray,
-                                           const int depth) const;
+	[[nodiscard]] virtual RGBColor trace_ray(const Ray ray,
+											 const int depth) const;
 
-protected:
-  World *world_ptr;
+	protected:
+	World* world_ptr;
 };
 
 #endif

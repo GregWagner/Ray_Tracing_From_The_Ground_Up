@@ -11,76 +11,78 @@ Vector3D::Vector3D(double a) : x(a), y(a), z(a) {}
 
 Vector3D::Vector3D(double _x, double _y, double _z) : x(_x), y(_y), z(_z) {}
 
-Vector3D::Vector3D(const Vector3D &vector)
-    : x(vector.x), y(vector.y), z(vector.z) {}
+Vector3D::Vector3D(const Vector3D& vector)
+	: x(vector.x), y(vector.y), z(vector.z) {}
 
 // constructs a vector from a normal
-Vector3D::Vector3D(const Normal &n) : x(n.x), y(n.y), z(n.z) {}
+Vector3D::Vector3D(const Normal& n) : x(n.x), y(n.y), z(n.z) {}
 
 // constructs a vector from a point
 // this is used in the ConcaveHemisphere hit functions
-Vector3D::Vector3D(const Point3D &p) : x(p.x), y(p.y), z(p.z) {}
+Vector3D::Vector3D(const Point3D& p) : x(p.x), y(p.y), z(p.z) {}
 
 Vector3D::~Vector3D() {}
 
-Vector3D &Vector3D::operator=(const Vector3D &rhs) {
-  if (this == &rhs) {
-    return (*this);
+Vector3D& Vector3D::operator=(const Vector3D& rhs) {
+	if (this == &rhs) {
+		return (*this);
+	}
+
+	x = rhs.x;
+	y = rhs.y;
+	z = rhs.z;
+
+	return (*this);
 }
 
-  x = rhs.x;
-  y = rhs.y;
-  z = rhs.z;
-
-  return (*this);
+Vector3D& Vector3D::operator=(const Normal& rhs) {
+	x = rhs.x;
+	y = rhs.y;
+	z = rhs.z;
+	return (*this);
 }
 
-Vector3D &Vector3D::operator=(const Normal &rhs) {
-  x = rhs.x;
-  y = rhs.y;
-  z = rhs.z;
-  return (*this);
-}
-
-Vector3D &Vector3D::operator=(const Point3D &rhs) {
-  x = rhs.x;
-  y = rhs.y;
-  z = rhs.z;
-  return (*this);
+Vector3D& Vector3D::operator=(const Point3D& rhs) {
+	x = rhs.x;
+	y = rhs.y;
+	z = rhs.z;
+	return (*this);
 }
 
 // length of the vector
 
-double Vector3D::length() const { return (std::sqrt(x * x + y * y + z * z)); }
+double Vector3D::length() const {
+	return (std::sqrt(x * x + y * y + z * z));
+}
 
 // converts the vector to a unit vector
 void Vector3D::normalize() {
-  double length = std::sqrt(x * x + y * y + z * z);
-  if (length == 0.0) {
-    return;
-  }
-  x /= length;
-  y /= length;
-  z /= length;
+	double length = std::sqrt(x * x + y * y + z * z);
+	if (length == 0.0) {
+		return;
+	}
+	x /= length;
+	y /= length;
+	z /= length;
 }
 
 // converts the vector to a unit vector and returns the vector
-Vector3D &Vector3D::hat() {
-  double length = std::sqrt(x * x + y * y + z * z);
-  if (length == 0.0) {
-    return (*this);
-  }
-  x /= length;
-  y /= length;
-  z /= length;
-  return (*this);
+Vector3D& Vector3D::hat() {
+	double length = std::sqrt(x * x + y * y + z * z);
+	if (length == 0.0) {
+		return (*this);
+	}
+	x /= length;
+	y /= length;
+	z /= length;
+	return (*this);
 }
 
 // non-member function
 
 // multiplication by a matrix on the left
-Vector3D operator*(const Matrix &mat, const Vector3D &v) {
-  return {mat.m[0][0] * v.x + mat.m[0][1] * v.y + mat.m[0][2] * v.z,
-          mat.m[1][0] * v.x + mat.m[1][1] * v.y + mat.m[1][2] * v.z,
-          mat.m[2][0] * v.x + mat.m[2][1] * v.y + mat.m[2][2] * v.z};
+Vector3D operator*(const Matrix& mat, const Vector3D& v) {
+	return {mat.m[0][0] * v.x + mat.m[0][1] * v.y + mat.m[0][2] * v.z,
+			mat.m[1][0] * v.x + mat.m[1][1] * v.y + mat.m[1][2] * v.z,
+			mat.m[2][0] * v.x + mat.m[2][1] * v.y + mat.m[2][2] * v.z};
 }

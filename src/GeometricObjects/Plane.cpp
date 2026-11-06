@@ -4,46 +4,48 @@ const double Plane::kEpsilon = 0.001;
 
 Plane::Plane() : GeometricObject(), a(0.0), n(0, 1, 0) {}
 
-Plane::Plane(const Point3D &point, const Normal &normal)
-    : GeometricObject(), a(point), n(normal) {
-  n.normalize();
+Plane::Plane(const Point3D& point, const Normal& normal)
+	: GeometricObject(), a(point), n(normal) {
+	n.normalize();
 }
 
-Plane::Plane(const Plane &plane)
-    : GeometricObject(plane), a(plane.a), n(plane.n) {}
+Plane::Plane(const Plane& plane)
+	: GeometricObject(plane), a(plane.a), n(plane.n) {}
 
-Plane *Plane::clone() const { return (new Plane(*this)); }
-
-Plane &Plane::operator=(const Plane &rhs) {
-  if (this == &rhs) {
-    return (*this);
+Plane* Plane::clone() const {
+	return (new Plane(*this));
 }
 
-  GeometricObject::operator=(rhs);
+Plane& Plane::operator=(const Plane& rhs) {
+	if (this == &rhs) {
+		return (*this);
+	}
 
-  a = rhs.a;
-  n = rhs.n;
+	GeometricObject::operator=(rhs);
 
-  return (*this);
+	a = rhs.a;
+	n = rhs.n;
+
+	return (*this);
 }
 
 Plane::~Plane() {}
 
-bool Plane::hit(const Ray &ray, double &tmin, ShadeRec &sr) const {
-  double denom = ray.d * n;
-  if (denom == 0.0) {
-    return (false);
-  }
+bool Plane::hit(const Ray& ray, double& tmin, ShadeRec& sr) const {
+	double denom = ray.d * n;
+	if (denom == 0.0) {
+		return (false);
+	}
 
-  double t = ((a - ray.o) * n) / denom;
+	double t = ((a - ray.o) * n) / denom;
 
-  if (t > kEpsilon) {
-    tmin = t;
-    sr.normal = n;
-    sr.local_hit_point = ray.o + t * ray.d;
+	if (t > kEpsilon) {
+		tmin = t;
+		sr.normal = n;
+		sr.local_hit_point = ray.o + t * ray.d;
 
-    return (true);
-  }
+		return (true);
+	}
 
-  return (false);
+	return (false);
 }

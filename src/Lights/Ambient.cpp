@@ -3,27 +3,31 @@
 
 Ambient::Ambient() : Light(), ls(1.0), color(1.0) {}
 
-Ambient::Ambient(const Ambient &a) : Light(a), ls(a.ls), color(a.color) {}
+Ambient::Ambient(const Ambient& a) : Light(a), ls(a.ls), color(a.color) {}
 
-Light *Ambient::clone() const { return (new Ambient(*this)); }
-
-Ambient &Ambient::operator=(const Ambient &rhs) {
-  if (this == &rhs) {
-    return (*this);
+Light* Ambient::clone() const {
+	return (new Ambient(*this));
 }
 
-  Light::operator=(rhs);
+Ambient& Ambient::operator=(const Ambient& rhs) {
+	if (this == &rhs) {
+		return (*this);
+	}
 
-  ls = rhs.ls;
-  color = rhs.color;
+	Light::operator=(rhs);
 
-  return (*this);
+	ls = rhs.ls;
+	color = rhs.color;
+
+	return (*this);
 }
 
 Ambient::~Ambient() {}
 
-Vector3D Ambient::get_direction(ShadeRec &s [[maybe_unused]]) {
-  return (Vector3D(0.0));
+Vector3D Ambient::get_direction(ShadeRec& s [[maybe_unused]]) {
+	return (Vector3D(0.0));
 }
 
-RGBColor Ambient::L(ShadeRec &sr [[maybe_unused]]) { return (ls * color); }
+RGBColor Ambient::L(ShadeRec& sr [[maybe_unused]]) {
+	return (ls * color);
+}

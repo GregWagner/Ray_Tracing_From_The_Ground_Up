@@ -10,20 +10,20 @@ class ShadeRec;
 // class Light
 
 class Light {
-public:
-  Light();
+	public:
+	Light();
 
-  Light(const Light &ls);
+	Light(const Light& ls);
 
-  Light &operator=(const Light &rhs);
+	Light& operator=(const Light& rhs);
 
-  [[nodiscard]] virtual Light *clone() const = 0;
+	[[nodiscard]] virtual Light* clone() const = 0;
 
-  virtual ~Light();
+	virtual ~Light();
 
-  [[nodiscard]] virtual Vector3D get_direction(ShadeRec &sr) = 0;
+	[[nodiscard]] virtual Vector3D get_direction(ShadeRec& sr) = 0;
 
-  [[nodiscard]] virtual RGBColor L(ShadeRec &sr);
+	[[nodiscard]] virtual RGBColor L(ShadeRec& sr);
 };
 
 #endif
