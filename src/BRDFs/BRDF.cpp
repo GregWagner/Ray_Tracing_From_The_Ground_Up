@@ -1,10 +1,6 @@
 #include "BRDF.hpp"
 #include "Constants.hpp"
 
-BRDF::BRDF() {}
-
-BRDF::BRDF(const BRDF& brdf [[maybe_unused]]) {}
-
 BRDF& BRDF::operator=(const BRDF& rhs) {
 	if (this == &rhs) {
 		return (*this);

@@ -7,24 +7,27 @@
 
 class BRDF {
 	public:
-	BRDF();
+	BRDF() = default;
 
-	BRDF(const BRDF& object);
+	BRDF(const BRDF& brdf [[maybe_unused]]) = default;
 
+	BRDF(BRDF&& brdf [[maybe_unused]]) = default;
+
+	[[nodiscard]]
 	virtual BRDF* clone() const = 0;
 
 	virtual ~BRDF();
 
-	virtual RGBColor f(const ShadeRec& sr, const Vector3D& wo,
+	virtual RGBColor f(const ShadeRec& srec, const Vector3D& wo,
 					   const Vector3D& wi) const;
 
-	virtual RGBColor sample_f(const ShadeRec& sr, const Vector3D& wo,
+	virtual RGBColor sample_f(const ShadeRec& srec, const Vector3D& wo,
 							  Vector3D& wi) const;
 
-	virtual RGBColor sample_f(const ShadeRec& sr, const Vector3D& wo,
+	virtual RGBColor sample_f(const ShadeRec& srec, const Vector3D& wo,
 							  Vector3D& wi, float& pdf) const;
 
-	virtual RGBColor rho(const ShadeRec& sr, const Vector3D& wo) const;
+	virtual RGBColor rho(const ShadeRec& srec, const Vector3D& wo) const;
 
 	protected:
 	BRDF& operator=(const BRDF& rhs);
