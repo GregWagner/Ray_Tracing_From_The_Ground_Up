@@ -16,17 +16,17 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # Optional clang-tidy integration
-option(ENABLE_CLANG_TIDY "Run clang-tidy during the build" OFF)
+option(ENABLE_CLANG_TIDY "Run clang-tidy during the build" ON)
 
 # Optional tests
 option(BUILD_TESTS "Build unit tests" ON)
 
 # Optional sanitizer integration
-option(ENABLE_SANITIZERS "Enable AddressSanitizer and UndefinedBehaviorSanitizer" OFF)
+option(ENABLE_SANITIZERS "Enable AddressSanitizer and UndefinedBehaviorSanitizer" ON)
 if(ENABLE_CLANG_TIDY)
     find_program(CLANG_TIDY_EXE NAMES clang-tidy)
     if(CLANG_TIDY_EXE)
-        set(CMAKE_CXX_CLANG_TIDY "${CLANG_TIDY_EXE}")
+        set(CMAKE_CXX_CLANG_TIDY "${CLANG_TIDY_EXE}" "--removed-arg=-mno-direct-extern-access")
     else()
         message(WARNING "clang-tidy not found; ENABLE_CLANG_TIDY ignored")
     endif()
