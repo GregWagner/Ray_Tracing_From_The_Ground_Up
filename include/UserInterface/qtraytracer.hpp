@@ -67,7 +67,7 @@ class RenderCanvas : public QWidget {
     void renderResume();
 
     private slots:
-    void onPixelBatch(QVector<RenderPixel*> batch);
+    void onPixelBatch(const QVector<RenderPixel*>& batch);
     void onRenderFinished();
 
     protected:

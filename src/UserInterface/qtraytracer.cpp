@@ -208,7 +208,7 @@ void RenderCanvas::renderResume() {
     }
 }
 
-void RenderCanvas::onPixelBatch(QVector<RenderPixel*> batch) {
+void RenderCanvas::onPixelBatch(const QVector<RenderPixel*>& batch) {
     for (RenderPixel* pixel : batch) {
         if (pixel != nullptr && !image.isNull() && pixel->x >= 0 && pixel->y >= 0 &&
             pixel->x < image.width() && pixel->y < image.height()) {
