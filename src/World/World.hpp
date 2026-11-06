@@ -27,8 +27,6 @@
 #include "Camera.hpp"
 #include "Light.hpp"
 
-using namespace std;
-
 class RenderThread; // part of skeleton - qtraytracer.h
 
 class World {
@@ -39,8 +37,8 @@ class World {
     Light* ambient_ptr;
     Camera* camera_ptr;
     Sphere sphere; // for Chapter 3 only
-    vector<GeometricObject*> objects;
-    vector<Light*> lights;
+    std::vector<GeometricObject*> objects;
+    std::vector<Light*> lights;
 
     RenderThread* paintArea; // connection to skeleton - qtraytracer.h
 

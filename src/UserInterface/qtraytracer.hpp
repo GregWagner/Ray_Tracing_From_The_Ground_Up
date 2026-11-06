@@ -3,17 +3,15 @@
 
 #include "World.hpp"
 
+#include <QElapsedTimer>
 #include <QImage>
 #include <QMainWindow>
 #include <QMutex>
-#include <QElapsedTimer>
 #include <QThread>
 #include <QWaitCondition>
 #include <QWidget>
 
 #include <vector>
-
-using namespace std;
 
 class RenderCanvas;
 class RenderThread;
@@ -37,12 +35,14 @@ class MainWindow : public QMainWindow {
     RenderCanvas* canvas = nullptr;
 };
 
-enum { Menu_File_Quit = 100,
-       Menu_File_Open,
-       Menu_File_Save,
-       Menu_Render_Start,
-       Menu_Render_Pause,
-       Menu_Render_Resume };
+enum {
+    Menu_File_Quit = 100,
+    Menu_File_Open,
+    Menu_File_Save,
+    Menu_Render_Start,
+    Menu_Render_Pause,
+    Menu_Render_Resume
+};
 
 class RenderPixel {
     public:
@@ -87,7 +87,8 @@ class RenderThread : public QThread {
     Q_OBJECT
 
     public:
-    explicit RenderThread(RenderCanvas* canvas, World* world, QObject* parent = nullptr);
+    explicit RenderThread(RenderCanvas* canvas, World* world,
+                          QObject* parent = nullptr);
     ~RenderThread() override;
 
     void setPixel(int x, int y, int redValue, int green, int blue);
