@@ -140,13 +140,11 @@ ShadeRec World::hit_objects(const Ray& ray) {
     Normal normal;
     Point3D local_hit_point;
     float tmin = kHugeValue;
-    int const num_objects = objects.size();
-
-    for (int j = 0; j < num_objects; j++) {
-        if (objects[j]->hit(ray, t, sr) && (t < tmin)) {
+    for (GeometricObject* object : objects) {
+        if (object->hit(ray, t, sr) && (t < tmin)) {
             sr.hit_an_object = true;
             tmin = t;
-            sr.material_ptr = objects[j]->get_material();
+            sr.material_ptr = object->get_material();
             sr.hit_point = ray.o + t * ray.d;
             normal = sr.normal;
             local_hit_point = sr.local_hit_point;
@@ -166,23 +164,17 @@ ShadeRec World::hit_objects(const Ray& ray) {
 // The objects array still exists, because it's an automatic variable, but it's
 // empty
 void World::delete_objects() {
-    int const num_objects = objects.size();
-
-    for (int j = 0; j < num_objects; j++) {
-        delete objects[j];
-        objects[j] = nullptr;
+    for (GeometricObject* object : objects) {
+        delete object;
     }
 
-    objects.erase(objects.begin(), objects.end());
+    objects.clear();
 }
 
 void World::delete_lights() {
-    int const num_lights = lights.size();
-
-    for (int j = 0; j < num_lights; j++) {
-        delete lights[j];
-        lights[j] = nullptr;
+    for (Light* light : lights) {
+        delete light;
     }
 
-    lights.erase(lights.begin(), lights.end());
+    lights.clear();
 }
