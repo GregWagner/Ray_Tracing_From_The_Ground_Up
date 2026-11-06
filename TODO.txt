@@ -176,7 +176,6 @@ Top reported issue families:
 Representative notes:
   [ ] Modernize function declarations that repeat the return type with braced
       initializer lists (500 warnings).
-  [ ] Remove redundant `virtual` where `override` is already present (140 warnings).
   [ ] Rename reserved double-underscore include guards/translation-unit constants
       (about 146 warnings).
   [ ] Fix narrowing conversions from double to float in view-plane and geometry code

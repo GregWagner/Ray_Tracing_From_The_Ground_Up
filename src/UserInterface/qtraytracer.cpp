@@ -17,11 +17,12 @@
 #include <QThread>
 #include <Qt>
 
-#include <cstring>
+const int WIDTH{500};
+const int HEIGHT{550};
 
 MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent) {
     setWindowTitle("Ray Tracer");
-    resize(500, 550);
+    resize(WIDTH, HEIGHT);
 
     canvas = new RenderCanvas(this);
     setCentralWidget(canvas);
@@ -55,8 +56,7 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent) {
 void MainWindow::onRenderStart() {
     if (canvas != nullptr) {
         canvas->renderStart();
-        resize(canvas->getImage().width() + 100,
-               canvas->getImage().height() + 150);
+        resize(canvas->getImage().width() + 100, canvas->getImage().height() + 150);
     }
 
     if (auto* sbar = statusBar()) {
@@ -162,7 +162,7 @@ QSize RenderCanvas::sizeHint() const {
     if (!image.isNull()) {
         return image.size();
     }
-    return QSize(400, 400);
+    return {WIDTH, HEIGHT};
 }
 
 void RenderCanvas::renderStart() {
@@ -240,7 +240,7 @@ RenderThread::RenderThread(RenderCanvas* canvasIn, World* worldIn,
                            QObject* parent)
     : QThread(parent), canvas(canvasIn), world(worldIn) {}
 
-RenderThread::~RenderThread() {}
+RenderThread::~RenderThread() = default;
 
 void RenderThread::setPixel(int x, int y, int redValue, int green, int blue) {
     {
