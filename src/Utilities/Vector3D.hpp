@@ -1,5 +1,4 @@
-#ifndef __VECTOR_3D__
-#define __VECTOR_3D__
+#pragma once
 
 #include "Matrix.hpp"
 
@@ -128,5 +127,3 @@ inline Vector3D operator*(const double a, const Vector3D& v) {
 
 // multiplication by a matrix on the left
 Vector3D operator*(const Matrix& mat, const Vector3D& v);
-
-#endif

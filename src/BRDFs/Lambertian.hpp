@@ -1,5 +1,4 @@
-#ifndef __LAMBERTIAN__
-#define __LAMBERTIAN__
+#pragma once
 
 #include "BRDF.hpp"
 
@@ -59,5 +58,3 @@ inline void Lambertian::set_cd(const float c) {
     cd.g = c;
     cd.b = c;
 }
-
-#endif

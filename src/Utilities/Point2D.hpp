@@ -1,5 +1,4 @@
-#ifndef __POINT_2D__
-#define __POINT_2D__
+#pragma once
 
 class Point2D {
     public:
@@ -21,5 +20,3 @@ class Point2D {
 inline Point2D Point2D::operator*(const float a) {
     return (Point2D(a * x, a * y));
 }
-
-#endif

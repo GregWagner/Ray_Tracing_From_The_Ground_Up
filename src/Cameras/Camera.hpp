@@ -1,5 +1,4 @@
-#ifndef __CAMERA__
-#define __CAMERA__
+#pragma once
 
 // There is no view plane distance because the fisheye and panoramic cameras
 // don't use it
@@ -92,5 +91,3 @@ inline void Camera::set_roll(const float r) {
 inline void Camera::set_exposure_time(const float exposure) {
     exposure_time = exposure;
 }
-
-#endif

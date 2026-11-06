@@ -1,5 +1,4 @@
-#ifndef _QTRAYTRACER_H_
-#define _QTRAYTRACER_H_
+#pragma once
 
 #include "World.hpp"
 
@@ -115,5 +114,3 @@ class RenderThread : public QThread {
     QWaitCondition condition;
     bool paused = false;
 };
-
-#endif

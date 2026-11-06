@@ -1,5 +1,4 @@
-#ifndef __RGB_COLOR__
-#define __RGB_COLOR__
+#pragma once
 
 class RGBColor {
     public:
@@ -109,5 +108,3 @@ RGBColor operator*(const float a, const RGBColor& c);
 [[nodiscard]] inline RGBColor operator*(const float a, const RGBColor& c) {
     return (RGBColor(a * c.r, a * c.g, a * c.b));
 }
-
-#endif

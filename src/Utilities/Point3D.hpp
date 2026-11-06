@@ -1,5 +1,4 @@
-#ifndef __POINT3D__
-#define __POINT3D__
+#pragma once
 
 #include "Matrix.hpp"
 #include "Vector3D.hpp"
@@ -84,5 +83,3 @@ inline Point3D operator*(double a, const Point3D& p) {
 
 // multiplication by a matrix on the left
 Point3D operator*(const Matrix& mat, const Point3D& p);
-
-#endif

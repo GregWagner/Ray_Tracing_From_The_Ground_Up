@@ -1,5 +1,4 @@
-#ifndef __LIGHT__
-#define __LIGHT__
+#pragma once
 
 #include "RGBColor.hpp"
 #include "Vector3D.hpp"
@@ -26,5 +25,3 @@ class Light {
 
     [[nodiscard]] virtual RGBColor L(ShadeRec& srec);
 };
-
-#endif

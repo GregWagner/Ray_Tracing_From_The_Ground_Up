@@ -1,8 +1,7 @@
-#ifndef __CONSTANTS__
-#define __CONSTANTS__
+#pragma once
 
 #include "RGBColor.hpp"
-#include <stdlib.h>
+#include <cstdlib>
 
 const double PI = 3.1415926535897932384;
 const double TWO_PI = 6.2831853071795864769;
@@ -18,5 +17,3 @@ const RGBColor white(1.0);
 const RGBColor red(1.0, 0.0, 0.0);
 
 const float invRAND_MAX = 1.0 / static_cast<float>(RAND_MAX);
-
-#endif

@@ -1,5 +1,4 @@
-#ifndef __DIRECTIONAL__
-#define __DIRECTIONAL__
+#pragma once
 
 #include "Light.hpp"
 #include "RGBColor.hpp"
@@ -75,5 +74,3 @@ inline void Directional::set_direction(float dx, float dy, float dz) {
     dir.z = dz;
     dir.normalize();
 }
-
-#endif

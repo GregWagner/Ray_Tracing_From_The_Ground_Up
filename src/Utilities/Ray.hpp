@@ -1,5 +1,4 @@
-#ifndef __RAY__
-#define __RAY__
+#pragma once
 
 #include "Point3D.hpp"
 #include "Vector3D.hpp"
@@ -19,5 +18,3 @@ class Ray {
 
     ~Ray();
 };
-
-#endif

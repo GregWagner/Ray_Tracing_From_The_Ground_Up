@@ -1,5 +1,4 @@
-#ifndef __SHADE_REC__
-#define __SHADE_REC__
+#pragma once
 
 #include <vector>
 
@@ -31,5 +30,3 @@ class ShadeRec {
 
     ShadeRec(const ShadeRec& sr);
 };
-
-#endif

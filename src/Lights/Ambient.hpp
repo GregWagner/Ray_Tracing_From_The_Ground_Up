@@ -1,5 +1,4 @@
-#ifndef __AMBIENT__
-#define __AMBIENT__
+#pragma once
 
 #include "Light.hpp"
 
@@ -51,5 +50,3 @@ inline void Ambient::set_color(const float r, const float g, const float b) {
     color.g = g;
     color.b = b;
 }
-
-#endif

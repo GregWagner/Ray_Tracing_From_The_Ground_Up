@@ -1,5 +1,4 @@
-#ifndef __WORLD__
-#define __WORLD__
+#pragma once
 
 // The World class does not have a copy constructor or an assignment operator,
 // for the followign reasons:
@@ -88,5 +87,3 @@ inline void World::set_ambient_light(Light* light_ptr) {
 inline void World::set_camera(Camera* c_ptr) {
     camera_ptr = c_ptr;
 }
-
-#endif

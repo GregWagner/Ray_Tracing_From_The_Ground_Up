@@ -1,5 +1,4 @@
-#ifndef __MATERIAL__
-#define __MATERIAL__
+#pragma once
 
 #include "RGBColor.hpp"
 #include "ShadeRec.hpp"
@@ -20,5 +19,3 @@ class Material {
     protected:
     Material& operator=(const Material& rhs);
 };
-
-#endif

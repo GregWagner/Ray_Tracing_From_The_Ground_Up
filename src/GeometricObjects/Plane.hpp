@@ -1,5 +1,4 @@
-#ifndef __PLANE__
-#define __PLANE__
+#pragma once
 
 #include "GeometricObject.hpp"
 
@@ -26,5 +25,3 @@ class Plane : public GeometricObject {
 
     static const double kEpsilon; // for shadows and secondary rays
 };
-
-#endif

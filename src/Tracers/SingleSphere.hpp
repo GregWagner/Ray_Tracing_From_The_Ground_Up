@@ -1,5 +1,4 @@
-#ifndef __SINGLE_SPHERE__
-#define __SINGLE_SPHERE__
+#pragma once
 
 #include "Tracer.hpp"
 
@@ -15,5 +14,3 @@ class SingleSphere : public Tracer {
 
     using Tracer::trace_ray;
 };
-
-#endif
