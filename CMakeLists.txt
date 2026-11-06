@@ -29,7 +29,16 @@ option(ENABLE_SANITIZERS "Enable AddressSanitizer and UndefinedBehaviorSanitizer
 if(ENABLE_CLANG_TIDY)
     find_program(CLANG_TIDY_EXE NAMES clang-tidy)
     if(CLANG_TIDY_EXE)
-        set(CMAKE_CXX_CLANG_TIDY "${CLANG_TIDY_EXE}" "--removed-arg=-mno-direct-extern-access")
+        execute_process(
+            COMMAND ${CLANG_TIDY_EXE} --help
+            OUTPUT_VARIABLE CLANG_TIDY_HELP
+            ERROR_QUIET
+            OUTPUT_STRIP_TRAILING_WHITESPACE)
+        set(CLANG_TIDY_ARGS "")
+        if(CLANG_TIDY_HELP MATCHES "removed-arg")
+            list(APPEND CLANG_TIDY_ARGS "--removed-arg=-mno-direct-extern-access")
+        endif()
+        set(CMAKE_CXX_CLANG_TIDY "${CLANG_TIDY_EXE}" ${CLANG_TIDY_ARGS})
     else()
         message(WARNING "clang-tidy not found; ENABLE_CLANG_TIDY ignored")
     endif()
