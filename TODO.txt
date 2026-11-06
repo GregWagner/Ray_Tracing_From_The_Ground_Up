@@ -28,3 +28,16 @@ Verification
   cmake -S . -B build && cmake --build build   # 0 warnings
   cmake --build build --target check-format     # passes
   clang-tidy src/<file>.cpp -p build            # 0 errors
+
+Improvement ideas (no source changes required)
+--------------------------------------------
+  [ ] Add GitHub Actions CI: configure/build, check-format, clang-tidy (ENABLE_CLANG_TIDY=ON)
+  [ ] Add CMakePresets.json for default, clang, tidy, and sanitizer builds
+  [ ] Introduce unit tests (Catch2/GoogleTest) for math utilities and ray/object intersections
+  [ ] Enable sanitizers (-fsanitize=address,undefined) in a dedicated preset
+  [ ] Pre-commit hook running clang-format on staged files
+  [ ] Add code coverage reporting (gcov/lcov) for tests
+  [ ] Run additional static analysis (cppcheck, include-what-you-use)
+  [ ] Document build/run/development workflow in README.md
+  [ ] Add CONTRIBUTING.md and PR/issue templates
+  [ ] Pin wxWidgets/compiler versions and document minimum requirements
