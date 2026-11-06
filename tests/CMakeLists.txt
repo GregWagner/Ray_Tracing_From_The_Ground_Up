@@ -19,3 +19,8 @@ endif()
 
 include(GoogleTest)
 gtest_discover_tests(rtf_tests)
+
+if(ENABLE_COVERAGE AND CMAKE_CXX_COMPILER_ID MATCHES "GNU")
+    target_compile_options(rtf_tests PRIVATE --coverage -O0 -g)
+    target_link_options(rtf_tests PRIVATE --coverage)
+endif()

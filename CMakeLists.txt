@@ -21,6 +21,9 @@ option(ENABLE_CLANG_TIDY "Run clang-tidy during the build" ON)
 # Optional tests
 option(BUILD_TESTS "Build unit tests" ON)
 
+# Optional code coverage integration
+option(ENABLE_COVERAGE "Enable gcov/lcov code coverage reporting for tests" ON)
+
 # Optional sanitizer integration
 option(ENABLE_SANITIZERS "Enable AddressSanitizer and UndefinedBehaviorSanitizer" ON)
 if(ENABLE_CLANG_TIDY)
@@ -123,6 +126,14 @@ if(ENABLE_SANITIZERS AND CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
     )
 endif()
 
+# Code coverage flags
+if(ENABLE_COVERAGE AND CMAKE_CXX_COMPILER_ID MATCHES "GNU")
+    foreach(tgt rtf_core)
+        target_compile_options(${tgt} PRIVATE --coverage -O0 -g)
+        target_link_options(${tgt} PRIVATE --coverage)
+    endforeach()
+endif()
+
 # clang-format helper targets
 if(BUILD_TESTS)
     find_package(GTest CONFIG REQUIRED)
@@ -145,4 +156,21 @@ if(CLANG_FORMAT_EXE)
         COMMAND ${CLANG_FORMAT_EXE} --dry-run --Werror ${FORMAT_SOURCES}
         COMMENT "Checking clang-format compliance"
     )
+endif()
+
+# Code coverage report target
+if(BUILD_TESTS AND ENABLE_COVERAGE)
+    find_program(LCOV_EXE NAMES lcov)
+    find_program(GENHTML_EXE NAMES genhtml)
+    if(LCOV_EXE AND GENHTML_EXE)
+        add_custom_target(coverage
+            COMMAND ${LCOV_EXE} --directory ${CMAKE_BINARY_DIR} --zerocounters
+            COMMAND $<TARGET_FILE:rtf_tests>
+            COMMAND ${LCOV_EXE} --ignore-errors inconsistent --directory ${CMAKE_BINARY_DIR} --capture --output-file ${CMAKE_BINARY_DIR}/coverage.info
+            COMMAND ${LCOV_EXE} --ignore-errors inconsistent --remove ${CMAKE_BINARY_DIR}/coverage.info '/usr/*' '*/tests/*' --output-file ${CMAKE_BINARY_DIR}/coverage.info
+            COMMAND ${GENHTML_EXE} ${CMAKE_BINARY_DIR}/coverage.info --output-directory ${CMAKE_BINARY_DIR}/coverage_report
+            WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+            COMMENT "Generating code coverage report"
+        )
+    endif()
 endif()
