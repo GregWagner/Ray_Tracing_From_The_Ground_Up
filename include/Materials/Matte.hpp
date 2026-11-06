@@ -7,32 +7,32 @@
 // class Matte
 
 class Matte : public Material {
-	public:
-	Matte();
+    public:
+    Matte();
 
-	Matte(const Matte& m);
+    Matte(const Matte& m);
 
-	[[nodiscard]] virtual Material* clone() const override;
+    [[nodiscard]] virtual Material* clone() const override;
 
-	Matte& operator=(const Matte& rhs);
+    Matte& operator=(const Matte& rhs);
 
-	~Matte() override;
+    ~Matte() override;
 
-	void set_ka(const float k);
+    void set_ka(const float k);
 
-	void set_kd(const float k);
+    void set_kd(const float k);
 
-	void set_cd(const RGBColor c);
+    void set_cd(const RGBColor c);
 
-	void set_cd(const float r, const float g, const float b);
+    void set_cd(const float r, const float g, const float b);
 
-	void set_cd(const float c);
+    void set_cd(const float c);
 
-	[[nodiscard]] virtual RGBColor shade(ShadeRec& sr) override;
+    [[nodiscard]] virtual RGBColor shade(ShadeRec& sr) override;
 
-	private:
-	Lambertian* ambient_brdf;
-	Lambertian* diffuse_brdf;
+    private:
+    Lambertian* ambient_brdf;
+    Lambertian* diffuse_brdf;
 };
 
 // this sets Lambertian::kd
@@ -40,28 +40,28 @@ class Matte : public Material {
 // is diffuse reflection
 
 inline void Matte::set_ka(const float ka) {
-	ambient_brdf->set_kd(ka);
+    ambient_brdf->set_kd(ka);
 }
 
 // this also sets Lambertian::kd, but for a different Lambertian object
 
 inline void Matte::set_kd(const float kd) {
-	diffuse_brdf->set_kd(kd);
+    diffuse_brdf->set_kd(kd);
 }
 
 inline void Matte::set_cd(const RGBColor c) {
-	ambient_brdf->set_cd(c);
-	diffuse_brdf->set_cd(c);
+    ambient_brdf->set_cd(c);
+    diffuse_brdf->set_cd(c);
 }
 
 inline void Matte::set_cd(const float r, const float g, const float b) {
-	ambient_brdf->set_cd(r, g, b);
-	diffuse_brdf->set_cd(r, g, b);
+    ambient_brdf->set_cd(r, g, b);
+    diffuse_brdf->set_cd(r, g, b);
 }
 
 inline void Matte::set_cd(const float c) {
-	ambient_brdf->set_cd(c);
-	diffuse_brdf->set_cd(c);
+    ambient_brdf->set_cd(c);
+    diffuse_brdf->set_cd(c);
 }
 
 #endif

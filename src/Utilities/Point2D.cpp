@@ -10,12 +10,12 @@ Point2D::Point2D(const float x1, const float y1) : x(x1), y(y1) {}
 Point2D::Point2D(const Point2D& p) : x(p.x), y(p.y) {}
 
 Point2D& Point2D::operator=(const Point2D& rhs) {
-	if (this == &rhs) {
-		return (*this);
-	}
+    if (this == &rhs) {
+        return (*this);
+    }
 
-	x = rhs.x;
-	y = rhs.y;
+    x = rhs.x;
+    y = rhs.y;
 
-	return (*this);
+    return (*this);
 }

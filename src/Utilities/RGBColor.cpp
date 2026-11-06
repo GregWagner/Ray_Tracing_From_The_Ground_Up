@@ -15,19 +15,19 @@ RGBColor::RGBColor(const RGBColor& c) : r(c.r), g(c.g), b(c.b) {}
 RGBColor::~RGBColor() {}
 
 RGBColor& RGBColor::operator=(const RGBColor& rhs) {
-	if (this == &rhs) {
-		return (*this);
-	}
+    if (this == &rhs) {
+        return (*this);
+    }
 
-	r = rhs.r;
-	g = rhs.g;
-	b = rhs.b;
+    r = rhs.r;
+    g = rhs.g;
+    b = rhs.b;
 
-	return (*this);
+    return (*this);
 }
 
 // raise each component to the specified power
 // used for color filtering in Chapter 28
 RGBColor RGBColor::powc(float p) const {
-	return {std::pow(r, p), std::pow(g, p), std::pow(b, p)};
+    return {std::pow(r, p), std::pow(g, p), std::pow(b, p)};
 }

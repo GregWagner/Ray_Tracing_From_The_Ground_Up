@@ -9,71 +9,71 @@
 #include "World.hpp" // you will need this later on for shadows
 
 class Directional : public Light {
-	public:
-	Directional();
+    public:
+    Directional();
 
-	Directional(const Directional& dl);
+    Directional(const Directional& dl);
 
-	[[nodiscard]] virtual Light* clone() const override;
+    [[nodiscard]] virtual Light* clone() const override;
 
-	Directional& operator=(const Directional& rhs);
+    Directional& operator=(const Directional& rhs);
 
-	virtual ~Directional() override;
+    virtual ~Directional() override;
 
-	void scale_radiance(const float b);
+    void scale_radiance(const float b);
 
-	void set_color(const float c);
+    void set_color(const float c);
 
-	void set_color(const RGBColor& c);
+    void set_color(const RGBColor& c);
 
-	void set_color(const float r, const float g, const float b);
+    void set_color(const float r, const float g, const float b);
 
-	void set_direction(Vector3D d);
+    void set_direction(Vector3D d);
 
-	void set_direction(float dx, float dy, float dz);
+    void set_direction(float dx, float dy, float dz);
 
-	[[nodiscard]] virtual Vector3D get_direction(ShadeRec& sr) override;
+    [[nodiscard]] virtual Vector3D get_direction(ShadeRec& sr) override;
 
-	[[nodiscard]] virtual RGBColor L(ShadeRec& sr) override;
+    [[nodiscard]] virtual RGBColor L(ShadeRec& sr) override;
 
-	private:
-	float ls;
-	RGBColor color;
-	Vector3D dir; // direction the light comes from
+    private:
+    float ls;
+    RGBColor color;
+    Vector3D dir; // direction the light comes from
 };
 
 // inlined access functions
 inline void Directional::scale_radiance(const float b) {
-	ls = b;
+    ls = b;
 }
 
 inline void Directional::set_color(const float c) {
-	color.r = c;
-	color.g = c;
-	color.b = c;
+    color.r = c;
+    color.g = c;
+    color.b = c;
 }
 
 inline void Directional::set_color(const RGBColor& c) {
-	color = c;
+    color = c;
 }
 
 inline void Directional::set_color(const float r, const float g,
-								   const float b) {
-	color.r = r;
-	color.g = g;
-	color.b = b;
+                                   const float b) {
+    color.r = r;
+    color.g = g;
+    color.b = b;
 }
 
 inline void Directional::set_direction(Vector3D d) {
-	dir = d;
-	dir.normalize();
+    dir = d;
+    dir.normalize();
 }
 
 inline void Directional::set_direction(float dx, float dy, float dz) {
-	dir.x = dx;
-	dir.y = dy;
-	dir.z = dz;
-	dir.normalize();
+    dir.x = dx;
+    dir.y = dy;
+    dir.z = dz;
+    dir.normalize();
 }
 
 #endif

@@ -6,31 +6,31 @@
 #include "Vector3D.hpp"
 
 class BRDF {
-	public:
-	BRDF() = default;
+    public:
+    BRDF() = default;
 
-	BRDF(const BRDF& brdf [[maybe_unused]]) = default;
+    BRDF(const BRDF& brdf [[maybe_unused]]) = default;
 
-	BRDF(BRDF&& brdf [[maybe_unused]]) = default;
+    BRDF(BRDF&& brdf [[maybe_unused]]) = default;
 
-	[[nodiscard]]
-	virtual BRDF* clone() const = 0;
+    [[nodiscard]]
+    virtual BRDF* clone() const = 0;
 
-	virtual ~BRDF();
+    virtual ~BRDF();
 
-	virtual RGBColor f(const ShadeRec& srec, const Vector3D& wo,
-					   const Vector3D& wi) const;
+    virtual RGBColor f(const ShadeRec& srec, const Vector3D& wo,
+                       const Vector3D& wi) const;
 
-	virtual RGBColor sample_f(const ShadeRec& srec, const Vector3D& wo,
-							  Vector3D& wi) const;
+    virtual RGBColor sample_f(const ShadeRec& srec, const Vector3D& wo,
+                              Vector3D& wi) const;
 
-	virtual RGBColor sample_f(const ShadeRec& srec, const Vector3D& wo,
-							  Vector3D& wi, float& pdf) const;
+    virtual RGBColor sample_f(const ShadeRec& srec, const Vector3D& wo,
+                              Vector3D& wi, float& pdf) const;
 
-	virtual RGBColor rho(const ShadeRec& srec, const Vector3D& wo) const;
+    virtual RGBColor rho(const ShadeRec& srec, const Vector3D& wo) const;
 
-	protected:
-	BRDF& operator=(const BRDF& rhs);
+    protected:
+    BRDF& operator=(const BRDF& rhs);
 };
 
 #endif

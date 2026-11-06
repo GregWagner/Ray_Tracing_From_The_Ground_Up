@@ -17,41 +17,41 @@ Normal::Normal(const Vector3D& v) : x(v.x), y(v.y), z(v.z) {}
 Normal::~Normal() {}
 
 Normal& Normal::operator=(const Normal& rhs) {
-	if (this == &rhs) {
-		return (*this);
-	}
+    if (this == &rhs) {
+        return (*this);
+    }
 
-	x = rhs.x;
-	y = rhs.y;
-	z = rhs.z;
+    x = rhs.x;
+    y = rhs.y;
+    z = rhs.z;
 
-	return (*this);
+    return (*this);
 }
 
 // assignment of a vector to a normal
 Normal& Normal::operator=(const Vector3D& rhs) {
-	x = rhs.x;
-	y = rhs.y;
-	z = rhs.z;
-	return (*this);
+    x = rhs.x;
+    y = rhs.y;
+    z = rhs.z;
+    return (*this);
 }
 
 // assignment of a point to a normal
 Normal& Normal::operator=(const Point3D& rhs) {
-	x = rhs.x;
-	y = rhs.y;
-	z = rhs.z;
-	return (*this);
+    x = rhs.x;
+    y = rhs.y;
+    z = rhs.z;
+    return (*this);
 }
 
 void Normal::normalize() {
-	double length = std::sqrt(x * x + y * y + z * z);
-	if (length == 0.0) {
-		return;
-	}
-	x /= length;
-	y /= length;
-	z /= length;
+    double length = std::sqrt(x * x + y * y + z * z);
+    if (length == 0.0) {
+        return;
+    }
+    x /= length;
+    y /= length;
+    z /= length;
 }
 
 // non-member function definition
@@ -61,7 +61,7 @@ void Normal::normalize() {
 // a normal is transformed by multiplying it on the left by the transpose of the
 // upper left 3 x 3 partition of the inverse transformation matrix
 Normal operator*(const Matrix& mat, const Normal& n) {
-	return {mat.m[0][0] * n.x + mat.m[1][0] * n.y + mat.m[2][0] * n.z,
-			mat.m[0][1] * n.x + mat.m[1][1] * n.y + mat.m[2][1] * n.z,
-			mat.m[0][2] * n.x + mat.m[1][2] * n.y + mat.m[2][2] * n.z};
+    return {mat.m[0][0] * n.x + mat.m[1][0] * n.y + mat.m[2][0] * n.z,
+            mat.m[0][1] * n.x + mat.m[1][1] * n.y + mat.m[2][1] * n.z,
+            mat.m[0][2] * n.x + mat.m[1][2] * n.y + mat.m[2][2] * n.z};
 }
