@@ -57,7 +57,7 @@ double Vector3D::length() const {
 
 // converts the vector to a unit vector
 void Vector3D::normalize() {
-    double const length = std::sqrt(x * x + y * y + z * z);
+    double const length = this->length();
     if (length == 0.0) {
         return;
     }
@@ -68,7 +68,7 @@ void Vector3D::normalize() {
 
 // converts the vector to a unit vector and returns the vector
 Vector3D& Vector3D::hat() {
-    double const length = std::sqrt(x * x + y * y + z * z);
+    double const length = this->length();
     if (length == 0.0) {
         return (*this);
     }

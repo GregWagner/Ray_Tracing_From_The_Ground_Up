@@ -12,6 +12,6 @@ class RayCast : public Tracer {
 
     [[nodiscard]] RGBColor trace_ray(const Ray& ray) const override;
 
-    [[nodiscard]] RGBColor trace_ray(const Ray ray,
+    [[nodiscard]] RGBColor trace_ray(const Ray& ray,
                                      const int depth) const override;
 };

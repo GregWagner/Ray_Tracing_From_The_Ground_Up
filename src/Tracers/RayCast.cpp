@@ -21,7 +21,7 @@ RGBColor RayCast::trace_ray(const Ray& ray) const {
 
 // this ignores the depth argument
 
-RGBColor RayCast::trace_ray(const Ray ray,
+RGBColor RayCast::trace_ray(const Ray& ray,
                             const int depth [[maybe_unused]]) const {
     ShadeRec sr(world_ptr->hit_objects(ray));
 
