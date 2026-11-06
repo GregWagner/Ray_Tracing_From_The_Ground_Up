@@ -58,7 +58,7 @@ TEST(RGBColorTest, ComponentConstructor) {
 
 TEST(RGBColorTest, CopyAndAssignment) {
 	RGBColor a(0.1f, 0.2f, 0.3f);
-	RGBColor b(a);
+	RGBColor b(a);  // NOLINT(performance-unnecessary-copy-initialization)
 	RGBColor c;
 	c = a;
 	EXPECT_TRUE(b == a);
@@ -149,7 +149,7 @@ TEST(MatrixTest, CopyAndAssignment) {
 
 TEST(MatrixTest, SetIdentity) {
 	Matrix m;
-	for (int i = 0; i < 4; ++i) {
+	for (int i = 0; i < 4; ++i) {  // NOLINT(modernize-loop-convert)
 		for (int j = 0; j < 4; ++j) {
 			m.m[i][j] = 7.0;
 		}
@@ -246,7 +246,7 @@ TEST(NormalTest, Constructors) {
 
 TEST(NormalTest, CopyAndAssignment) {
 	Normal a(1.0, 2.0, 3.0);
-	Normal b(a);
+	Normal b(a);  // NOLINT(performance-unnecessary-copy-initialization)
 	Normal c;
 	c = a;
 	EXPECT_DOUBLE_EQ(b.x, a.x);
