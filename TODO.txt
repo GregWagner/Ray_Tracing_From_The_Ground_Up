@@ -147,3 +147,79 @@ Documentation
 
 Clang-tidy run with default .clang-tidy (notes only)
 ---------------------------------------------------
+
+Code review recommendations (documentation only; no src changes made in this pass)
+---------------------------------------------------------------------------
+
+Priority: correctness and safety
+- World::tracer_ptr, World::camera_ptr, World::ambient_ptr, Material/BRDF pointers and
+  RenderCanvas::world/thread are raw owning pointers. Prefer std::unique_ptr at API
+  boundaries or document transfer/deletion rules and audit every setter/build/rebuild
+  path (set_ambient_light, set_camera, GeometricObject::set_material, World::build,
+  RenderCanvas::renderStart/onRenderFinished).
+- Null-check world->camera_ptr and world->tracer_ptr before rendering (Pinhole::render_scene,
+  RenderThread::run, RenderCanvas::renderStart, RenderThread::setPixel timer paths) and
+  fail with a clear exception/status instead of dereferencing null pointers.
+- Camera::compute_uvw uses exact equality for eye/lookat coordinates; replace with tolerance
+  checks to avoid singularities under floating-point noise.
+- Plane::hit compares the denominator to 0.0 exactly; use epsilon-based comparisons and
+  avoid unstable division for near-parallel rays.
+- Sphere/Plane hit calculations use double, matching the requested precision; keep all
+  ray/object intersection math in double and convert to float only for shading/output.
+- ViewPlane::set_gamma divides by gamma and ViewPlane::set_samples assumes an n x n grid;
+  validate gamma > 0, zoom != 0, and either require square sample counts or handle
+  arbitrary counts consistently.
+- Normal has no user-defined default constructor and no member initialization, so default
+  Normal (and uniforms declared without in-class initializers) can remain uninitialized.
+  Initialize members to zero or provide a default constructor.
+- RGBColor::operator== uses exact float equality; consider an epsilon-based comparison for
+  geometry/image tests, while retaining exact equality only where bit-identical copies are
+  expected.
+- World::hit_objects shares ShadeRec::material_ptr without ownership. Keep material lifetime
+  owned by GeometricObject and document that ShadeRec must not delete it.
+- RenderCanvas/RenderThread own pixel batches and timers through raw pointers/QVector
+  buffers. Prefer RAII ownership or Qt parent ownership and ensure queued/in-flight pixels
+  are drained on pause/cancel/destruction.
+- On close, Qt/Wayland plugin proxy allocations are external/known leaks; keep
+  .lsan-suppressions or run with QT_QPA_PLATFORM=offscreen for sanitizer smoke tests.
+- AGENTS.md is stale relative to the codebase: World::build is implemented and called from
+  RenderCanvas::renderStart, and renderStart already creates/destroys World. Update the
+  documentation rather than re-introducing the commented builder include pattern.
+
+Performance and robustness
+- Pinhole::render_scene and World::display_pixel call setPixel/notifyCanvas one pixel at a
+  time; render into an image buffer and flush in batches.
+- Avoid allocation in hot loops: RenderPixel/new QVector and repaint signals are performance
+  hotspots; reuse buffers or push pixel structs by value.
+- Use std::vector ownership consistently and remove manual erase loops in World::delete_objects
+  and World::delete_lights.
+- Guard RenderThread timers against completed == 0 before dividing by completed * 100.
+
+Code quality/API
+- Rename misspelled/ambiguous APIs and chapter-specific members where practical
+  (max_to_one, kHugeValue, SingleSphere's unused World::sphere).
+- Use std::max/std::min instead of custom Maths::max where appropriate.
+- Make clone/override relationships explicit with override and avoid C-style casts.
+- Replace redundant manual copy/move boilerplate with defaulted operations where possible.
+- Keep include style consistent with the project convention; decide whether the project uses
+  pragma once or #ifndef guards and document it consistently.
+
+Clang-tidy findings (project .clang-tidy, build-tidy)
+- 279 warnings: portability-avoid-pragma-once. Either convert headers to include guards or
+  suppress portability-avoid-pragma-once because headers intentionally use pragma once.
+- 487 warnings: modernize-return-braced-init-list. Run clang-tidy --fix for trivial operator
+  function returns, or disable for readability-heavy code.
+- 45 warnings: bugprone-throwing-static-initialization in Constants. rgb-color constants may
+  throw during static initialization; make them constexpr/const aggregates or
+  function-local/static initializers, or suppress intentionally.
+- 30 warnings: bugprone-narrowing-conversions, mostly float/double/int conversions. Add
+  explicit casts or use consistent types (double for intersection, float for shading).
+- 21 warnings: modernize-use-default-member-init. Prefer in-class member initializers.
+- 10 warnings: modernize-use-nodiscard. Add [[nodiscard]] to pure query functions.
+- 4 warnings: performance-unnecessary-value-param. Pass Vector3D/geometry structs by const
+  reference, especially Directional::set_direction(Vector3D d) and RGBColor parameters.
+- 3 warnings: modernize-use-equals-default. Replace trivial bodies with = default.
+- 1 warning: performance-enum-size. Consider underlying enum types.
+- 1 warning: bugprone-reserved-identifier from the sanitizer default suppression
+  callback. That identifier must remain exactly as required by LeakSanitizer; suppress it
+  with NOLINT.
