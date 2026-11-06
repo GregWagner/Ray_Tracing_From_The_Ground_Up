@@ -43,4 +43,4 @@ Improvement ideas (no source changes required)
       variableScope (1), unknownMacro (1)
   [x] Document build/run/development workflow in README.md
   [ ] Add CONTRIBUTING.md and PR/issue templates
-  [ ] Pin wxWidgets/compiler versions and document minimum requirements
+  [x] Pin wxWidgets/compiler versions and document minimum requirements
