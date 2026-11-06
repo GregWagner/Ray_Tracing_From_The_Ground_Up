@@ -1,0 +1,41 @@
+TODO: Fix compiler warnings (strict flags enabled in CMakeLists.txt)
+
+Categories and recommended fixes:
+
+1. -Wwrite-strings (366 occurrences)
+   - Source: src/UserInterface/main.xpm and bg.xpm (XPM image data arrays).
+   - Fix: declare the XPM pixel/colour arrays as `const char*` instead of `char*`,
+     or suppress -Wwrite-strings for those two translation units only.
+   - Note: XPM files are generated; prefer regenerating with const-correct declarations.
+
+2. -Wnon-virtual-dtor / -Wdelete-non-virtual-dtor (10 + 4 occurrences)
+   - Source: src/BRDFs/BRDF.h (BRDF), src/BRDFs/Lambertian.h (Lambertian).
+   - Fix: add a virtual destructor to BRDF (and propagate to derived classes),
+     e.g. `virtual ~BRDF() = default;`. This also resolves the delete-non-virtual-dtor
+     warnings in src/Materials/Matte.cpp.
+
+3. -Woverloaded-virtual (12 occurrences)
+   - Source: src/Tracers/Tracer.h (Tracer::trace_ray(Ray, int)).
+   - Fix: derived tracers (RayCast, MultipleObjects, SingleSphere) override a
+     different signature; add `using Tracer::trace_ray;` or rename/align signatures.
+
+4. -Wshadow (13 occurrences)
+   - Source: src/Cameras/Camera.h (parameter `u` shadows member), src/Cameras/Pinhole.cpp
+     (parameter `w`), src/UserInterface/wxraytracer.cpp (local `red` shadows global).
+   - Fix: rename parameters/locals (e.g. `u_`, `w_`, `redValue`) or the members.
+
+5. -Wreorder (6 occurrences)
+   - Source: src/Cameras/Camera.h / Camera.cpp (member init order: `up` before `u`).
+   - Fix: reorder member declarations/initializer list to match declaration order.
+
+6. -Wunused-parameter (35 occurrences)
+   - Sources: BRDF/Lambertian/Material/Ambient/Directional/Light/Matte tracer and UI callbacks.
+   - Fix: mark intentionally unused parameters with (void)param; or remove them from
+     the interface where the base class allows.
+
+7. clang-tidy (optional)
+   - Modernize deprecated headers (<math.h> -> <cmath>), redundant void args,
+     default copy/move/destructors, and trailing-return-type are reported.
+   - Address incrementally; keep .clang-tidy as the policy source.
+
+General: keep source changes minimal and run `cmake --build build` + `clang-tidy` after each fix.
