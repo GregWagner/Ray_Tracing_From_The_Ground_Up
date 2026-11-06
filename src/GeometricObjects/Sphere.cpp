@@ -5,7 +5,7 @@ const double Sphere::kEpsilon = 0.001;
 
 Sphere::Sphere() : GeometricObject(), center(0.0), radius(1.0) {}
 
-Sphere::Sphere(Point3D c, double r) : GeometricObject(), center(c), radius(r) {}
+Sphere::Sphere(const Point3D& c, double r) : GeometricObject(), center(c), radius(r) {}
 
 Sphere* Sphere::clone() const {
     return (new Sphere(*this));

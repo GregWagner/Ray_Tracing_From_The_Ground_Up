@@ -27,7 +27,7 @@ Lambertian& Lambertian::operator=(const Lambertian& rhs) {
 RGBColor Lambertian::f(const ShadeRec& sr [[maybe_unused]],
                        const Vector3D& wo [[maybe_unused]],
                        const Vector3D& wi [[maybe_unused]]) const {
-    return (kd * cd * invPI);
+    return (kd * cd * static_cast<float>(invPI));
 }
 
 RGBColor Lambertian::rho(const ShadeRec& sr [[maybe_unused]],

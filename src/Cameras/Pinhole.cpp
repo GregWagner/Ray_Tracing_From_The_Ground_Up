@@ -51,14 +51,14 @@ void Pinhole::render_scene(const World& world) {
 
             for (int p = 0; p < n; p++) {     // up pixel
                 for (int q = 0; q < n; q++) { // across pixel
-                    pp.x = vp.s * (c - 0.5 * vp.hres + (q + 0.5) / n);
-                    pp.y = vp.s * (r - 0.5 * vp.vres + (p + 0.5) / n);
+                    pp.x = vp.s * (static_cast<float>(c) - 0.5f * static_cast<float>(vp.hres) + (static_cast<float>(q) + 0.5f) / static_cast<float>(n));
+                    pp.y = vp.s * (static_cast<float>(r) - 0.5f * static_cast<float>(vp.vres) + (static_cast<float>(p) + 0.5f) / static_cast<float>(n));
                     ray.d = get_direction(pp);
                     L += world.tracer_ptr->trace_ray(ray, depth);
                 }
             }
 
-            L /= vp.num_samples;
+            L /= static_cast<float>(vp.num_samples);
             L *= exposure_time;
             world.display_pixel(r, c, L);
         }

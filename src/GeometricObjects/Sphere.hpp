@@ -6,7 +6,7 @@ class Sphere : public GeometricObject {
     public:
     Sphere();
 
-    Sphere(Point3D center, double r);
+    Sphere(const Point3D& center, double r);
 
     Sphere(const Sphere& sphere);
 

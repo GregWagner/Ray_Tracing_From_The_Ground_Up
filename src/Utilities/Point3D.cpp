@@ -8,9 +8,7 @@ Point3D::Point3D(const double a) : x(a), y(a), z(a) {}
 Point3D::Point3D(const double a, const double b, const double c)
     : x(a), y(b), z(c) {}
 
-Point3D::Point3D(const Point3D& p) = default;
-
-Point3D::~Point3D() = default;
+Point3D::Point3D(const Point3D& point) = default;
 
 Point3D& Point3D::operator=(const Point3D& rhs) {
     if (this == &rhs) {

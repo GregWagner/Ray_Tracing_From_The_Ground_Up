@@ -2,7 +2,7 @@
 
 Material::Material() = default;
 
-Material::Material(const Material& m [[maybe_unused]]) {}
+Material::Material(const Material& m [[maybe_unused]]) = default;
 
 Material& Material::operator=(const Material& rhs) {
     if (this == &rhs) {

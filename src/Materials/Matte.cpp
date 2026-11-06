@@ -66,7 +66,7 @@ RGBColor Matte::shade(ShadeRec& sr) {
     RGBColor L = ambient_brdf->rho(sr, wo) * sr.w.ambient_ptr->L(sr);
     for (Light* light : sr.w.lights) {
         Vector3D const wi = light->get_direction(sr);
-        float const ndotwi = sr.normal * wi;
+        float const ndotwi = static_cast<float>(sr.normal * wi);
 
         if (ndotwi > 0.0) {
             L += diffuse_brdf->f(sr, wo, wi) * light->L(sr) * ndotwi;
