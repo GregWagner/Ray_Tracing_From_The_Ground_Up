@@ -29,7 +29,7 @@
 
 using namespace std;
 
-class RenderThread; // part of skeleton - wxRaytracer.h
+class RenderThread; // part of skeleton - qtraytracer.h
 
 class World {
 public:
@@ -42,7 +42,7 @@ public:
   vector<GeometricObject *> objects;
   vector<Light *> lights;
 
-  RenderThread *paintArea; // connection to skeleton - wxRaytracer.h
+  RenderThread *paintArea; // connection to skeleton - qtraytracer.h
 
   World();
 

@@ -43,7 +43,7 @@ Improvement ideas (no source changes required)
       variableScope (1), unknownMacro (1)
   [x] Document build/run/development workflow in README.md
   [ ] Add CONTRIBUTING.md and PR/issue templates
-  [x] Pin wxWidgets/compiler versions and document minimum requirements
+  [x] Pin Qt/compiler versions and document minimum requirements
 
 Code review findings (notes only; no source changes made)
 -------------------------------------------------------
@@ -95,7 +95,7 @@ Priority 2: memory and resource safety
       and clearly define ownership in NotifyCanvas/OnNewPixel to avoid leaks on
       pause/cancel/errors.
   [ ] GUI raw new/delete for menus, bitmaps, images, and timers should be
-      simplified (smart pointers, wxSizer-managed children) and checked for leaks
+      simplified (smart pointers, Qt-managed children) and checked for leaks
       under sanitizers.
   [ ] World destructor deletes ambient_ptr but light/material ownership is split;
       audit every raw pointer allocation/deletion for double-delete and leaks.
@@ -105,7 +105,7 @@ Priority 2: memory and resource safety
       where possible, especially in delete_objects/delete_lights.
 
 Priority 3: API design and modern C++
-  [ ] Avoid `using namespace std;` in headers (World.hpp, wxraytracer.hpp).
+  [ ] Avoid `using namespace std;` in headers (World.hpp, qtraytracer.hpp).
   [ ] Replace reserved double-underscore include guards with pragma once or valid
       guard names; use `<cstdlib>` instead of `<stdlib.h>`.
   [ ] Improve const-correctness: mark getters/operators const where appropriate
@@ -123,8 +123,8 @@ Priority 3: API design and modern C++
 Priority 4: rendering quality and functionality
   [ ] Sampling is truncated (sqrt(num_samples)) then divided by num_samples;
       support arbitrary sample counts or validate at construction.
-  [ ] Image display uses DrawPoint per pixel, which is slow; write pixels into a
-      wxImage/wxBitmap buffer to speed rendering and reduce UI updates.
+  [ ] Image display uses DrawPoint per pixel, which is slow; write pixels into an
+      image buffer to speed rendering and reduce UI updates.
   [ ] Pinhole ray direction should account for zoom consistently; avoid mutating
       copied ViewPlane values unexpectedly.
   [ ] Add gamma handling robustly, including no gamma correction when requested.
@@ -137,12 +137,12 @@ Priority 5: testing, build, and tooling
   [ ] Add tests for matrix transforms, normal transforms, materials, camera basis,
       Pinhole rendering, World::build, and more intersection cases.
   [ ] Add integration tests around null/empty Worlds and sanitizer runs; use
-      wx-free test doubles for RenderCanvas.
+      Gui-free test doubles for RenderCanvas.
   [ ] Add GitHub Actions CI for configure/build/test/check-format/tidy and a
       sanitizer preset build.
   [ ] Add pre-commit hook and coverage reporting; track remaining clang-tidy
       warnings in the TODO list.
-  [ ] Keep wxWidgets/compiler versions pinned and documented; optionally use
+  [ ] Keep Qt/compiler versions pinned and documented; optionally use
       FetchContent for GoogleTest to make tests reproducible.
   [ ] Add CONTRIBUTING.md, PR/issue templates, and clearer ownership docs.
 

@@ -32,7 +32,7 @@ if(ENABLE_CLANG_TIDY)
     endif()
 endif()
 
-find_package(wxWidgets 3.2 CONFIG REQUIRED COMPONENTS xrc html qa xml net core base)
+find_package(Qt6 6.2 REQUIRED COMPONENTS Widgets)
 
 set(RTF_CORE_SOURCES
     src/BRDFs/BRDF.cpp
@@ -65,11 +65,16 @@ set(RTF_CORE_SOURCES
 
 add_library(rtf_core STATIC ${RTF_CORE_SOURCES})
 
-add_executable(wxraytracer
-    src/UserInterface/wxraytracer.cpp
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTORCC ON)
+set(CMAKE_AUTOUIC ON)
+
+add_executable(qtraytracer
+    src/UserInterface/qtraytracer.cpp
+    include/UserInterface/qtraytracer.hpp
 )
 
-target_link_libraries(wxraytracer PRIVATE rtf_core ${wxWidgets_LIBRARIES})
+target_link_libraries(qtraytracer PRIVATE rtf_core Qt6::Widgets)
 
 target_include_directories(rtf_core PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/src
@@ -85,11 +90,11 @@ target_include_directories(rtf_core PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/include/World
 )
 
-target_link_libraries(wxraytracer PRIVATE ${wxWidgets_LIBRARIES})
+
 
 # Strict compiler warnings (no source changes required)
 if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
-    foreach(tgt rtf_core wxraytracer)
+    foreach(tgt rtf_core qtraytracer)
         target_compile_options(${tgt} PRIVATE
             -Wall
             -Wextra
@@ -103,14 +108,14 @@ endif()
 
 # Sanitizers
 if(ENABLE_SANITIZERS AND CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
-    foreach(tgt rtf_core wxraytracer)
+    foreach(tgt rtf_core qtraytracer)
         target_compile_options(${tgt} PRIVATE
             -fsanitize=address,undefined
             -fno-omit-frame-pointer
             -g
         )
     endforeach()
-    target_link_options(wxraytracer PRIVATE
+    target_link_options(qtraytracer PRIVATE
         -fsanitize=address,undefined
     )
     target_link_options(rtf_core PRIVATE
