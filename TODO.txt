@@ -1,41 +1,120 @@
 TODO: Fix compiler warnings (strict flags enabled in CMakeLists.txt)
+====================================================================
 
-Categories and recommended fixes:
+Context
+-------
+Strict warning flags were added to CMakeLists.txt for GCC/Clang:
+  -Wall -Wextra -Wpedantic -Wshadow -Wnon-virtual-dtor -Woverloaded-virtual
 
-1. -Wwrite-strings (366 occurrences)
-   - Source: src/UserInterface/main.xpm and bg.xpm (XPM image data arrays).
-   - Fix: declare the XPM pixel/colour arrays as `const char*` instead of `char*`,
-     or suppress -Wwrite-strings for those two translation units only.
-   - Note: XPM files are generated; prefer regenerating with const-correct declarations.
+The project still builds, but emits ~430 warnings. This file tracks the
+recommended fixes. None of these require changing the rendering logic; most
+are mechanical. Fix in the order listed (highest impact / risk first).
 
-2. -Wnon-virtual-dtor / -Wdelete-non-virtual-dtor (10 + 4 occurrences)
-   - Source: src/BRDFs/BRDF.h (BRDF), src/BRDFs/Lambertian.h (Lambertian).
-   - Fix: add a virtual destructor to BRDF (and propagate to derived classes),
-     e.g. `virtual ~BRDF() = default;`. This also resolves the delete-non-virtual-dtor
-     warnings in src/Materials/Matte.cpp.
+How to reproduce
+----------------
+  cmake -S . -B build
+  cmake --build build 2>&1 | grep warning:
+  clang-tidy src/<file>.cpp -p build        # per-file deep analysis
+  cmake --build build --target check-format # formatting gate (if enabled)
 
-3. -Woverloaded-virtual (12 occurrences)
-   - Source: src/Tracers/Tracer.h (Tracer::trace_ray(Ray, int)).
-   - Fix: derived tracers (RayCast, MultipleObjects, SingleSphere) override a
-     different signature; add `using Tracer::trace_ray;` or rename/align signatures.
+Priority 1 - Undefined behaviour / correctness
+---------------------------------------------
 
-4. -Wshadow (13 occurrences)
-   - Source: src/Cameras/Camera.h (parameter `u` shadows member), src/Cameras/Pinhole.cpp
-     (parameter `w`), src/UserInterface/wxraytracer.cpp (local `red` shadows global).
-   - Fix: rename parameters/locals (e.g. `u_`, `w_`, `redValue`) or the members.
+1) -Wdelete-non-virtual-dtor (4 occurrences) + -Wnon-virtual-dtor (10)
+   Files: src/BRDFs/BRDF.h, src/BRDFs/Lambertian.h, src/Materials/Matte.cpp
+   Why it matters: Matte deletes BRDF* (and therefore Lambertian*) through a base
+   pointer. With a non-virtual destructor only the base sub-object is destroyed,
+   leaking / UB. This is a real bug, not just noise.
+   Fix:
+     // BRDF.h
+     class BRDF {
+     public:
+         virtual ~BRDF() = default;
+         ...
+     };
+   Lambertian inherits the virtual destructor automatically. After this, the
+   -Wdelete-non-virtual-dtor warnings in Matte.cpp disappear. Consider making
+   BRDF abstract (pure virtual destructor or a pure virtual method) if it should
+   never be instantiated directly.
 
-5. -Wreorder (6 occurrences)
-   - Source: src/Cameras/Camera.h / Camera.cpp (member init order: `up` before `u`).
-   - Fix: reorder member declarations/initializer list to match declaration order.
+2) -Wreorder (6 occurrences)
+   Files: src/Cameras/Camera.h, src/Cameras/Camera.cpp
+   Why it matters: members are initialized in declaration order regardless of the
+   order written in the constructor initializer list. If one member's constructor
+   depends on another (e.g. u derived from up), the current order can use
+   uninitialised data.
+   Fix: reorder either the member declarations in Camera.h or the initializer
+   list in Camera.cpp so they agree. Prefer declaration order = initialisation
+   order = dependency order (up, then u, then v, then w).
 
-6. -Wunused-parameter (35 occurrences)
-   - Sources: BRDF/Lambertian/Material/Ambient/Directional/Light/Matte tracer and UI callbacks.
-   - Fix: mark intentionally unused parameters with (void)param; or remove them from
-     the interface where the base class allows.
+Priority 2 - API correctness / hidden overrides
+----------------------------------------------
 
-7. clang-tidy (optional)
-   - Modernize deprecated headers (<math.h> -> <cmath>), redundant void args,
-     default copy/move/destructors, and trailing-return-type are reported.
-   - Address incrementally; keep .clang-tidy as the policy source.
+3) -Woverloaded-virtual (12 occurrences)
+   Files: src/Tracers/Tracer.h and derived tracers (RayCast, MultipleObjects,
+   SingleSphere).
+   Why it matters: a derived class declares trace_ray with a different signature
+   than the base, which *hides* rather than overrides the base version. Callers
+   using a Tracer* may silently dispatch to the wrong overload.
+   Fix options:
+     a) Make signatures match exactly (same parameter types and const-ness), or
+     b) Add `using Tracer::trace_ray;` in each derived class to unhide, or
+     c) Rename the derived method if it is intentionally different.
+   Inspect the book's intended interface before choosing; (a) is usually right.
 
-General: keep source changes minimal and run `cmake --build build` + `clang-tidy` after each fix.
+4) -Wshadow (13 occurrences)
+   Files: src/Cameras/Camera.h (param `u` shadows member `u`),
+          src/Cameras/Pinhole.cpp (param `w` shadows member `w`),
+          src/UserInterface/wxraytracer.cpp (local `red` shadows global).
+   Why it matters: shadowing makes it ambiguous which entity is used and is a
+   common source of "changed the wrong variable" bugs.
+   Fix: rename the parameter/local (preferred: `uAxis`, `viewPlaneDistance`,
+   `redComponent`) rather than the member, to keep the public API stable.
+
+Priority 3 - Hygiene / maintainability
+--------------------------------------
+
+5) -Wwrite-strings (366 occurrences)
+   Files: src/UserInterface/main.xpm, src/UserInterface/bg.xpm
+   Why it matters: XPM stores image data as `char*` arrays pointing at string
+   literals, which is deprecated/UB in modern C++. Harmless in practice for
+   these read-only resources.
+   Fix: regenerate the XPM files declaring the arrays as `const char*`, or
+   wrap the include in a translation unit compiled with -Wno-write-strings.
+   Do NOT edit the arrays by hand (they are generated).
+
+6) -Wunused-parameter (35 occurrences)
+   Files: BRDF.cpp, Lambertian.cpp, Material.cpp, Ambient/Directional/Light.cpp,
+          Matte.cpp, tracers, wxraytracer.cpp callbacks.
+   Why it matters: often indicates an incomplete implementation or a stale
+   interface. Some are genuinely unused by design (BRDF base stubs, wx event
+   handlers).
+   Fix: for intended-unused params use `(void)param;` (or `[[maybe_unused]]`
+   in C++17) at the top of the function. For stubs that should do work, implement
+   or remove the parameter from the base signature.
+
+Priority 4 - clang-tidy modernization (informational)
+----------------------------------------------------
+   Reported by .clang-tidy:
+     - modernize-deprecated-headers: <math.h> -> <cmath>
+     - modernize-redundant-void-arg: drop `(void)` from parameter lists
+     - modernize-use-equals-default: trivial ctors/dtors
+     - readability-identifier-length: very short param names (a, x, p, ...)
+     - readability-braces-around-statements
+   These are style improvements, not bugs. Tackle file-by-file; run
+   `clang-tidy src/<file>.cpp -p build --fix` to apply safe fixes, then review
+   the diff. Keep the book's naming where it aids readability.
+
+Verification checklist
+---------------------
+  [ ] cmake --build build succeeds with 0 warnings
+  [ ] clang-tidy passes on touched files
+  [ ] check-format passes (if the format target is enabled)
+  [ ] render still works: ./build/wxraytracer -> Render menu
+
+Notes
+-----
+- Fixing (1) and (3) changes class interfaces; rebuild all dependents.
+- Do not silence warnings globally with -w; prefer targeted fixes.
+- If a warning cannot be fixed without a large refactor, document it here
+  instead of disabling the flag.
