@@ -12,7 +12,7 @@ class Matte : public Material {
 
     Matte(const Matte& m);
 
-    [[nodiscard]] virtual Material* clone() const override;
+    [[nodiscard]] Material* clone() const override;
 
     Matte& operator=(const Matte& rhs);
 
@@ -28,7 +28,7 @@ class Matte : public Material {
 
     void set_cd(const float c);
 
-    [[nodiscard]] virtual RGBColor shade(ShadeRec& sr) override;
+    [[nodiscard]] RGBColor shade(ShadeRec& sr) override;
 
     private:
     Lambertian* ambient_brdf;

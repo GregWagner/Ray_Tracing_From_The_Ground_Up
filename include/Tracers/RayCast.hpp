@@ -9,12 +9,12 @@ class RayCast : public Tracer {
 
     explicit RayCast(World* _worldPtr);
 
-    virtual ~RayCast() override;
+    ~RayCast() override;
 
-    [[nodiscard]] virtual RGBColor trace_ray(const Ray& ray) const override;
+    [[nodiscard]] RGBColor trace_ray(const Ray& ray) const override;
 
-    [[nodiscard]] virtual RGBColor trace_ray(const Ray ray,
-                                             const int depth) const override;
+    [[nodiscard]] RGBColor trace_ray(const Ray ray,
+                                     const int depth) const override;
 };
 
 #endif

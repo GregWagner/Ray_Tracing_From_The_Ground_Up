@@ -11,14 +11,14 @@ class Plane : public GeometricObject {
 
     Plane(const Plane& plane);
 
-    [[nodiscard]] virtual Plane* clone() const override;
+    [[nodiscard]] Plane* clone() const override;
 
     Plane& operator=(const Plane& rhs);
 
-    virtual ~Plane() override;
+    ~Plane() override;
 
-    [[nodiscard]] virtual bool hit(const Ray& ray, double& tmin,
-                                   ShadeRec& sr) const override;
+    [[nodiscard]] bool hit(const Ray& ray, double& tmin,
+                           ShadeRec& sr) const override;
 
     private:
     Point3D a; // point through which plane passes

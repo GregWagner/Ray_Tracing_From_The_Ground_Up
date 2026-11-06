@@ -9,9 +9,9 @@ class SingleSphere : public Tracer {
 
     explicit SingleSphere(World* _worldPtr);
 
-    virtual ~SingleSphere() override;
+    ~SingleSphere() override;
 
-    [[nodiscard]] virtual RGBColor trace_ray(const Ray& ray) const override;
+    [[nodiscard]] RGBColor trace_ray(const Ray& ray) const override;
 
     using Tracer::trace_ray;
 };

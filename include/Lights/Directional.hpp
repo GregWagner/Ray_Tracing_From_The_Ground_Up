@@ -14,11 +14,11 @@ class Directional : public Light {
 
     Directional(const Directional& dl);
 
-    [[nodiscard]] virtual Light* clone() const override;
+    [[nodiscard]] Light* clone() const override;
 
     Directional& operator=(const Directional& rhs);
 
-    virtual ~Directional() override;
+    ~Directional() override;
 
     void scale_radiance(const float b);
 
@@ -32,9 +32,9 @@ class Directional : public Light {
 
     void set_direction(float dx, float dy, float dz);
 
-    [[nodiscard]] virtual Vector3D get_direction(ShadeRec& sr) override;
+    [[nodiscard]] Vector3D get_direction(ShadeRec& sr) override;
 
-    [[nodiscard]] virtual RGBColor L(ShadeRec& sr) override;
+    [[nodiscard]] RGBColor L(ShadeRec& sr) override;
 
     private:
     float ls;

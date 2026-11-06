@@ -9,9 +9,9 @@ class MultipleObjects : public Tracer {
 
     explicit MultipleObjects(World* _world_ptr);
 
-    virtual ~MultipleObjects() override;
+    ~MultipleObjects() override;
 
-    [[nodiscard]] virtual RGBColor trace_ray(const Ray& ray) const override;
+    [[nodiscard]] RGBColor trace_ray(const Ray& ray) const override;
 
     using Tracer::trace_ray;
 };

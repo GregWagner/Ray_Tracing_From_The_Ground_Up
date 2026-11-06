@@ -11,9 +11,9 @@ class Sphere : public GeometricObject {
 
     Sphere(const Sphere& sphere);
 
-    [[nodiscard]] virtual Sphere* clone() const override;
+    [[nodiscard]] Sphere* clone() const override;
 
-    virtual ~Sphere() override;
+    ~Sphere() override;
 
     Sphere& operator=(const Sphere& sphere);
 
@@ -23,8 +23,8 @@ class Sphere : public GeometricObject {
 
     void set_radius(const double r);
 
-    [[nodiscard]] virtual bool hit(const Ray& ray, double& t,
-                                   ShadeRec& s) const override;
+    [[nodiscard]] bool hit(const Ray& ray, double& t,
+                           ShadeRec& s) const override;
 
     private:
     Point3D center; // center coordinates as a point
