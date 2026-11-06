@@ -236,7 +236,7 @@ wxImage RenderCanvas::GetImage() {
 	if (m_image != nullptr)
 		return m_image->ConvertToImage();
 
-	return wxImage();
+	return {};
 }
 
 void RenderCanvas::OnDraw(wxDC& dc) {
