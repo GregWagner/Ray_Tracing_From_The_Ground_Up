@@ -33,6 +33,11 @@ Then start rendering from the Render menu.
 
 ## Development
 
+On a Wayland session, AddressSanitizer may report a small leak from Qt/libwayland-client.
+Use `LSAN_OPTIONS=suppressions=.lsan-suppressions` when running the app, or run the
+sanitizer build with `QT_QPA_PLATFORM=offscreen`.
+
+
 - Format code: `cmake --build build --target format`
 - Check formatting: `cmake --build build --target check-format`
 - Enable clang-tidy during build: `-DENABLE_CLANG_TIDY=ON` (or the `tidy` preset)

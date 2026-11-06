@@ -1,0 +1,3 @@
+# Qt 6 Wayland platform plugin leaks observed during normal application shutdown.
+leak:wl_proxy_marshal_array_flags
+leak:libwayland-client.so
