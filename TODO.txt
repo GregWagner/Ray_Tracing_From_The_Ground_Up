@@ -3,29 +3,28 @@ TODO: Fix compiler warnings (strict flags enabled in CMakeLists.txt)
 
 Status
 ------
-All compiler warnings are now fixed. A clean build produces 0 warnings.
+All compiler warnings are fixed (clean build: 0 warnings).
 
-Completed:
-  [x] -Wnon-virtual-dtor / -Wdelete-non-virtual-dtor (BRDF virtual destructor)
-  [x] -Wreorder (Camera initializer order)
-  [x] -Wwrite-strings (XPM arrays made const char*)
-  [x] -Wunused-parameter ([[maybe_unused]] on unused params)
-  [x] -Wshadow (renamed shadowing params/locals)
-  [x] -Woverloaded-virtual (using-declarations in derived tracers)
+clang-tidy: 0 errors. Remaining warnings (not auto-fixed safely):
+  40 modernize-use-equals-default
+  17 bugprone-narrowing-conversions
+   5 modernize-return-braced-init-list
+   3 performance-type-promotion-in-math-fn
+   2 performance-unnecessary-value-param
+   2 modernize-loop-convert
+   1 modernize-min-max-use-initializer-list
+   1 modernize-avoid-c-style-cast
+   1 bugprone-throwing-static-initialization
+   1 bugprone-implicit-widening-of-multiplication-result
 
-Remaining (informational only)
------------------------------
-clang-tidy modernization items (see .clang-tidy):
-  - modernize-deprecated-headers: <math.h> -> <cmath>
-  - modernize-redundant-void-arg
-  - modernize-use-equals-default
-  - readability-identifier-length
-  - readability-braces-around-statements
-These are style improvements, not bugs. Tackle file-by-file with
-`clang-tidy src/<file>.cpp -p build --fix`.
+Safely applied so far:
+  [x] modernize-use-nullptr
+  [x] modernize-redundant-void-arg
+  [x] modernize-avoid-c-style-cast (mostly)
+  [x] modernize-use-auto
 
 Verification
 ------------
   cmake -S . -B build && cmake --build build   # 0 warnings
   cmake --build build --target check-format     # passes
-  clang-tidy src/<file>.cpp -p build            # optional
+  clang-tidy src/<file>.cpp -p build            # 0 errors
