@@ -37,7 +37,10 @@ Improvement ideas (no source changes required)
   [x] Enable sanitizers (-fsanitize=address,undefined) in a dedicated preset
   [ ] Pre-commit hook running clang-format on staged files
   [ ] Add code coverage reporting (gcov/lcov) for tests
-  [ ] Run additional static analysis (cppcheck, include-what-you-use)
+  [~] Run additional static analysis (cppcheck done; include-what-you-use not installed)
+      cppcheck findings: missingOverride (31), noExplicitConstructor (14), unusedFunction (32),
+      passedByValue (5), uninitMemberVar (3), shadowFunction (2), functionStatic (2),
+      variableScope (1), unknownMacro (1)
   [ ] Document build/run/development workflow in README.md
   [ ] Add CONTRIBUTING.md and PR/issue templates
   [ ] Pin wxWidgets/compiler versions and document minimum requirements
