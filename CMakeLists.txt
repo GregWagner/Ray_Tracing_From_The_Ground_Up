@@ -6,6 +6,20 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
+# Export compile commands for clang-tidy / tooling
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
+# Optional clang-tidy integration
+option(ENABLE_CLANG_TIDY "Run clang-tidy during the build" OFF)
+if(ENABLE_CLANG_TIDY)
+    find_program(CLANG_TIDY_EXE NAMES clang-tidy)
+    if(CLANG_TIDY_EXE)
+        set(CMAKE_CXX_CLANG_TIDY "${CLANG_TIDY_EXE}")
+    else()
+        message(WARNING "clang-tidy not found; ENABLE_CLANG_TIDY ignored")
+    endif()
+endif()
+
 find_package(wxWidgets CONFIG REQUIRED COMPONENTS xrc html qa xml net core base)
 
 add_executable(wxraytracer
@@ -52,3 +66,33 @@ target_include_directories(wxraytracer PRIVATE
 )
 
 target_link_libraries(wxraytracer PRIVATE ${wxWidgets_LIBRARIES})
+
+# Strict compiler warnings (no source changes required)
+if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
+    target_compile_options(wxraytracer PRIVATE
+        -Wall
+        -Wextra
+        -Wpedantic
+        -Wshadow
+        -Wnon-virtual-dtor
+        -Woverloaded-virtual
+    )
+endif()
+
+# clang-format helper targets
+find_program(CLANG_FORMAT_EXE NAMES clang-format)
+if(CLANG_FORMAT_EXE)
+    file(GLOB_RECURSE FORMAT_SOURCES
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/*.h
+    )
+    list(FILTER FORMAT_SOURCES EXCLUDE REGEX "\\.xpm$")
+    add_custom_target(format
+        COMMAND ${CLANG_FORMAT_EXE} -i ${FORMAT_SOURCES}
+        COMMENT "Running clang-format on source files"
+    )
+    add_custom_target(check-format
+        COMMAND ${CLANG_FORMAT_EXE} --dry-run --Werror ${FORMAT_SOURCES}
+        COMMENT "Checking clang-format compliance"
+    )
+endif()
