@@ -8,8 +8,9 @@ Ambient::Ambient(const Ambient &a) : Light(a), ls(a.ls), color(a.color) {}
 Light *Ambient::clone() const { return (new Ambient(*this)); }
 
 Ambient &Ambient::operator=(const Ambient &rhs) {
-  if (this == &rhs)
+  if (this == &rhs) {
     return (*this);
+}
 
   Light::operator=(rhs);
 

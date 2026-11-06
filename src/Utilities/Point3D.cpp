@@ -13,8 +13,9 @@ Point3D::Point3D(const Point3D &p) : x(p.x), y(p.y), z(p.z) {}
 Point3D::~Point3D() {}
 
 Point3D &Point3D::operator=(const Point3D &rhs) {
-  if (this == &rhs)
+  if (this == &rhs) {
     return (*this);
+}
 
   x = rhs.x;
   y = rhs.y;

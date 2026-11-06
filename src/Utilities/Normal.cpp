@@ -17,8 +17,9 @@ Normal::Normal(const Vector3D &v) : x(v.x), y(v.y), z(v.z) {}
 Normal::~Normal() {}
 
 Normal &Normal::operator=(const Normal &rhs) {
-  if (this == &rhs)
+  if (this == &rhs) {
     return (*this);
+}
 
   x = rhs.x;
   y = rhs.y;

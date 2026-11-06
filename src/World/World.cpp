@@ -100,23 +100,25 @@ void World::render_scene() const {
 
   ray.d = Vector3D(0, 0, -1);
 
-  for (int r = 0; r < vres; r++)      // up
-    for (int c = 0; c <= hres; c++) { // across
-      ray.o =
-          Point3D(s * (c - hres / 2.0 + 0.5), s * (r - vres / 2.0 + 0.5), zw);
-      pixel_color = tracer_ptr->trace_ray(ray);
-      display_pixel(r, c, pixel_color);
-    }
+  for (int r = 0; r < vres; r++) {		// up
+	  for (int c = 0; c <= hres; c++) { // across
+		  ray.o =
+			  Point3D(s * (c - hres / 2.0 + 0.5), s * (r - vres / 2.0 + 0.5), zw);
+		  pixel_color = tracer_ptr->trace_ray(ray);
+		  display_pixel(r, c, pixel_color);
+	  }
+  }
 }
 
 // clamp
 RGBColor World::max_to_one(const RGBColor &c) const {
   float max_value = max(c.r, max(c.g, c.b));
 
-  if (max_value > 1.0)
-    return (c / max_value);
-  else
-    return (c);
+  if (max_value > 1.0) {
+	  return (c / max_value);
+  } else {
+	  return (c);
+  }
 }
 
 // Set color to red if any component is greater than one
@@ -140,15 +142,16 @@ ShadeRec World::hit_objects(const Ray &ray) {
   float tmin = kHugeValue;
   int num_objects = objects.size();
 
-  for (int j = 0; j < num_objects; j++)
-    if (objects[j]->hit(ray, t, sr) && (t < tmin)) {
-      sr.hit_an_object = true;
-      tmin = t;
-      sr.material_ptr = objects[j]->get_material();
-      sr.hit_point = ray.o + t * ray.d;
-      normal = sr.normal;
-      local_hit_point = sr.local_hit_point;
-    }
+  for (int j = 0; j < num_objects; j++) {
+	  if (objects[j]->hit(ray, t, sr) && (t < tmin)) {
+		  sr.hit_an_object = true;
+		  tmin = t;
+		  sr.material_ptr = objects[j]->get_material();
+		  sr.hit_point = ray.o + t * ray.d;
+		  normal = sr.normal;
+		  local_hit_point = sr.local_hit_point;
+	  }
+  }
 
   if (sr.hit_an_object) {
     sr.t = tmin;

@@ -9,8 +9,9 @@ Camera::Camera(const Camera &c)
       exposure_time(c.exposure_time) {}
 
 Camera &Camera::operator=(const Camera &rhs) {
-  if (this == &rhs)
+  if (this == &rhs) {
     return (*this);
+}
 
   eye = rhs.eye;
   lookat = rhs.lookat;

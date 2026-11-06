@@ -5,8 +5,9 @@ Material::Material() {}
 Material::Material(const Material &m [[maybe_unused]]) {}
 
 Material &Material::operator=(const Material &rhs) {
-  if (this == &rhs)
+  if (this == &rhs) {
     return (*this);
+}
 
   return (*this);
 }

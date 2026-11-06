@@ -11,8 +11,9 @@ Lambertian *Lambertian::clone() const { return (new Lambertian(*this)); }
 Lambertian::~Lambertian() {}
 
 Lambertian &Lambertian::operator=(const Lambertian &rhs) {
-  if (this == &rhs)
+  if (this == &rhs) {
     return (*this);
+}
 
   BRDF::operator=(rhs);
 

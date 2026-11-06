@@ -4,22 +4,25 @@ Matte::Matte()
     : Material(), ambient_brdf(new Lambertian), diffuse_brdf(new Lambertian) {}
 
 Matte::Matte(const Matte &m) : Material(m) {
-  if (m.ambient_brdf)
+  if (m.ambient_brdf) {
     ambient_brdf = m.ambient_brdf->clone();
-  else
+  } else {
     ambient_brdf = nullptr;
+}
 
-  if (m.diffuse_brdf)
+  if (m.diffuse_brdf) {
     diffuse_brdf = m.diffuse_brdf->clone();
-  else
+  } else {
     diffuse_brdf = nullptr;
+}
 }
 
 Material *Matte::clone() const { return (new Matte(*this)); }
 
 Matte &Matte::operator=(const Matte &rhs) {
-  if (this == &rhs)
+  if (this == &rhs) {
     return (*this);
+}
 
   Material::operator=(rhs);
 
@@ -28,16 +31,18 @@ Matte &Matte::operator=(const Matte &rhs) {
     ambient_brdf = nullptr;
   }
 
-  if (rhs.ambient_brdf)
+  if (rhs.ambient_brdf) {
     ambient_brdf = rhs.ambient_brdf->clone();
+}
 
   if (diffuse_brdf) {
     delete diffuse_brdf;
     diffuse_brdf = nullptr;
   }
 
-  if (rhs.diffuse_brdf)
+  if (rhs.diffuse_brdf) {
     diffuse_brdf = rhs.diffuse_brdf->clone();
+}
 
   return (*this);
 }
@@ -63,8 +68,9 @@ RGBColor Matte::shade(ShadeRec &sr) {
     Vector3D wi = sr.w.lights[j]->get_direction(sr);
     float ndotwi = sr.normal * wi;
 
-    if (ndotwi > 0.0)
+    if (ndotwi > 0.0) {
       L += diffuse_brdf->f(sr, wo, wi) * sr.w.lights[j]->L(sr) * ndotwi;
+}
   }
 
   return (L);

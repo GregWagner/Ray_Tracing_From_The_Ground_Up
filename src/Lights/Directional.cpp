@@ -8,8 +8,9 @@ Directional::Directional(const Directional &dl)
 Light *Directional::clone() const { return (new Directional(*this)); }
 
 Directional &Directional::operator=(const Directional &rhs) {
-  if (this == &rhs)
+  if (this == &rhs) {
     return (*this);
+}
 
   Light::operator=(rhs);
 

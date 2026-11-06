@@ -15,8 +15,9 @@ RGBColor::RGBColor(const RGBColor &c) : r(c.r), g(c.g), b(c.b) {}
 RGBColor::~RGBColor() {}
 
 RGBColor &RGBColor::operator=(const RGBColor &rhs) {
-  if (this == &rhs)
+  if (this == &rhs) {
     return (*this);
+}
 
   r = rhs.r;
   g = rhs.g;

@@ -14,8 +14,9 @@ Sphere::Sphere(const Sphere &sphere)
     : GeometricObject(sphere), center(sphere.center), radius(sphere.radius) {}
 
 Sphere &Sphere::operator=(const Sphere &rhs) {
-  if (this == &rhs)
+  if (this == &rhs) {
     return (*this);
+}
 
   GeometricObject::operator=(rhs);
 
