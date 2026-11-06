@@ -38,3 +38,6 @@
 build/
 CMakeFiles/
 CMakeCache.txt
+
+# clangd / tooling caches
+.cache/
