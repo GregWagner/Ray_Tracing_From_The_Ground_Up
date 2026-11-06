@@ -74,13 +74,13 @@ void World::build() {
     pinhole->set_zoom(1.0);
     camera_ptr = pinhole;
 
-    auto* sphere = new Sphere(Point3D(0, 0, 0), 80);
+    auto* renderSphere = new Sphere(Point3D(0, 0, 0), 80);
     auto* matte = new Matte();
     matte->set_ka(0.25f);
     matte->set_kd(0.6f);
     matte->set_cd(1.0f);
-    sphere->set_material(matte);
-    add_object(sphere);
+    renderSphere->set_material(matte);
+    add_object(renderSphere);
 
     auto* directional = new Directional();
     directional->scale_radiance(3.0f);

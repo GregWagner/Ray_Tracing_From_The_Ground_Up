@@ -1,7 +1,6 @@
 #include "qtraytracer.hpp"
 
 #include "World.hpp"
-#include "bg.xpm"
 
 #include <QApplication>
 #include <QCloseEvent>
@@ -243,7 +242,7 @@ RenderThread::RenderThread(RenderCanvas* canvasIn, World* worldIn,
 
 RenderThread::~RenderThread() {}
 
-void RenderThread::setPixel(int x, int y, int red, int green, int blue) {
+void RenderThread::setPixel(int x, int y, int redValue, int green, int blue) {
     {
         QMutexLocker locker(&mutex);
         while (paused && !isInterruptionRequested()) {
@@ -255,7 +254,7 @@ void RenderThread::setPixel(int x, int y, int red, int green, int blue) {
         }
     }
 
-    pixels.append(new RenderPixel(x, y, red, green, blue));
+    pixels.append(new RenderPixel(x, y, redValue, green, blue));
 
     if (timer.elapsed() - lastUpdateTime > 40) {
         notifyCanvas();

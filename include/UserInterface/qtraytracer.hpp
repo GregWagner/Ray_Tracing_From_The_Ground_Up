@@ -46,7 +46,7 @@ enum { Menu_File_Quit = 100,
 
 class RenderPixel {
     public:
-    RenderPixel(int x, int y, int red, int green, int blue);
+    RenderPixel(int x, int y, int redValue, int green, int blue);
 
     int x, y;
     int red, green, blue;
@@ -90,7 +90,7 @@ class RenderThread : public QThread {
     explicit RenderThread(RenderCanvas* canvas, World* world, QObject* parent = nullptr);
     ~RenderThread() override;
 
-    void setPixel(int x, int y, int red, int green, int blue);
+    void setPixel(int x, int y, int redValue, int green, int blue);
     void pause();
     void resume();
 
