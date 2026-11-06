@@ -4,8 +4,8 @@
 // This file contains the declaration of the base class Camera
 // There is no view plane distance because the fisheye and panoramic cameras don't use it
 
-#include "Point3D.h"
-#include "Vector3D.h"
+#include "Point3D.hpp"
+#include "Vector3D.hpp"
 
 class World;  // can't #include "World" here because World contains a camera pointer
 

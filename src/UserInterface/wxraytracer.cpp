@@ -1,6 +1,6 @@
 #include <wx/wx.h>
 #include <wx/dcbuffer.h>
-#include "wxraytracer.h"
+#include "wxraytracer.hpp"
 #include "main.xpm"
 #include "bg.xpm"
 

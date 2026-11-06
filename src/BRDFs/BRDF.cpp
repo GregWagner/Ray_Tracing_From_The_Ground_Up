@@ -1,8 +1,8 @@
 // This file contians the definition of the class BRDF
 
 
-#include "Constants.h"
-#include "BRDF.h"
+#include "Constants.hpp"
+#include "BRDF.hpp"
 
 // ---------------------------------------------------------- default constructor
 

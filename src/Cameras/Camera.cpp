@@ -1,6 +1,6 @@
 // This file contains the definition of the Camera class
 
-#include "Camera.h"
+#include "Camera.hpp"
 
 
 // ----------------------------------------------------------------- default constructor

@@ -3,9 +3,9 @@
 
 // This file contains the declaration of the base class BRDF
 
-#include "RGBColor.h"
-#include "ShadeRec.h"
-#include "Vector3D.h"
+#include "RGBColor.hpp"
+#include "ShadeRec.hpp"
+#include "Vector3D.hpp"
 
 class BRDF {
 public:

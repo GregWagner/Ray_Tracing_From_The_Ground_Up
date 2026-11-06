@@ -1,7 +1,7 @@
 #ifndef __PLANE__
 #define __PLANE__
 
-#include "GeometricObject.h"
+#include "GeometricObject.hpp"
 
 //-------------------------------------------------------------------- class Plane
 

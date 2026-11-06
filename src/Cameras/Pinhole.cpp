@@ -1,9 +1,9 @@
 // This file contains the definition of the Pinhole class
 
-#include "Pinhole.h"
-#include "Constants.h"
-#include "Point3D.h"
-#include "Vector3D.h"
+#include "Pinhole.hpp"
+#include "Constants.hpp"
+#include "Point3D.hpp"
+#include "Vector3D.hpp"
 #include <cmath>
 
 // -----------------------------------------------------------------------------

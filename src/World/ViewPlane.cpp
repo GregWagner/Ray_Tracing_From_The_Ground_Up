@@ -1,6 +1,6 @@
 // This file contains the definition the ViewPlane class
 
-#include "ViewPlane.h"
+#include "ViewPlane.hpp"
 	
 // ---------------------------------------------------------------- default constructor	
 						

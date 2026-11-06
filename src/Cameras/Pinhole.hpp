@@ -3,8 +3,8 @@
 
 // This file contains the declaration of the class Pinhole
 
-#include "Point2D.h"
-#include "World.h"    // we can #include "World.h" here
+#include "Point2D.hpp"
+#include "World.hpp"    // we can #include "World.hpp" here
 
 //--------------------------------------------------------------------- class Pinhole
 

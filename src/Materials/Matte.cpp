@@ -1,4 +1,4 @@
-#include "Matte.h"
+#include "Matte.hpp"
 
 // ---------------------------------------------------------------- default constructor
 

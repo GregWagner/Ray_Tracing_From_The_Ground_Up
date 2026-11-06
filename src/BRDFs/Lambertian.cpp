@@ -1,5 +1,5 @@
-#include "Lambertian.h"
-#include "Constants.h"
+#include "Lambertian.hpp"
+#include "Constants.hpp"
 
 // ---------------------------------------------------------------------- default constructor
 

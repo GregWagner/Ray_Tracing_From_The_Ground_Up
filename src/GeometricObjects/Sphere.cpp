@@ -1,6 +1,6 @@
 // This file contains the definition of the class sphere
 
-#include "Sphere.h"
+#include "Sphere.hpp"
 #include <cmath>
 
 const double Sphere::kEpsilon = 0.001;

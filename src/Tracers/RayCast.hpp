@@ -1,7 +1,7 @@
 #ifndef __RAY_CAST__
 #define __RAY_CAST__
 
-#include "Tracer.h"
+#include "Tracer.hpp"
 
 class RayCast: public Tracer {
 	public:

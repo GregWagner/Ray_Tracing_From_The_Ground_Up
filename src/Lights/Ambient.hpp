@@ -1,7 +1,7 @@
 #ifndef __AMBIENT__
 #define __AMBIENT__
 
-#include "Light.h"
+#include "Light.hpp"
 
 class Ambient: public Light {
 	public:

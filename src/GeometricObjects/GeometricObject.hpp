@@ -3,9 +3,9 @@
 
 class Material;
 	
-#include "Point3D.h"
-#include "Ray.h"
-#include "ShadeRec.h"
+#include "Point3D.hpp"
+#include "Ray.hpp"
+#include "ShadeRec.hpp"
 
 
 //----------------------------------------------------------------------------------------------------- Class GeometricObject

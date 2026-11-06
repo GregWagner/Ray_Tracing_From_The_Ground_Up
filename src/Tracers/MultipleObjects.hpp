@@ -1,7 +1,7 @@
 #ifndef __MULTIPLE_OBJECTS__
 #define __MULTIPLE_OBJECTS__
 
-#include "Tracer.h"
+#include "Tracer.hpp"
 
 class MultipleObjects: public Tracer {
 	public:

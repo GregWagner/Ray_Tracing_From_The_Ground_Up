@@ -1,8 +1,8 @@
 // this file contains the definition of the class GeometricObject 
 
-#include "Constants.h"
-#include "Material.h"
-#include "GeometricObject.h"
+#include "Constants.hpp"
+#include "Material.hpp"
+#include "GeometricObject.hpp"
 
 
 // ---------------------------------------------------------------------- default constructor

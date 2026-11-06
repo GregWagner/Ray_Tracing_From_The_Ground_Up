@@ -3,7 +3,7 @@
 
 // This file contains the declaration of the class Sphere
 
-#include "GeometricObject.h"
+#include "GeometricObject.hpp"
 
 //-------------------------------------------------------------------------------- class Sphere
 

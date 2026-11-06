@@ -26,9 +26,9 @@ The legacy Makefile and prebuilt `bin/wxraytracer` have been removed; CMake is t
 - `World::paintArea` (a `RenderThread*`) bridges `World::display_pixel` to the GUI.
 
 ## Conventions
-- Headers use `#ifndef __NAME__` guards and are included by bare module name (e.g. `"World.h"`); include dirs are per-module.
+- Headers use `#ifndef __NAME__` guards and are included by bare module name (e.g. `"World.hpp"`); include dirs are per-module.
 - `World` owns objects/lights through raw pointers and frees them in its destructor; materials are owned by objects.
-- Floats for view-plane geometry, doubles for math constants (`Constants.h`).
+- Floats for view-plane geometry, doubles for math constants (`Constants.hpp`).
 
 ## Gotchas
 - `BuildShadedObjects.cpp` is meant to be `#include`d into `World.cpp` when enabled, not compiled on its own.

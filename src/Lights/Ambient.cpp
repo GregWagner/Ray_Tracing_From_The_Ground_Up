@@ -1,5 +1,5 @@
 
-#include "Ambient.h"
+#include "Ambient.hpp"
 
 // ---------------------------------------------------------------------- default constructor
 

@@ -1,6 +1,6 @@
 // this file contains the definition of the class Point3D
 
-#include "Point3D.h"
+#include "Point3D.hpp"
 #include <cmath>
 
 // --------------------------------------------- default constructor

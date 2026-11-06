@@ -1,9 +1,9 @@
 #ifndef __LIGHT__
 #define __LIGHT__
 
-#include "Vector3D.h"
-#include "RGBColor.h"
-#include "Ray.h"
+#include "Vector3D.hpp"
+#include "RGBColor.hpp"
+#include "Ray.hpp"
 
 class ShadeRec;
 

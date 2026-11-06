@@ -1,7 +1,7 @@
 #ifndef __LAMBERTIAN__
 #define __LAMBERTIAN__
 
-#include "BRDF.h"
+#include "BRDF.hpp"
 
 class Lambertian: public BRDF {
 	public:

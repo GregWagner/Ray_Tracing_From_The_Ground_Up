@@ -1,4 +1,4 @@
-#include "Directional.h"
+#include "Directional.hpp"
 
 // ---------------------------------------------------------------------- default constructor
 

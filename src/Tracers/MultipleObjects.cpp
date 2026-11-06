@@ -1,5 +1,5 @@
-#include "MultipleObjects.h"
-#include "World.h"
+#include "MultipleObjects.hpp"
+#include "World.hpp"
 
 // -------------------------------------------------------------------- default constructor
 

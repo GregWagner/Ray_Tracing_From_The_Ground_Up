@@ -1,7 +1,7 @@
-#include "RayCast.h"
-#include "World.h"
-#include "ShadeRec.h"
-#include "Material.h"
+#include "RayCast.hpp"
+#include "World.hpp"
+#include "ShadeRec.hpp"
+#include "Material.hpp"
 
 // -------------------------------------------------------------------- default constructor
 

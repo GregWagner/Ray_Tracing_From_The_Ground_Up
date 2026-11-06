@@ -1,5 +1,5 @@
 
-#include "Point2D.h"
+#include "Point2D.hpp"
 
 Point2D::Point2D(void)
 	: x(0.0), y(0.0)

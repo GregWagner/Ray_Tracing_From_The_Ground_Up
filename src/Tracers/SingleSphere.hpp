@@ -1,7 +1,7 @@
 #ifndef __SINGLE_SPHERE__
 #define __SINGLE_SPHERE__
 
-#include "Tracer.h"
+#include "Tracer.hpp"
 
 class SingleSphere: public Tracer {
 	public:

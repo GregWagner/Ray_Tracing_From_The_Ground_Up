@@ -1,9 +1,9 @@
 #ifndef __MATERIAL__
 #define __MATERIAL__
 
-#include "World.h"			// required for the shade function in all derived classes
-#include "RGBColor.h"
-#include "ShadeRec.h"
+#include "World.hpp"			// required for the shade function in all derived classes
+#include "RGBColor.hpp"
+#include "ShadeRec.hpp"
 
 class Material {	
 	public:

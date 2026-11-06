@@ -1,40 +1,40 @@
 // this file contains the definition of the World class
 
-#include "wxraytracer.h"
+#include "wxraytracer.hpp"
 
-#include "World.h"
-#include "Constants.h"
+#include "World.hpp"
+#include "Constants.hpp"
 
 // geometric objects
 
-#include "Plane.h"
-#include "Sphere.h"
+#include "Plane.hpp"
+#include "Sphere.hpp"
 
 // tracers
 
-#include "SingleSphere.h"
-#include "MultipleObjects.h"
-#include "RayCast.h"
+#include "SingleSphere.hpp"
+#include "MultipleObjects.hpp"
+#include "RayCast.hpp"
 
 // cameras
 
-#include "Pinhole.h"
+#include "Pinhole.hpp"
 
 // lights
 
-#include "Directional.h"
+#include "Directional.hpp"
 
 // materials
 
-#include "Matte.h"
+#include "Matte.hpp"
 
 // utilities
 
-#include "Vector3D.h"
-#include "Point3D.h"
-#include "Normal.h"
-#include "ShadeRec.h"
-#include "Maths.h"
+#include "Vector3D.hpp"
+#include "Point3D.hpp"
+#include "Normal.hpp"
+#include "ShadeRec.hpp"
+#include "Maths.hpp"
 
 // build functions
 

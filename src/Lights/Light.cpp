@@ -1,6 +1,6 @@
-#include "Light.h"
+#include "Light.hpp"
 
-#include "Constants.h"
+#include "Constants.hpp"
 
 // ---------------------------------------------------------------------- default constructor
 

@@ -1,6 +1,6 @@
-#include "SingleSphere.h"
-#include "World.h"
-#include "ShadeRec.h"
+#include "SingleSphere.hpp"
+#include "World.hpp"
+#include "ShadeRec.hpp"
 
 // -------------------------------------------------------------------- default constructor
 
