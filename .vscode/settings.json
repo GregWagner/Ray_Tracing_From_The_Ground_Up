@@ -1,0 +1,13 @@
+{
+    "C_Cpp.default.compileCommands": "${workspaceFolder}/build/compile_commands.json",
+    "C_Cpp.default.includePath": [
+        "${workspaceFolder}/include",
+        "${workspaceFolder}/include/**",
+        "${workspaceFolder}/src"
+    ],
+    "files.associations": {
+        "*.hpp": "cpp",
+        "*.cpp": "cpp",
+        "*.h": "cpp"
+    }
+}
