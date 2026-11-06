@@ -11,6 +11,9 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # Optional clang-tidy integration
 option(ENABLE_CLANG_TIDY "Run clang-tidy during the build" OFF)
+
+# Optional sanitizer integration
+option(ENABLE_SANITIZERS "Enable AddressSanitizer and UndefinedBehaviorSanitizer" OFF)
 if(ENABLE_CLANG_TIDY)
     find_program(CLANG_TIDY_EXE NAMES clang-tidy)
     if(CLANG_TIDY_EXE)
@@ -77,6 +80,18 @@ if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
         -Wshadow
         -Wnon-virtual-dtor
         -Woverloaded-virtual
+    )
+endif()
+
+# Sanitizers
+if(ENABLE_SANITIZERS AND CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
+    target_compile_options(wxraytracer PRIVATE
+        -fsanitize=address,undefined
+        -fno-omit-frame-pointer
+        -g
+    )
+    target_link_options(wxraytracer PRIVATE
+        -fsanitize=address,undefined
     )
 endif()
 
