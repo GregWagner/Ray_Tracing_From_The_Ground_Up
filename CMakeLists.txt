@@ -3,6 +3,12 @@ cmake_minimum_required(VERSION 3.16)
 project(rtf VERSION 1.0 LANGUAGES CXX DESCRIPTION "Ray Tracing from the Ground Up example project")
 
 set(CMAKE_CXX_STANDARD 17)
+
+if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU" AND CMAKE_CXX_COMPILER_VERSION VERSION_LESS "9.0")
+    message(FATAL_ERROR "GCC 9.0 or newer is required")
+elseif(CMAKE_CXX_COMPILER_ID STREQUAL "Clang" AND CMAKE_CXX_COMPILER_VERSION VERSION_LESS "9.0")
+    message(FATAL_ERROR "Clang 9.0 or newer is required")
+endif()
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
@@ -23,7 +29,7 @@ if(ENABLE_CLANG_TIDY)
     endif()
 endif()
 
-find_package(wxWidgets CONFIG REQUIRED COMPONENTS xrc html qa xml net core base)
+find_package(wxWidgets 3.2 CONFIG REQUIRED COMPONENTS xrc html qa xml net core base)
 
 add_executable(wxraytracer
     src/BRDFs/BRDF.cpp

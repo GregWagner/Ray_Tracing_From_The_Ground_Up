@@ -5,7 +5,7 @@ wxWidgets 3.2 (GTK3) GUI.
 
 ## Build
 
-Requires CMake 3.16+, a C++17 compiler, and wxWidgets 3.2.
+Requires CMake 3.16+, a C++17 compiler (GCC 9+ or Clang 9+), and wxWidgets 3.2+.
 
 ```sh
 cmake -S . -B build
