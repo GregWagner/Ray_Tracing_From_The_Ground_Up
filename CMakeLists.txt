@@ -74,7 +74,7 @@ set(CMAKE_AUTOUIC ON)
 
 add_executable(qtraytracer
     src/UserInterface/qtraytracer.cpp
-    include/UserInterface/qtraytracer.hpp
+    src/UserInterface/qtraytracer.hpp
 )
 
 target_link_libraries(qtraytracer PRIVATE rtf_core Qt6::Widgets)
@@ -85,16 +85,15 @@ endif()
 
 target_include_directories(rtf_core PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/src
-    ${CMAKE_CURRENT_SOURCE_DIR}/include
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/BRDFs
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/Cameras
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/GeometricObjects
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/Lights
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/Materials
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/Tracers
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/UserInterface
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/Utilities
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/World
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/BRDFs
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/Cameras
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/GeometricObjects
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/Lights
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/Materials
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/Tracers
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/UserInterface
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/Utilities
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/World
 )
 
 
@@ -149,7 +148,7 @@ find_program(CLANG_FORMAT_EXE NAMES clang-format)
 if(CLANG_FORMAT_EXE)
     file(GLOB_RECURSE FORMAT_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/include/*.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/*.hpp
     )
     list(FILTER FORMAT_SOURCES EXCLUDE REGEX "\\.xpm$")
     add_custom_target(format
