@@ -96,7 +96,6 @@ Priority 3 - Hygiene / maintainability
 Priority 4 - clang-tidy modernization (informational)
 ----------------------------------------------------
    Reported by .clang-tidy:
-     - modernize-deprecated-headers: <math.h> -> <cmath>
      - modernize-redundant-void-arg: drop `(void)` from parameter lists
      - modernize-use-equals-default: trivial ctors/dtors
      - readability-identifier-length: very short param names (a, x, p, ...)
