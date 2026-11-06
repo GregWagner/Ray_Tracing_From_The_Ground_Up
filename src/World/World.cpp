@@ -1,7 +1,5 @@
 // this file contains the definition of the World class
 
-#include "wxraytracer.hpp"
-
 #include "World.hpp"
 #include "Constants.hpp"
 
@@ -133,37 +131,6 @@ World::clamp_to_color(const RGBColor& raw_color) const {
 	return (c);
 }
 
-
-// ---------------------------------------------------------------------------display_pixel
-// raw_color is the pixel color computed by the ray tracer
-// its RGB floating point components can be arbitrarily large
-// mapped_color has all components in the range [0, 1], but still floating point
-// display color has integer components for computer display
-// the Mac's components are in the range [0, 65535]
-// a PC's components will probably be in the range [0, 255]
-// the system-dependent code is in the function convert_to_display_color
-// the function SetCPixel is a Mac OS function
-
-
-void World::display_pixel(const int row, const int column, const RGBColor& raw_color) const {
-	RGBColor mapped_color;
-
-	if (vp.show_out_of_gamut)
-		mapped_color = clamp_to_color(raw_color);
-	else
-		mapped_color = max_to_one(raw_color);
-
-	if (vp.gamma != 1.0)
-		mapped_color = mapped_color.powc(vp.inv_gamma);
-
-	// have to start from max y coordinate to convert to screen coordinates
-	int x = column;
-	int y = vp.vres - row - 1;
-
-	paintArea->setPixel(x, y, static_cast<int>(mapped_color.r * 255),
-						static_cast<int>(mapped_color.g * 255),
-						static_cast<int>(mapped_color.b * 255));
-}
 
 // ----------------------------------------------------------------------------- hit_objects
 

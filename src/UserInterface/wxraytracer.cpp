@@ -1,6 +1,7 @@
 #include <wx/wx.h>
 #include <wx/dcbuffer.h>
 #include "wxraytracer.hpp"
+#include "World.hpp"
 #include "main.xpm"
 #include "bg.xpm"
 
@@ -447,4 +448,23 @@ void* RenderThread::Entry() {
 	world->camera_ptr->render_scene(*world);
 
 	return nullptr;
+}
+
+void World::display_pixel(const int row, const int column, const RGBColor& raw_color) const {
+	RGBColor mapped_color;
+
+	if (vp.show_out_of_gamut)
+		mapped_color = clamp_to_color(raw_color);
+	else
+		mapped_color = max_to_one(raw_color);
+
+	if (vp.gamma != 1.0)
+		mapped_color = mapped_color.powc(vp.inv_gamma);
+
+	int x = column;
+	int y = vp.vres - row - 1;
+
+	paintArea->setPixel(x, y, static_cast<int>(mapped_color.r * 255),
+						static_cast<int>(mapped_color.g * 255),
+						static_cast<int>(mapped_color.b * 255));
 }

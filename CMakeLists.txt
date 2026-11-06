@@ -18,6 +18,9 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 # Optional clang-tidy integration
 option(ENABLE_CLANG_TIDY "Run clang-tidy during the build" OFF)
 
+# Optional tests
+option(BUILD_TESTS "Build unit tests" ON)
+
 # Optional sanitizer integration
 option(ENABLE_SANITIZERS "Enable AddressSanitizer and UndefinedBehaviorSanitizer" OFF)
 if(ENABLE_CLANG_TIDY)
@@ -31,7 +34,7 @@ endif()
 
 find_package(wxWidgets 3.2 CONFIG REQUIRED COMPONENTS xrc html qa xml net core base)
 
-add_executable(wxraytracer
+set(RTF_CORE_SOURCES
     src/BRDFs/BRDF.cpp
     src/BRDFs/Lambertian.cpp
     src/Cameras/Camera.cpp
@@ -48,7 +51,6 @@ add_executable(wxraytracer
     src/Tracers/RayCast.cpp
     src/Tracers/SingleSphere.cpp
     src/Tracers/Tracer.cpp
-    src/UserInterface/wxraytracer.cpp
     src/Utilities/Matrix.cpp
     src/Utilities/Normal.cpp
     src/Utilities/Point2D.cpp
@@ -61,7 +63,15 @@ add_executable(wxraytracer
     src/World/World.cpp
 )
 
-target_include_directories(wxraytracer PRIVATE
+add_library(rtf_core STATIC ${RTF_CORE_SOURCES})
+
+add_executable(wxraytracer
+    src/UserInterface/wxraytracer.cpp
+)
+
+target_link_libraries(wxraytracer PRIVATE rtf_core ${wxWidgets_LIBRARIES})
+
+target_include_directories(rtf_core PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/src
     ${CMAKE_CURRENT_SOURCE_DIR}/include
     ${CMAKE_CURRENT_SOURCE_DIR}/include/BRDFs
@@ -79,29 +89,42 @@ target_link_libraries(wxraytracer PRIVATE ${wxWidgets_LIBRARIES})
 
 # Strict compiler warnings (no source changes required)
 if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
-    target_compile_options(wxraytracer PRIVATE
-        -Wall
-        -Wextra
-        -Wpedantic
-        -Wshadow
-        -Wnon-virtual-dtor
-        -Woverloaded-virtual
-    )
+    foreach(tgt rtf_core wxraytracer)
+        target_compile_options(${tgt} PRIVATE
+            -Wall
+            -Wextra
+            -Wpedantic
+            -Wshadow
+            -Wnon-virtual-dtor
+            -Woverloaded-virtual
+        )
+    endforeach()
 endif()
 
 # Sanitizers
 if(ENABLE_SANITIZERS AND CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
-    target_compile_options(wxraytracer PRIVATE
-        -fsanitize=address,undefined
-        -fno-omit-frame-pointer
-        -g
-    )
+    foreach(tgt rtf_core wxraytracer)
+        target_compile_options(${tgt} PRIVATE
+            -fsanitize=address,undefined
+            -fno-omit-frame-pointer
+            -g
+        )
+    endforeach()
     target_link_options(wxraytracer PRIVATE
+        -fsanitize=address,undefined
+    )
+    target_link_options(rtf_core PRIVATE
         -fsanitize=address,undefined
     )
 endif()
 
 # clang-format helper targets
+if(BUILD_TESTS)
+    find_package(GTest CONFIG REQUIRED)
+    enable_testing()
+    add_subdirectory(tests)
+endif()
+
 find_program(CLANG_FORMAT_EXE NAMES clang-format)
 if(CLANG_FORMAT_EXE)
     file(GLOB_RECURSE FORMAT_SOURCES
