@@ -16,6 +16,8 @@ class Light {
 
     Light& operator=(const Light& rhs);
 
+    Light& operator=(Light&& rhs) = default;
+
     [[nodiscard]] virtual Light* clone() const = 0;
 
     virtual ~Light() = default;
