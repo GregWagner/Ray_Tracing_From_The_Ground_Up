@@ -46,3 +46,10 @@ CMakeCache.txt
 # CMake generated files in test source dir (if accidentally configured in-tree)
 tests/Makefile
 tests/*.cmake
+
+# In-source CMake build artifacts
+Makefile
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+CTestTestfile.cmake
