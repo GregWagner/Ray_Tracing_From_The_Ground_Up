@@ -16,5 +16,3 @@ Ray& Ray::operator=(const Ray& rhs) {
 
     return (*this);
 }
-
-Ray::~Ray() = default;

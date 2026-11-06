@@ -9,7 +9,6 @@ class Vector3D {
     public:
     double x, y, z;
 
-    public:
     Vector3D();
     explicit Vector3D(double a);
     Vector3D(double _x, double _y, double _z);
@@ -17,7 +16,7 @@ class Vector3D {
     explicit Vector3D(const Normal& n);  // constructs a vector from a Normal
     explicit Vector3D(const Point3D& p); // constructs a vector from a point
 
-    ~Vector3D();
+    ~Vector3D() = default;
 
     Vector3D& operator=(const Vector3D& rhs);
 

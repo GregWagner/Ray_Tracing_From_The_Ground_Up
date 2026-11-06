@@ -16,5 +16,5 @@ class Ray {
 
     Ray& operator=(const Ray& rhs);
 
-    ~Ray();
+    ~Ray() = default;
 };

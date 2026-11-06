@@ -112,7 +112,7 @@ void World::render_scene() const {
 
 // clamp
 RGBColor World::max_to_one(const RGBColor& c) const {
-    float const max_value = static_cast<float>(max(c.r, max(c.g, c.b)));
+    auto const max_value = static_cast<float>(max(c.r, max(c.g, c.b)));
 
     if (max_value > 1.0) {
         return (c / max_value);
@@ -139,7 +139,7 @@ ShadeRec World::hit_objects(const Ray& ray) {
     double t;
     Normal normal;
     Point3D local_hit_point;
-    float tmin = static_cast<float>(kHugeValue);
+    auto tmin = static_cast<float>(kHugeValue);
     for (GeometricObject* object : objects) {
         if (object->hit(ray, t, sr) && (t < tmin)) {
             sr.hit_an_object = true;

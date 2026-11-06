@@ -9,13 +9,13 @@ class Normal {
     public:
     double x, y, z;
 
-    Normal();
+    Normal() = default;
     explicit Normal(double a);
     Normal(double _x, double _y, double _z);
     Normal(const Normal& n);
     explicit Normal(const Vector3D& v); // constructs a normal from vector
 
-    ~Normal();
+    ~Normal() = default;
 
     Normal& operator=(const Normal& rhs);
 
