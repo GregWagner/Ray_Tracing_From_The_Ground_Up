@@ -41,6 +41,6 @@ Improvement ideas (no source changes required)
       cppcheck findings: missingOverride (31), noExplicitConstructor (14), unusedFunction (32),
       passedByValue (5), uninitMemberVar (3), shadowFunction (2), functionStatic (2),
       variableScope (1), unknownMacro (1)
-  [ ] Document build/run/development workflow in README.md
+  [x] Document build/run/development workflow in README.md
   [ ] Add CONTRIBUTING.md and PR/issue templates
   [ ] Pin wxWidgets/compiler versions and document minimum requirements
