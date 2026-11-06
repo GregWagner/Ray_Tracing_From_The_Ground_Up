@@ -7,12 +7,12 @@ class SingleSphere : public Tracer {
 	public:
 	SingleSphere();
 
-	SingleSphere(World* _worldPtr);
+	explicit SingleSphere(World* _worldPtr);
 
-	virtual ~SingleSphere();
+	virtual ~SingleSphere() override;
 
 	virtual RGBColor
-	trace_ray(const Ray& ray) const;
+	trace_ray(const Ray& ray) const override;
 
 	using Tracer::trace_ray;
 };

@@ -70,12 +70,18 @@ Matrix::operator*(const Matrix& mat) const {
 // division by a scalar
 
 Matrix
-Matrix::operator/(const double d) {
+Matrix::operator/(const double d) const {
+	Matrix result(*this);
+
+	if (d == 0.0) {
+		return (result);
+	}
+
 	for (int x = 0; x < 4; x++)
 		for (int y = 0; y < 4; y++)
-			m[x][y] = m[x][y] / d;
+			result.m[x][y] = m[x][y] / d;
 
-	return (*this);
+	return (result);
 }
 
 

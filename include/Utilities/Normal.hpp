@@ -14,10 +14,10 @@ class Normal {
 
 	public:
 	Normal();								 // default constructor
-	Normal(double a);						 // constructor
+	explicit Normal(double a);						 // constructor
 	Normal(double _x, double _y, double _z); // constructor
 	Normal(const Normal& n);				 // copy constructor
-	Normal(const Vector3D& v);				 // constructs a normal from vector
+	explicit Normal(const Vector3D& v);				 // constructs a normal from vector
 
 	~Normal(); // destructor
 

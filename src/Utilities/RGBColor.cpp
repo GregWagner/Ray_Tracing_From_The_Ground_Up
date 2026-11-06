@@ -42,5 +42,5 @@ RGBColor& RGBColor::operator=(const RGBColor& rhs) {
 // used for color filtering in Chapter 28
 
 RGBColor RGBColor::powc(float p) const {
-	return (RGBColor(pow(r, p), pow(g, p), pow(b, p)));
+	return (RGBColor(std::pow(r, p), std::pow(g, p), std::pow(b, p)));
 }

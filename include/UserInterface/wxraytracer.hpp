@@ -24,8 +24,8 @@ class RenderPixel;
 
 class wxraytracerapp : public wxApp {
 	public:
-	virtual bool OnInit();
-	virtual int OnExit();
+	virtual bool OnInit() override;
+	virtual int OnExit() override;
 	virtual void SetStatusText(const wxString& text, int number = 0);
 
 	private:
@@ -64,13 +64,13 @@ enum {
 
 class RenderCanvas : public wxScrolledWindow {
 	public:
-	RenderCanvas(wxWindow* parent);
+	explicit RenderCanvas(wxWindow* parent);
 	virtual ~RenderCanvas();
 
 	void SetImage(wxImage& image);
 	wxImage GetImage();
 
-	virtual void OnDraw(wxDC& dc);
+	virtual void OnDraw(wxDC& dc) override;
 	void renderStart();
 	void renderPause();
 	void renderResume();
@@ -111,8 +111,8 @@ DECLARE_EVENT_TYPE(wxEVT_RENDER, -1)
 class RenderThread : public wxThread {
 	public:
 	RenderThread(RenderCanvas* c, World* w) : wxThread(), world(w), canvas(c) {}
-	virtual void* Entry();
-	virtual void OnExit();
+	virtual void* Entry() override;
+	virtual void OnExit() override;
 	virtual void setPixel(int x, int y, int red, int green, int blue);
 
 	private:

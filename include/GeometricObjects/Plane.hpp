@@ -14,16 +14,16 @@ class Plane : public GeometricObject {
 	Plane(const Plane& plane); // copy constructor
 
 	virtual Plane* // virtual copy constructor
-	clone() const;
+	clone() const override;
 
 	Plane& // assignment operator
 	operator=(const Plane& rhs);
 
 	virtual // destructor
-		~Plane();
+		~Plane() override;
 
 	virtual bool
-	hit(const Ray& ray, double& tmin, ShadeRec& sr) const;
+	hit(const Ray& ray, double& tmin, ShadeRec& sr) const override;
 
 	private:
 	Point3D a; // point through which plane passes

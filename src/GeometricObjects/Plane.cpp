@@ -60,7 +60,12 @@ Plane::~Plane() {}
 // ----------------------------------------------------------------- hit
 
 bool Plane::hit(const Ray& ray, double& tmin, ShadeRec& sr) const {
-	float t = (a - ray.o) * n / (ray.d * n);
+	double denom = ray.d * n;
+	if (denom == 0.0) {
+		return (false);
+	}
+
+	double t = ((a - ray.o) * n) / denom;
 
 	if (t > kEpsilon) {
 		tmin = t;

@@ -16,7 +16,7 @@ class Tracer {
 	public:
 	Tracer();
 
-	Tracer(World* _world_ptr);
+	explicit Tracer(World* _world_ptr);
 
 	virtual ~Tracer();
 

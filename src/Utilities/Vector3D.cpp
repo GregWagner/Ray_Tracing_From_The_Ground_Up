@@ -76,15 +76,18 @@ Vector3D& Vector3D::operator=(const Point3D& rhs) {
 // ----------------------------------------------------------  length
 // length of the vector
 
-double Vector3D::length() {
-	return (sqrt(x * x + y * y + z * z));
+double Vector3D::length() const {
+	return (std::sqrt(x * x + y * y + z * z));
 }
 
 // ----------------------------------------------------------  normalize
 // converts the vector to a unit vector
 
 void Vector3D::normalize() {
-	double length = sqrt(x * x + y * y + z * z);
+	double length = std::sqrt(x * x + y * y + z * z);
+	if (length == 0.0) {
+		return;
+	}
 	x /= length;
 	y /= length;
 	z /= length;
@@ -94,7 +97,10 @@ void Vector3D::normalize() {
 // converts the vector to a unit vector and returns the vector
 
 Vector3D& Vector3D::hat() {
-	double length = sqrt(x * x + y * y + z * z);
+	double length = std::sqrt(x * x + y * y + z * z);
+	if (length == 0.0) {
+		return (*this);
+	}
 	x /= length;
 	y /= length;
 	z /= length;
@@ -107,7 +113,7 @@ Vector3D& Vector3D::hat() {
 // multiplication by a matrix on the left
 
 Vector3D operator*(const Matrix& mat, const Vector3D& v) {
-	return (Point3D(mat.m[0][0] * v.x + mat.m[0][1] * v.y + mat.m[0][2] * v.z,
-					mat.m[1][0] * v.x + mat.m[1][1] * v.y + mat.m[1][2] * v.z,
-					mat.m[2][0] * v.x + mat.m[2][1] * v.y + mat.m[2][2] * v.z));
+	return (Vector3D(mat.m[0][0] * v.x + mat.m[0][1] * v.y + mat.m[0][2] * v.z,
+					 mat.m[1][0] * v.x + mat.m[1][1] * v.y + mat.m[1][2] * v.z,
+					 mat.m[2][0] * v.x + mat.m[2][1] * v.y + mat.m[2][2] * v.z));
 }

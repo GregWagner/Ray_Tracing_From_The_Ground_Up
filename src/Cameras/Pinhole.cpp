@@ -62,7 +62,7 @@ void Pinhole::render_scene(const World& world) {
 	Ray ray;
 	int depth = 0;
 	Point2D pp; // sample point on a pixel
-	int n = static_cast<int>(sqrt(static_cast<float>(vp.num_samples)));
+	int n = static_cast<int>(std::sqrt(static_cast<float>(vp.num_samples)));
 
 	vp.s /= zoom;
 	ray.o = eye;

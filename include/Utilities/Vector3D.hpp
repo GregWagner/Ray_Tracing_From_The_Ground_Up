@@ -16,11 +16,11 @@ class Vector3D {
 
 	public:
 	Vector3D();								   // default constructor
-	Vector3D(double a);						   // constructor
+	explicit Vector3D(double a);						   // constructor
 	Vector3D(double _x, double _y, double _z); // constructor
 	Vector3D(const Vector3D& v);			   // copy constructor
-	Vector3D(const Normal& n);				   // constructs a vector from a Normal
-	Vector3D(const Point3D& p);				   // constructs a vector from a point
+	explicit Vector3D(const Normal& n);				   // constructs a vector from a Normal
+	explicit Vector3D(const Point3D& p);				   // constructs a vector from a point
 
 	~Vector3D(); // destructor
 
@@ -37,10 +37,10 @@ class Vector3D {
 	operator-() const;
 
 	double // length
-	length();
+	length() const;
 
 	double // square of the length
-	len_squared();
+	len_squared() const;
 
 	Vector3D // multiplication by a double on the right
 	operator*(const double a) const;
@@ -88,7 +88,7 @@ Vector3D::operator-() const {
 // the square of the length
 
 inline double
-Vector3D::len_squared() {
+Vector3D::len_squared() const {
 	return (x * x + y * y + z * z);
 }
 

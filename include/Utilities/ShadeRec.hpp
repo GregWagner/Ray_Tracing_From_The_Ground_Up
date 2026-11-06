@@ -29,7 +29,7 @@ class ShadeRec {
 	World& w;				 // World reference
 	RGBColor color;
 
-	ShadeRec(World& wr); // constructor
+	explicit ShadeRec(World& wr); // constructor
 
 	ShadeRec(const ShadeRec& sr); // copy constructor
 };

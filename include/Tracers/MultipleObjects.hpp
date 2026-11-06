@@ -7,12 +7,12 @@ class MultipleObjects : public Tracer {
 	public:
 	MultipleObjects();
 
-	MultipleObjects(World* _world_ptr);
+	explicit MultipleObjects(World* _world_ptr);
 
-	virtual ~MultipleObjects();
+	virtual ~MultipleObjects() override;
 
 	virtual RGBColor
-	trace_ray(const Ray& ray) const;
+	trace_ray(const Ray& ray) const override;
 
 	using Tracer::trace_ray;
 };

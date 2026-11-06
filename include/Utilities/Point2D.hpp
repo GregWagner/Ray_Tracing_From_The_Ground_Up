@@ -7,7 +7,7 @@ class Point2D {
 
 	public:
 	Point2D();								 // default constructor
-	Point2D(const float arg);				 // constructor
+	explicit Point2D(const float arg);				 // constructor
 	Point2D(const float x1, const float y1); // constructor
 	Point2D(const Point2D& p);				 // copy constructor
 	~Point2D() {}							 // destructor

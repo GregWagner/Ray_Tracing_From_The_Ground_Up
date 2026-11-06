@@ -10,12 +10,12 @@ class Ambient : public Light {
 	Ambient(const Ambient& a);
 
 	virtual Light*
-	clone() const;
+	clone() const override;
 
 	Ambient&
 	operator=(const Ambient& rhs);
 
-	virtual ~Ambient();
+	virtual ~Ambient() override;
 
 	void
 	scale_radiance(const float b);
@@ -30,10 +30,10 @@ class Ambient : public Light {
 	set_color(const float r, const float g, const float b);
 
 	virtual Vector3D
-	get_direction(ShadeRec& s);
+	get_direction(ShadeRec& s) override;
 
 	virtual RGBColor
-	L(ShadeRec& s);
+	L(ShadeRec& s) override;
 
 	private:
 	float ls;

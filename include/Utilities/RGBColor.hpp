@@ -11,7 +11,7 @@ class RGBColor {
 
 	public:
 	RGBColor();								// default constructor
-	RGBColor(float c);						// constructor
+	explicit RGBColor(float c);						// constructor
 	RGBColor(float _r, float _g, float _b); // constructor
 	RGBColor(const RGBColor& c);			// copy constructor
 

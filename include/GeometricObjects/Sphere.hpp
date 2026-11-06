@@ -16,10 +16,10 @@ class Sphere : public GeometricObject {
 	Sphere(const Sphere& sphere); // Copy constructor
 
 	virtual Sphere* // Virtual copy constructor
-	clone() const;
+	clone() const override;
 
 	virtual // Destructor
-		~Sphere();
+		~Sphere() override;
 
 	Sphere& // assignment operator
 	operator=(const Sphere& sphere);
@@ -34,7 +34,7 @@ class Sphere : public GeometricObject {
 	set_radius(const double r);
 
 	virtual bool
-	hit(const Ray& ray, double& t, ShadeRec& s) const;
+	hit(const Ray& ray, double& t, ShadeRec& s) const override;
 
 	private:
 	Point3D center; // center coordinates as a point

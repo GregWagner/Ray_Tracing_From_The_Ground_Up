@@ -16,12 +16,12 @@ class Directional : public Light {
 	Directional(const Directional& dl);
 
 	virtual Light*
-	clone() const;
+	clone() const override;
 
 	Directional&
 	operator=(const Directional& rhs);
 
-	virtual ~Directional();
+	virtual ~Directional() override;
 
 	void
 	scale_radiance(const float b);
@@ -42,10 +42,10 @@ class Directional : public Light {
 	set_direction(float dx, float dy, float dz);
 
 	virtual Vector3D
-	get_direction(ShadeRec& sr);
+	get_direction(ShadeRec& sr) override;
 
 	virtual RGBColor
-	L(ShadeRec& sr);
+	L(ShadeRec& sr) override;
 
 	private:
 	float ls;

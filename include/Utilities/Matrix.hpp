@@ -24,8 +24,8 @@ class Matrix {
 	Matrix // multiplication of two matrices
 	operator*(const Matrix& mat) const;
 
-	Matrix // divsion by a double
-	operator/(const double d);
+	Matrix // division by a double
+	operator/(const double d) const;
 
 	void // set to the identity matrix
 	set_identity();
