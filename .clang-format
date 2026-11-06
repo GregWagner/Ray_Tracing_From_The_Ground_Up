@@ -18,3 +18,4 @@ SpaceAfterCStyleCast: false
 SpacesInParentheses: false
 KeepEmptyLinesAtTheStartOfBlocks: false
 MaxEmptyLinesToKeep: 2
+LineEnding: LF
