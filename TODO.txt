@@ -44,3 +44,111 @@ Improvement ideas (no source changes required)
   [x] Document build/run/development workflow in README.md
   [ ] Add CONTRIBUTING.md and PR/issue templates
   [x] Pin wxWidgets/compiler versions and document minimum requirements
+
+Code review findings (notes only; no source changes made)
+-------------------------------------------------------
+
+Priority 0: rendering is currently non-functional
+  [ ] Restore the scene builder: World::build()/renderStart() calls and
+      src/build/BuildShadedObjects.cpp are missing or disabled, so tracer_ptr and
+      camera_ptr stay null. Rendering then dereferences null pointers and crashes.
+      Reintroduce a default/standard scene builder and wire it into World and the
+      GUI render path; validate pointers before use as a fallback.
+  [ ] Null-check world->camera_ptr and world->tracer_ptr in Pinhole::render_scene,
+      RenderThread::Entry, and World::display_pixel paths. Fail with a clear error
+      instead of crashing; add an assertion in debug builds.
+  [ ] Replace dangling owning pointers with documented ownership. World stores raw
+      pointers to Tracer/Camera/Light/Ambient, while objects own materials. Define
+      whether these are owned or non-owned, and use std::unique_ptr where ownership
+      is intended (or clearly document caller ownership).
+  [ ] Fix ownership/leak bugs: set_ambient_light overwrites ambient_ptr without
+      deleting the previous light; GeometricObject::set_material overwrites
+      material_ptr without deleting the previous material. Use delete-and-null or
+      transfer ownership explicitly.
+
+Priority 1: correctness and robustness
+  [ ] Sphere/Plane intersection: normalize tolerance handling; compare values with
+      kEpsilon instead of exact equality for parallel rays and numerically small
+      directions; avoid division by zero in ray direction normalization.
+  [ ] Validate ViewPlane and color parameters: gamma must be > 0 before computing
+      inv_gamma; zoom must be != 0; num_samples sampling should use a consistent
+      n x n grid and divide by n * n, or reject non-square sample counts.
+  [ ] Empty/zero vector handling currently silently returns; normalize() and
+      Vector3D::hat() should either return a status or document no-op behavior,
+      and callers should avoid producing NaNs. Also zero-size normals.
+  [ ] Exact floating-point comparisons in RGBColor::operator== and denom checks
+      are fragile; consider approximate equality and epsilon-based tests.
+  [ ] Legacy World::render_scene() writes column `c <= hres` (one past the right
+      edge) and uses a hardcoded zw; either fix the loop bounds or remove this
+      legacy path since Pinhole::render_scene is the active renderer.
+  [ ] MultipleObjects::trace_ray returns sr.color, but World::hit_objects never
+      populates color; either set sr.color in hit_objects or remove/use a material
+      result. SingleSphere depends on the otherwise-unused World::sphere member.
+  [ ] Camera::compute_uvw uses exact equality for eye/lookat coordinates to detect
+      vertical viewing directions; use a tolerance and avoid degeneracy.
+  [ ] Multi-threading: RenderThread::setPixel can be invoked after cancellation;
+      OnTimerUpdate divides by completed * 100 when nothing has completed; guard
+      against completed == 0 and stale timers. Ensure thread timer cleanup.
+
+Priority 2: memory and resource safety
+  [ ] RenderThread stores raw RenderPixel*, timer*, and vector buffers; use RAII
+      and clearly define ownership in NotifyCanvas/OnNewPixel to avoid leaks on
+      pause/cancel/errors.
+  [ ] GUI raw new/delete for menus, bitmaps, images, and timers should be
+      simplified (smart pointers, wxSizer-managed children) and checked for leaks
+      under sanitizers.
+  [ ] World destructor deletes ambient_ptr but light/material ownership is split;
+      audit every raw pointer allocation/deletion for double-delete and leaks.
+  [ ] ShadeRec copies share material_ptr without ownership; document this and
+      avoid deleting through copied ShadeRec objects.
+  [ ] Use std::vector ownership consistently and remove manual array erase calls
+      where possible, especially in delete_objects/delete_lights.
+
+Priority 3: API design and modern C++
+  [ ] Avoid `using namespace std;` in headers (World.hpp, wxraytracer.hpp).
+  [ ] Replace reserved double-underscore include guards with pragma once or valid
+      guard names; use `<cstdlib>` instead of `<stdlib.h>`.
+  [ ] Improve const-correctness: mark getters/operators const where appropriate
+      (RGBColor, Point2D, Vector3D, Matrix, ViewPlane setters maybe non-const).
+  [ ] Modernize operators and casts: Tracer::trace_ray(Ray, int) should take
+      Ray const&, conversion helpers should avoid repeated sqrt(), many loops can
+      become range-based.
+  [ ] Rename ambiguous/misspelled APIs and comments consistently; `max_to_one`,
+      `kHugeValue`, and chapter-specific members make the API harder to reuse.
+  [ ] Prefer standard library over custom math (`std::max`) and consider
+      constexpr constants/limits.
+  [ ] C++17: use std::optional for optional cached results and std::unique_ptr
+      for ownership; mark clone functions override consistently.
+
+Priority 4: rendering quality and functionality
+  [ ] Sampling is truncated (sqrt(num_samples)) then divided by num_samples;
+      support arbitrary sample counts or validate at construction.
+  [ ] Image display uses DrawPoint per pixel, which is slow; write pixels into a
+      wxImage/wxBitmap buffer to speed rendering and reduce UI updates.
+  [ ] Pinhole ray direction should account for zoom consistently; avoid mutating
+      copied ViewPlane values unexpectedly.
+  [ ] Add gamma handling robustly, including no gamma correction when requested.
+  [ ] Ambient light currently returns zero direction, making area/shadows harder;
+      implement shadow rays and light sampling if needed.
+
+Priority 5: testing, build, and tooling
+  [ ] Remove the unused src/main.cpp stub from format/check-format glob or delete
+      it, since check-format currently scans it and fails.
+  [ ] Add tests for matrix transforms, normal transforms, materials, camera basis,
+      Pinhole rendering, World::build, and more intersection cases.
+  [ ] Add integration tests around null/empty Worlds and sanitizer runs; use
+      wx-free test doubles for RenderCanvas.
+  [ ] Add GitHub Actions CI for configure/build/test/check-format/tidy and a
+      sanitizer preset build.
+  [ ] Add pre-commit hook and coverage reporting; track remaining clang-tidy
+      warnings in the TODO list.
+  [ ] Keep wxWidgets/compiler versions pinned and documented; optionally use
+      FetchContent for GoogleTest to make tests reproducible.
+  [ ] Add CONTRIBUTING.md, PR/issue templates, and clearer ownership docs.
+
+Documentation
+  [ ] Expand README with architecture notes, renderer entry point, test commands,
+      and known limitations (missing scene builder).
+  [ ] Document thread/UI behavior, ownership model, and rendering pipeline.
+  [ ] Keep AGENTS.md synchronized with the actual source layout (there is no
+      src/build directory in this checkout).
