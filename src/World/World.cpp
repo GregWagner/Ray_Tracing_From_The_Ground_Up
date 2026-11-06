@@ -36,17 +36,17 @@ World::World()
       camera_ptr(nullptr) {}
 
 World::~World() {
-  if (tracer_ptr) {
+  if (tracer_ptr != nullptr) {
     delete tracer_ptr;
     tracer_ptr = nullptr;
   }
 
-  if (ambient_ptr) {
+  if (ambient_ptr != nullptr) {
     delete ambient_ptr;
     ambient_ptr = nullptr;
   }
 
-  if (camera_ptr) {
+  if (camera_ptr != nullptr) {
     delete camera_ptr;
     camera_ptr = nullptr;
   }

@@ -5,7 +5,7 @@ Tracer::Tracer() : world_ptr(nullptr) {}
 Tracer::Tracer(World *_worldPtr) : world_ptr(_worldPtr) {}
 
 Tracer::~Tracer() {
-  if (world_ptr) {
+  if (world_ptr != nullptr) {
     world_ptr = nullptr;
 }
 }

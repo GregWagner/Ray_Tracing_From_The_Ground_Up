@@ -129,7 +129,7 @@ RenderCanvas::RenderCanvas(QWidget *parent) : QWidget(parent) {
 }
 
 RenderCanvas::~RenderCanvas() {
-  if (thread) {
+  if (thread != nullptr) {
     thread->requestInterruption();
     thread->resume();
     thread->wait();
@@ -163,7 +163,7 @@ QSize RenderCanvas::sizeHint() const {
 }
 
 void RenderCanvas::renderStart() {
-  if (thread) {
+  if (thread != nullptr) {
     thread->requestInterruption();
     thread->resume();
     thread->wait();
@@ -194,20 +194,20 @@ void RenderCanvas::renderStart() {
 }
 
 void RenderCanvas::renderPause() {
-  if (thread) {
+  if (thread != nullptr) {
     thread->pause();
 }
 }
 
 void RenderCanvas::renderResume() {
-  if (thread) {
+  if (thread != nullptr) {
     thread->resume();
 }
 }
 
 void RenderCanvas::onPixelBatch(QVector<RenderPixel *> batch) {
   for (RenderPixel *pixel : batch) {
-    if (pixel && !image.isNull() && pixel->x >= 0 && pixel->y >= 0 &&
+    if (pixel != nullptr && !image.isNull() && pixel->x >= 0 && pixel->y >= 0 &&
         pixel->x < image.width() && pixel->y < image.height()) {
       image.setPixelColor(pixel->x, pixel->y,
                           QColor(pixel->red, pixel->green, pixel->blue));
@@ -221,13 +221,13 @@ void RenderCanvas::onPixelBatch(QVector<RenderPixel *> batch) {
 }
 
 void RenderCanvas::onRenderFinished() {
-  if (thread) {
+  if (thread != nullptr) {
     thread->wait();
     delete thread;
     thread = nullptr;
   }
 
-  if (world) {
+  if (world != nullptr) {
     delete world;
     world = nullptr;
   }
@@ -319,7 +319,7 @@ void World::display_pixel(const int row, const int column,
   int x = column;
   int y = vp.vres - row - 1;
 
-  if (paintArea) {
+  if (paintArea != nullptr) {
     paintArea->setPixel(x, y, static_cast<int>(mapped_color.r * 255),
                         static_cast<int>(mapped_color.g * 255),
                         static_cast<int>(mapped_color.b * 255));
