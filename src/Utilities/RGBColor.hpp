@@ -1,4 +1,5 @@
-#pragma once
+#ifndef RGBCOLOR_HPP
+#define RGBCOLOR_HPP
 
 class RGBColor {
     public:
@@ -112,3 +113,5 @@ RGBColor operator*(const float a, const RGBColor& c);
 [[nodiscard]] inline RGBColor operator*(const float a, const RGBColor& c) {
     return (RGBColor(a * c.r, a * c.g, a * c.b));
 }
+
+#endif

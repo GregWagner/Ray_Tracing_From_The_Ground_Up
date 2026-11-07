@@ -1,4 +1,5 @@
-#pragma once
+#ifndef CONSTANTS_HPP
+#define CONSTANTS_HPP
 
 #include "RGBColor.hpp"
 #include <cstdlib>
@@ -17,3 +18,5 @@ const RGBColor white(1.0);
 const RGBColor red(1.0, 0.0, 0.0);
 
 const float invRAND_MAX = 1.0 / static_cast<float>(RAND_MAX);
+
+#endif

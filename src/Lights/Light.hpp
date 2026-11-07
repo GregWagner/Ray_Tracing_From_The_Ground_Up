@@ -1,4 +1,5 @@
-#pragma once
+#ifndef LIGHT_HPP
+#define LIGHT_HPP
 
 #include "RGBColor.hpp"
 #include "Vector3D.hpp"
@@ -25,3 +26,5 @@ class Light {
 
     [[nodiscard]] virtual RGBColor L(ShadeRec& srec);
 };
+
+#endif

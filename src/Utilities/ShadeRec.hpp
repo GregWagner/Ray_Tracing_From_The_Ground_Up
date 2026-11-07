@@ -1,4 +1,5 @@
-#pragma once
+#ifndef SHADEREC_HPP
+#define SHADEREC_HPP
 
 #include <vector>
 
@@ -30,3 +31,5 @@ class ShadeRec {
 
     ShadeRec(const ShadeRec& sr);
 };
+
+#endif

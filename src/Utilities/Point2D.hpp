@@ -1,4 +1,5 @@
-#pragma once
+#ifndef POINT2D_HPP
+#define POINT2D_HPP
 
 class Point2D {
     public:
@@ -23,3 +24,5 @@ class Point2D {
 inline Point2D Point2D::operator*(const float a) const {
     return (Point2D(a * x, a * y));
 }
+
+#endif

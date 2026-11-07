@@ -1,4 +1,5 @@
-#pragma once
+#ifndef TRACER_HPP
+#define TRACER_HPP
 
 // The tracer classes have no copy constructor, assignment operator. or clone
 // function because of the world pointer, which should not be assigned or copy
@@ -31,3 +32,5 @@ class Tracer {
     protected:
     World* world_ptr;
 };
+
+#endif

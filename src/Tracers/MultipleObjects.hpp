@@ -1,4 +1,5 @@
-#pragma once
+#ifndef MULTIPLEOBJECTS_HPP
+#define MULTIPLEOBJECTS_HPP
 
 #include "Tracer.hpp"
 
@@ -18,3 +19,5 @@ class MultipleObjects : public Tracer {
 
     using Tracer::trace_ray;
 };
+
+#endif

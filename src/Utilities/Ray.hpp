@@ -1,4 +1,5 @@
-#pragma once
+#ifndef RAY_HPP
+#define RAY_HPP
 
 #include "Point3D.hpp"
 #include "Vector3D.hpp"
@@ -22,3 +23,5 @@ class Ray {
 
     ~Ray() = default;
 };
+
+#endif

@@ -1,4 +1,5 @@
-#pragma once
+#ifndef DIRECTIONAL_HPP
+#define DIRECTIONAL_HPP
 
 #include "Light.hpp"
 #include "RGBColor.hpp"
@@ -78,3 +79,5 @@ inline void Directional::set_direction(float dx, float dy, float dz) {
     dir.z = dz;
     dir.normalize();
 }
+
+#endif

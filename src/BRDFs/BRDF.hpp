@@ -1,4 +1,5 @@
-#pragma once
+#ifndef BRDF_HPP
+#define BRDF_HPP
 
 #include "RGBColor.hpp"
 #include "ShadeRec.hpp"
@@ -31,3 +32,5 @@ class BRDF {
     protected:
     BRDF& operator=(const BRDF& rhs);
 };
+
+#endif

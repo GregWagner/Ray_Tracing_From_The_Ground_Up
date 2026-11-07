@@ -1,4 +1,5 @@
-#pragma once
+#ifndef LAMBERTIAN_HPP
+#define LAMBERTIAN_HPP
 
 #include "BRDF.hpp"
 
@@ -62,3 +63,5 @@ inline void Lambertian::set_cd(const float c) {
     cd.g = c;
     cd.b = c;
 }
+
+#endif

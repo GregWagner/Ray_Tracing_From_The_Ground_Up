@@ -1,4 +1,5 @@
-#pragma once
+#ifndef SPHERE_HPP
+#define SPHERE_HPP
 
 #include "GeometricObject.hpp"
 
@@ -49,3 +50,5 @@ inline void Sphere::set_center(const double x, const double y, const double z) {
 inline void Sphere::set_radius(const double r) {
     radius = r;
 }
+
+#endif

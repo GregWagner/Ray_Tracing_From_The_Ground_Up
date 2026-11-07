@@ -1,4 +1,5 @@
-#pragma once
+#ifndef MATERIAL_HPP
+#define MATERIAL_HPP
 
 #include "RGBColor.hpp"
 #include "ShadeRec.hpp"
@@ -23,3 +24,5 @@ class Material {
 
     Material& operator=(Material&& rhs) = default;
 };
+
+#endif

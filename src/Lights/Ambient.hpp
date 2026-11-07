@@ -1,5 +1,5 @@
-#ifndef AMBIENT_H
-#define AMBIENt_H
+#ifndef AMBIENT_HPP
+#define AMBIENT_HPP
 
 #include "Light.hpp"
 

@@ -1,4 +1,5 @@
-#pragma once
+#ifndef VIEWPLANE_HPP
+#define VIEWPLANE_HPP
 
 class ViewPlane {
     public:
@@ -60,3 +61,5 @@ inline void ViewPlane::set_gamut_display(const bool show) {
 inline void ViewPlane::set_samples(const int n) {
     num_samples = n;
 }
+
+#endif

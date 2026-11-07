@@ -1,4 +1,5 @@
-#pragma once
+#ifndef GEOMETRICOBJECT_HPP
+#define GEOMETRICOBJECT_HPP
 
 class Material;
 
@@ -39,3 +40,5 @@ class GeometricObject {
 inline Material* GeometricObject::get_material() const {
     return (material_ptr);
 }
+
+#endif

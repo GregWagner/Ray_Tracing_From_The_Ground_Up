@@ -1,4 +1,5 @@
-#pragma once
+#ifndef RAYCAST_HPP
+#define RAYCAST_HPP
 
 #include "Tracer.hpp"
 
@@ -19,3 +20,5 @@ class RayCast : public Tracer {
     [[nodiscard]] RGBColor trace_ray(const Ray& ray,
                                      const int depth) const override;
 };
+
+#endif

@@ -1,5 +1,5 @@
-#pragma once
-
+#ifndef NORMAL_HPP
+#define NORMAL_HPP
 
 #include "Matrix.hpp"
 #include "Point3D.hpp"
@@ -112,3 +112,5 @@ inline double operator*(const Vector3D& v, const Normal& n) {
 
 // multiplication by a matrix on the left
 Normal operator*(const Matrix& mat, const Normal& n);
+
+#endif

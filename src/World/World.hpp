@@ -1,4 +1,5 @@
-#pragma once
+#ifndef WORLD_HPP
+#define WORLD_HPP
 
 // The World class does not have a copy constructor or an assignment operator,
 // for the followign reasons:
@@ -99,3 +100,5 @@ inline void World::set_camera(Camera* c_ptr) {
 
     camera_ptr = c_ptr;
 }
+
+#endif
