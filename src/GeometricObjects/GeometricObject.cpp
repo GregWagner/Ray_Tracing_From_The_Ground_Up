@@ -1,6 +1,8 @@
 #include "GeometricObject.hpp"
 #include "Material.hpp"
 
+#include <utility>
+
 GeometricObject::GeometricObject() : material_ptr(nullptr) {}
 
 GeometricObject::GeometricObject(const GeometricObject& object) {
@@ -33,6 +35,21 @@ GeometricObject::~GeometricObject() {
         delete material_ptr;
         material_ptr = nullptr;
     }
+}
+
+GeometricObject::GeometricObject(GeometricObject&& object) noexcept
+    : material_ptr(object.material_ptr) {
+    object.material_ptr = nullptr;
+}
+
+GeometricObject& GeometricObject::operator=(GeometricObject&& rhs) noexcept {
+    if (this != &rhs) {
+        delete material_ptr;
+        material_ptr = rhs.material_ptr;
+        rhs.material_ptr = nullptr;
+    }
+
+    return (*this);
 }
 
 void GeometricObject::set_material(Material* mPtr) {

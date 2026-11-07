@@ -8,7 +8,11 @@ class SingleSphere : public Tracer {
 
     explicit SingleSphere(World* _worldPtr);
 
+    SingleSphere(SingleSphere&& other) = default;
+
     ~SingleSphere() override;
+
+    SingleSphere& operator=(SingleSphere&& other) = default;
 
     [[nodiscard]] RGBColor trace_ray(const Ray& ray) const override;
 

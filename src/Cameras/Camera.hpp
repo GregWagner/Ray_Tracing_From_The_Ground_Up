@@ -17,6 +17,8 @@ class Camera {
 
     Camera(const Camera& camera);
 
+    Camera(Camera&& camera) = default;
+
     [[nodiscard]] virtual Camera* clone() const = 0;
 
     virtual ~Camera();
@@ -50,6 +52,8 @@ class Camera {
     float exposure_time;
 
     Camera& operator=(const Camera& camera);
+
+    Camera& operator=(Camera&& camera) = default;
 };
 
 // inlined access functions

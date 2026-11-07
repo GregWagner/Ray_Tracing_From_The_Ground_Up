@@ -8,7 +8,11 @@ class MultipleObjects : public Tracer {
 
     explicit MultipleObjects(World* _world_ptr);
 
+    MultipleObjects(MultipleObjects&& other) = default;
+
     ~MultipleObjects() override;
+
+    MultipleObjects& operator=(MultipleObjects&& other) = default;
 
     [[nodiscard]] RGBColor trace_ray(const Ray& ray) const override;
 

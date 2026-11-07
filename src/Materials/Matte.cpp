@@ -1,5 +1,7 @@
 #include "Matte.hpp"
 
+#include <utility>
+
 Matte::Matte()
     : Material(), ambient_brdf(new Lambertian), diffuse_brdf(new Lambertian) {}
 
@@ -19,6 +21,29 @@ Matte::Matte(const Matte& m) : Material(m) {
 
 Material* Matte::clone() const {
     return (new Matte(*this));
+}
+
+Matte::Matte(Matte&& m) noexcept
+    : Material(std::move(m)), ambient_brdf(m.ambient_brdf),
+      diffuse_brdf(m.diffuse_brdf) {
+    m.ambient_brdf = nullptr;
+    m.diffuse_brdf = nullptr;
+}
+
+Matte& Matte::operator=(Matte&& rhs) noexcept {
+    if (this != &rhs) {
+        Material::operator=(std::move(rhs));
+
+        delete ambient_brdf;
+        ambient_brdf = rhs.ambient_brdf;
+        rhs.ambient_brdf = nullptr;
+
+        delete diffuse_brdf;
+        diffuse_brdf = rhs.diffuse_brdf;
+        rhs.diffuse_brdf = nullptr;
+    }
+
+    return (*this);
 }
 
 Matte& Matte::operator=(const Matte& rhs) {

@@ -17,7 +17,11 @@ class Tracer {
 
     explicit Tracer(World* _world_ptr);
 
+    Tracer(Tracer&& tracer) = default;
+
     virtual ~Tracer();
+
+    Tracer& operator=(Tracer&& tracer) = default;
 
     [[nodiscard]] virtual RGBColor trace_ray(const Ray& ray) const;
 

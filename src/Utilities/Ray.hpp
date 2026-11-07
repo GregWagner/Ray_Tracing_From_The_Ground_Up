@@ -14,7 +14,11 @@ class Ray {
 
     Ray(const Ray& ray);
 
+    Ray(Ray&& ray) = default;
+
     Ray& operator=(const Ray& rhs);
+
+    Ray& operator=(Ray&& rhs) = default;
 
     ~Ray() = default;
 };

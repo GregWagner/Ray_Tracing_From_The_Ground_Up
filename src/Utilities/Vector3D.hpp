@@ -13,12 +13,16 @@ class Vector3D {
     explicit Vector3D(double a);
     Vector3D(double _x, double _y, double _z);
     Vector3D(const Vector3D& v);
+
+    Vector3D(Vector3D&& v) = default;
     explicit Vector3D(const Normal& n);  // constructs a vector from a Normal
     explicit Vector3D(const Point3D& p); // constructs a vector from a point
 
     ~Vector3D() = default;
 
     Vector3D& operator=(const Vector3D& rhs);
+
+    Vector3D& operator=(Vector3D&& rhs) = default;
 
     Vector3D& // assign a Normal to a vector
     operator=(const Normal& rhs);

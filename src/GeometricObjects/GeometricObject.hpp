@@ -12,6 +12,8 @@ class GeometricObject {
 
     GeometricObject(const GeometricObject& object);
 
+    GeometricObject(GeometricObject&& object) noexcept;
+
     [[nodiscard]] virtual GeometricObject* clone() const = 0;
 
     virtual ~GeometricObject();
@@ -30,6 +32,8 @@ class GeometricObject {
                       // to assign to material_ptr. hit functions are const
 
     GeometricObject& operator=(const GeometricObject& rhs);
+
+    GeometricObject& operator=(GeometricObject&& rhs) noexcept;
 };
 
 inline Material* GeometricObject::get_material() const {

@@ -8,9 +8,12 @@ class Point2D {
     explicit Point2D(const float arg);
     Point2D(const float x1, const float y1);
     Point2D(const Point2D& p);
+    Point2D(Point2D&& p) = default;
     ~Point2D() {}
 
     Point2D& operator=(const Point2D& rhs);
+
+    Point2D& operator=(Point2D&& rhs) = default;
 
     Point2D // multiplication on right by scalar
     operator*(const float a) const;

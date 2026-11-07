@@ -10,6 +10,8 @@ class Material {
 
     Material(const Material& material);
 
+    Material(Material&& material) = default;
+
     [[nodiscard]] virtual Material* clone() const = 0;
 
     virtual ~Material();
@@ -18,4 +20,6 @@ class Material {
 
     protected:
     Material& operator=(const Material& rhs);
+
+    Material& operator=(Material&& rhs) = default;
 };

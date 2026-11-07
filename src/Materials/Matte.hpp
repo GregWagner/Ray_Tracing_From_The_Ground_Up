@@ -11,9 +11,13 @@ class Matte : public Material {
 
     Matte(const Matte& m);
 
+    Matte(Matte&& m) noexcept;
+
     [[nodiscard]] Material* clone() const override;
 
     Matte& operator=(const Matte& rhs);
+
+    Matte& operator=(Matte&& rhs) noexcept;
 
     ~Matte() override;
 

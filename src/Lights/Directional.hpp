@@ -13,9 +13,13 @@ class Directional : public Light {
 
     Directional(const Directional& dl);
 
+    Directional(Directional&& dl) = default;
+
     [[nodiscard]] Light* clone() const override;
 
     Directional& operator=(const Directional& rhs);
+
+    Directional& operator=(Directional&& rhs) = default;
 
     ~Directional() override;
 

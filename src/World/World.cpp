@@ -1,6 +1,8 @@
 #include "World.hpp"
 #include "Constants.hpp"
 
+#include <utility>
+
 // geometric objects
 #include "Plane.hpp"
 #include "Sphere.hpp"
@@ -53,6 +55,49 @@ World::~World() {
 
     delete_objects();
     delete_lights();
+}
+
+World::World(World&& other) noexcept
+    : background_color(other.background_color), tracer_ptr(other.tracer_ptr),
+      ambient_ptr(other.ambient_ptr), camera_ptr(other.camera_ptr),
+      sphere(std::move(other.sphere)), objects(std::move(other.objects)),
+      lights(std::move(other.lights)), paintArea(other.paintArea) {
+    vp = other.vp;
+    other.tracer_ptr = nullptr;
+    other.ambient_ptr = nullptr;
+    other.camera_ptr = nullptr;
+    other.paintArea = nullptr;
+    other.objects.clear();
+    other.lights.clear();
+}
+
+World& World::operator=(World&& other) noexcept {
+    if (this != &other) {
+        delete tracer_ptr;
+        delete ambient_ptr;
+        delete camera_ptr;
+        delete_objects();
+        delete_lights();
+
+        background_color = other.background_color;
+        tracer_ptr = other.tracer_ptr;
+        ambient_ptr = other.ambient_ptr;
+        camera_ptr = other.camera_ptr;
+        sphere = other.sphere;
+        objects = std::move(other.objects);
+        lights = std::move(other.lights);
+        vp = other.vp;
+        paintArea = other.paintArea;
+
+        other.tracer_ptr = nullptr;
+        other.ambient_ptr = nullptr;
+        other.camera_ptr = nullptr;
+        other.paintArea = nullptr;
+        other.objects.clear();
+        other.lights.clear();
+    }
+
+    return (*this);
 }
 
 // This uses orthographic viewing along the zw axis

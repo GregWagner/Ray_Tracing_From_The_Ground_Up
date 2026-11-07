@@ -11,9 +11,13 @@ class Matrix {
 
     Matrix(const Matrix& mat);
 
+    Matrix(Matrix&& mat) = default;
+
     ~Matrix() = default;
 
     Matrix& operator=(const Matrix& rhs);
+
+    Matrix& operator=(Matrix&& rhs) = default;
 
     Matrix // multiplication of two matrices
     operator*(const Matrix& mat) const;

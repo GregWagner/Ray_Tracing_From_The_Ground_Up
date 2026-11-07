@@ -11,9 +11,12 @@ class Point3D {
     explicit Point3D(const double a);
     Point3D(const double a, const double b, const double c);
     Point3D(const Point3D& point);
+    Point3D(Point3D&& point) = default;
     ~Point3D() = default;
 
     Point3D& operator=(const Point3D& rhs);
+
+    Point3D& operator=(Point3D&& rhs) = default;
 
     Point3D // unary minus
     operator-() const;

@@ -13,11 +13,14 @@ class Normal {
     explicit Normal(double a);
     Normal(double _x, double _y, double _z);
     Normal(const Normal& n);
+    Normal(Normal&& n) = default;
     explicit Normal(const Vector3D& v); // constructs a normal from vector
 
     ~Normal() = default;
 
     Normal& operator=(const Normal& rhs);
+
+    Normal& operator=(Normal&& rhs) = default;
 
     Normal& // assignment of a vector to a normal
     operator=(const Vector3D& rhs);

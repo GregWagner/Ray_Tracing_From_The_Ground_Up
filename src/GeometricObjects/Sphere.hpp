@@ -10,11 +10,15 @@ class Sphere : public GeometricObject {
 
     Sphere(const Sphere& sphere);
 
+    Sphere(Sphere&& sphere) = default;
+
     [[nodiscard]] Sphere* clone() const override;
 
     ~Sphere() override;
 
     Sphere& operator=(const Sphere& sphere);
+
+    Sphere& operator=(Sphere&& sphere) = default;
 
     void set_center(const Point3D& c);
 

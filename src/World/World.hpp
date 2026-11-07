@@ -43,7 +43,11 @@ class World {
 
     World();
 
+    World(World&& other) noexcept;
+
     ~World();
+
+    World& operator=(World&& other) noexcept;
 
     void add_object(GeometricObject* object_ptr);
 

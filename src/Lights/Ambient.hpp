@@ -1,4 +1,5 @@
-#pragma once
+#ifndef AMBIENT_H
+#define AMBIENt_H
 
 #include "Light.hpp"
 
@@ -8,9 +9,13 @@ class Ambient : public Light {
 
     Ambient(const Ambient& a);
 
+    Ambient(Ambient&& a) = default;
+
     [[nodiscard]] Light* clone() const override;
 
     Ambient& operator=(const Ambient& rhs);
+
+    Ambient& operator=(Ambient&& rhs) = default;
 
     ~Ambient() override;
 
@@ -50,3 +55,4 @@ inline void Ambient::set_color(const float r, const float g, const float b) {
     color.g = g;
     color.b = b;
 }
+#endif

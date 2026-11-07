@@ -15,7 +15,11 @@ class ViewPlane {
 
     ViewPlane(const ViewPlane& vp);
 
+    ViewPlane(ViewPlane&& vp) = default;
+
     ViewPlane& operator=(const ViewPlane& rhs);
+
+    ViewPlane& operator=(ViewPlane&& rhs) = default;
 
     ~ViewPlane() = default;
 

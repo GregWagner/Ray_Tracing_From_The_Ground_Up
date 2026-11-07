@@ -13,9 +13,13 @@ class Pinhole : public Camera {
 
     Pinhole(const Pinhole& ph);
 
+    Pinhole(Pinhole&& ph) = default;
+
     [[nodiscard]] Camera* clone() const override;
 
     Pinhole& operator=(const Pinhole& rhs);
+
+    Pinhole& operator=(Pinhole&& rhs) = default;
 
     ~Pinhole() override;
 

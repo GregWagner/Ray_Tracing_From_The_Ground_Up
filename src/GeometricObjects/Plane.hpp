@@ -10,9 +10,13 @@ class Plane : public GeometricObject {
 
     Plane(const Plane& plane);
 
+    Plane(Plane&& plane) = default;
+
     [[nodiscard]] Plane* clone() const override;
 
     Plane& operator=(const Plane& rhs);
+
+    Plane& operator=(Plane&& rhs) = default;
 
     ~Plane() override;
 

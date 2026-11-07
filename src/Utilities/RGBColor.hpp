@@ -9,9 +9,13 @@ class RGBColor {
     RGBColor(float _r, float _g, float _b);
     RGBColor(const RGBColor& c);
 
+    RGBColor(RGBColor&& c) = default;
+
     ~RGBColor() = default;
 
     RGBColor& operator=(const RGBColor& rhs);
+
+    RGBColor& operator=(RGBColor&& rhs) = default;
 
     RGBColor // addition
     operator+(const RGBColor& c) const;
